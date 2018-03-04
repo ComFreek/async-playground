@@ -56,7 +56,18 @@ export interface IAsyncLimitedQueue<T> extends AsyncIterable<T> {
 	 */
 	queue(data: T): Promise<void>;
 
+	/**
+	 * Queue all elements of an iterable, e.g. an array or a generator function.
+	 * @see IAsyncQueue#queueAll
+	 */
 	queueAll(iterable: Iterable<T>): void;
+
+	/**
+	 * Queue all elements of an asynchronous iterable, e.g. an asynchronous
+	 * generator functions.
+	 *
+	 * @see IAsyncQueue#queueAllAsync
+	 */
 	queueAllAsync(iterable: AsyncIterable<T>): Promise<void>;
 
 	/**
@@ -68,7 +79,43 @@ export interface IAsyncLimitedQueue<T> extends AsyncIterable<T> {
 	 */
 	offer(data: T): boolean;
 
+	/**
+	 * Offer all elements of an iterable for in-order insertion.
+	 *
+	 * @param iterable An iterable whose first (limit - queue.size()) elements
+	 *                 will be inserted. Iterables which iterate an infinite
+	 *                 number of elements can also be passed and will *not*
+	 *                 result in an endless loop.
+	 *
+	 * @returns The number of elements, which could be inserted right away.
+	 *          Possibly 0 when the queue was full at the time of the call.
+	 */
 	offerAll(iterable: Iterable<T>): number;
+
+	/**
+	 * Offer all elements of an asynchronous iterable for in-order insertion.
+	 *
+	 * @param iterable An iterable whose elements will be {@link offer}ed
+	 *                 in-order for this queue.
+	 *                 The method will stop querying and offering further
+	 *                 elements upon the first {@link offer} call, which
+	 *                 returns `false`.
+	 *
+	 *                 Contrary to {@link offerAll}, iterables iterating an
+	 *                 infinite number of elements might prevent the Promise,
+	 *                 which {@link offerAllAsync} returns, from ever resolving.
+	 *
+	 *                 This depends on {@link dequeue} operations which could
+	 *                 get scheduled by the JS VM while elements from the passed
+	 *                 asynchronous iterator are accessed.
+	 *
+	 * @returns A promise resolving to the number of elements, which could be
+	 *          inserted (offered successfully) consecutively without waiting.
+	 *          Possibly 0 when the queue was full at the time of the call.
+	 *
+	 *          Fulfillment of this promise is not guaranteed in case of infinite
+	 *          iterables.
+	 */
 	offerAllAsync(iterable: AsyncIterable<T>): Promise<number>;
 
 	/**
@@ -92,6 +139,23 @@ export interface IAsyncLimitedQueue<T> extends AsyncIterable<T> {
 	 */
 	dequeue(): Promise<T>;
 
+	/**
+	 * Return the current size at the moment of the call.
+	 *
+	 * Even though code like
+	 * ```
+	 * if (queue.size() >= 1) {
+	 *   const element = queue.poll();
+	 * }
+	 * ```
+	 * is technically not wrong (due to JS' execution model), users are
+	 * advised to avoid this pattern. Instead, users are encouraged to
+	 *
+	 *  - in cases where waiting for a promise is impossible, to use
+	 *    {@link poll} and catch the exception,
+	 *  - or to use {@link dequeue} with JS' `await` or
+	 *    `queue.dequeue().then(...)`.
+	 */
 	size(): number;
 }
 
