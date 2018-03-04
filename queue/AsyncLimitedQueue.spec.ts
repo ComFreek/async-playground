@@ -134,4 +134,14 @@ describe('AsyncLimitedQueue', () => {
 		}
 		expect(queue.size()).to.equal(0);
 	});
+
+	it('queueAll correctly resolves after queueing all elements', async () => {
+		// No await
+		const queueAllPromise = queue.queueAll(range(0, LIMIT)).then(async () => {
+			await expect(queue.size()).to.equal(LIMIT);
+		});
+		expect(queue.size()).to.equal(0);
+
+		await queueAllPromise;
+	});
 });

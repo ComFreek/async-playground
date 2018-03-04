@@ -60,7 +60,7 @@ export interface IAsyncLimitedQueue<T> extends AsyncIterable<T> {
 	 * Queue all elements of an iterable, e.g. an array or a generator function.
 	 * @see IAsyncQueue#queueAll
 	 */
-	queueAll(iterable: Iterable<T>): void;
+	queueAll(iterable: Iterable<T>): Promise<void>;
 
 	/**
 	 * Queue all elements of an asynchronous iterable, e.g. an asynchronous
