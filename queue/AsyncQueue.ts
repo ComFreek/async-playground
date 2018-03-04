@@ -9,7 +9,7 @@ import { ISemaphore, Semaphore } from '../semaphore/index';
  *
  * The {@link AsyncIterable} interface iterates the queue's (future) contents
  * ad infinitum. Users are advised to signal the end by manual insertion of a
- * special value (a so-called deadpill):
+ * special value (a so-called poison pill):
  *
  * ```
  * const queue = new AsyncQueue<string|null>();
