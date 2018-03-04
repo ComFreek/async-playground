@@ -2,7 +2,7 @@ import { AsyncLimitedQueue, IAsyncLimitedQueue } from './AsyncLimitedQueue';
 import * as chai from 'chai';
 import 'mocha';
 
-import { promiseFasterThan } from '../spec-utils';
+import { wait, promiseFasterThan } from '../spec-utils';
 
 import chaiAsPromised = require('chai-as-promised');
 import { runCommonQueueTests } from './Queue.common-spec';
@@ -64,11 +64,11 @@ describe('AsyncLimitedQueue', () => {
 			await queue.queue(i);
 		}
 
-		setTimeout(async () => {
+		wait(50).then(async () => {
 			for (let i = 0; i < LIMIT + COUNT; i++) {
 				await expect(queue.dequeue()).to.eventually.equal(i);
 			}
-		}, 50);
+		});
 
 		for (let i = 0; i < COUNT; i++) {
 			// TODO Also test that these calls are blocking

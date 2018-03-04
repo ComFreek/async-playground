@@ -100,9 +100,9 @@ export function runCommonQueueTests(queueCreator: (() => IAsyncQueue<number>) | 
 		// Insert the numbers [0, COUNT - 1] in-order (!) into the queue.
 		for (let i = 0; i < COUNT; i++) {
 			(function(curNumber) {
-				setTimeout(async () => {
-					await queue.queue(curNumber);
-				}, curNumber * QUEUE_DELTA_TIME);
+				wait(curNumber * QUEUE_DELTA_TIME).then(() => {
+					return queue.queue(curNumber);
+				});
 			})(i);
 		}
 
