@@ -1,0 +1,27 @@
+{
+  "compilerOptions": {
+    "target": "ES5",
+    "module": "commonjs",
+    "lib": [
+      "es6",
+      "esnext.asynciterable",
+      "es2015.symbol.wellknown"
+    ],
+
+    "downlevelIteration": true,
+
+    "strict": true,
+
+    /* Additional Checks */
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "noImplicitReturns": true,
+    "noFallthroughCasesInSwitch": true,
+
+    "esModuleInterop": true                   /* Enables emit interoperability between CommonJS and ES Modules via creation of namespace objects for all imports. Implies 'allowSyntheticDefaultImports'. */,
+    "typeRoots": [
+      "node_modules/@types",
+      "examples/node_modules/@types"
+    ]
+  }
+}
