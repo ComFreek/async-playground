@@ -8,6 +8,9 @@
     "build-docs": "node node_modules/typedoc/bin/typedoc --out docs queue/ semaphore/"
   },
   "author": "ComFreek <comfreek@outlook.com>",
+  "homepage": "https://github.com/ComFreek/async-playground",
+  "bugs": "https://github.com/ComFreek/async-playground/issues",
+  "repository": "github:ComFreek/async-playground",
   "license": "ISC",
   "dependencies": {},
   "devDependencies": {
