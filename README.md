@@ -78,6 +78,10 @@ async function* readInput() {
 - `npm test`
 - Note that a recent version of Node.js is required and it must be run with the `--harmony` flag: `node --harmony your-script.js`. (The flag must also appear before the script name!)
 
+## Documentation
+
+`npm run build-docs`
+
 ## Contributions & licensing
 
 Ideas and code contributions are welcome! Feel free to copy and redistribute code under the terms of the ISC license, see `LICENSE`.
