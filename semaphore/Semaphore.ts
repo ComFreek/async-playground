@@ -1,30 +1,32 @@
 /**
  * General counting semaphore with Promises.
  *
- * It allows arbitrary take (also referred to as "P") and free ("V") calls.
+ * It allows arbitrary {@link take} (also referred to as "P") and {@link free}
+ * ("V") calls.
  *
  * To use implementations with the normal JS execution model
- * (single-threaded + queue), take() and free() are supposed
- * to be called on different 'fibers'. For example, take()
+ * (single-threaded + queue), {@link take} and {@link free} are supposed
+ * to be called on different 'fibers'. For example, {@link take}
  * can be awaited in the business logic processing data
- * while free() is called inside a filesystem API callback
+ * while {@link free} is called inside a filesystem API callback
  * putting the data into an array.
  *
  * @example All of the following examples assume a semaphore initialized with a count of 0.
  *
- *  - take() is called 10 times. free() is then called once. Exactly one of the
- *    previous 10 promises is fulfilled. It is implementation-defined which
- *    of them is chosen.
- *  - free() is called 5 times. take() is then called 6 times. Exactly 5 of the
- *    returned promises get fulfilled "immediately" (for some informal value of
- *    immediately).
+ *  - {@link take} is called 10 times. {@link free} is then called once.
+ *    Exactly one of the previous 10 promises is fulfilled. It is
+ *    implementation-defined which of them is chosen.
+ *  - {@link free} is called 5 times. {@link take} is then called 6 times.
+ *    Exactly 5 of the returned promises get fulfilled "immediately" (for some
+ *    informal value of immediately).
  */
 export interface ISemaphore {
 	/**
 	 * Take or 'P' operation.
+	 *
 	 * @returns A promise which is fulfilled when >= 1 of the resource
 	 *          represented by the internal counter is available. This might be
-	 *          the case either if free() is called or if the semaphore is
+	 *          the case either if {@link free} is called or if the semaphore is
 	 *          initialized with a value > 0.
 	 */
 	take(): Promise<void>;
@@ -39,15 +41,17 @@ export interface ISemaphore {
 
 	/**
 	 * Free or 'V' operation.
-	 * If there are any promises returned by take() still awaiting their
-	 * fulfillment, exactly of them is fulfilled.
-	 * The order of fulfillment is implementation-defined.
+	 *
+	 * If there are any promises returned by {@link take()} still awaiting
+	 * their fulfillment, exactly of them is fulfilled. The order of
+	 * fulfillment is implementation-defined.
 	 */
 	free(): void;
 }
 
 /**
  * General counting semaphore implementation.
+ *
  * Not thread-safe! Not safe with regard to pre-emptive multitasking (e.g.
  * possible with some native code Node.js extensions).
  */
@@ -56,33 +60,34 @@ export class Semaphore implements ISemaphore {
 
 	/**
 	 * Initialize.
+	 *
 	 * @param counter Initial value for the counter. E.g. if you provide 10, the
-	 *                first 10 take()s will fulfill "immediately" (for some
-	 *                informal value of immediately).
+	 *                first 10 {@link take takes} will fulfill "immediately"
+	 *                (for some informal value of immediately).
 	 */
 	public constructor(private counter = 0) {
 	}
 
 	public async take(): Promise<void> {
 		// Instead of the code below, we could also have done it this way:
-		//   ```
-		//   this.counter--;
-		//   if (this.counter < 0) {
-		//     await new Promise<void>(resolve => {
-		//       this.resolvers.push(resolve);
-		//     });
-		//   }
-		//   ```
+		// ```
+		// this.counter--;
+		// if (this.counter < 0) {
+		// 	await new Promise<void>(resolve => {
+		// 		this.resolvers.push(resolve);
+		// 	});
+		// }
+		// ```
 		// That would have been equivalent in all semantic aspects.
 		//
 		// One would think that if the executor (the first argument passed to
 		// the Promise constructor) were executed asychronously in the Promise
 		// constructor somehow, then it would be possible that the following
 		// code results in a deadlock:
-		//   ```
-		//   setTimeout(() => sem.free(), 0);
-		//   sem.take();
-		//   ```
+		// ```
+		// setTimeout(() => sem.free(), 0);
+		// sem.take();
+		// ```
 		// Namely if the call to take() pushes the resolver after the free()
 		// call.
 		// This is impossible, though, the spec (cf. [1]) guarantees that the

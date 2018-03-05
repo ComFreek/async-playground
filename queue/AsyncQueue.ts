@@ -33,11 +33,11 @@ export interface IAsyncQueue<T> extends AsyncIterable<T> {
 	/**
 	 * Queue all elements of an iterable, e.g. an array or a generator function.
 	 *
-	 * @example queue.queueAll(['myArray', 'of', 'strings'])
+	 * @example `queue.queueAll(['myArray', 'of', 'strings'])`
 	 *
 	 * @example If one has a generator function f:
-	 *          ```function *f(): Iterable<string> { ... }```
-	 *          then you can call queue.queueAll(f()).
+	 *          `function *f(): Iterable<string> { ... }`
+	 *          then you can call `queue.queueAll(f())`.
 	 */
 	queueAll(iterable: Iterable<T>): void;
 
@@ -46,46 +46,45 @@ export interface IAsyncQueue<T> extends AsyncIterable<T> {
 	 * generator functions.
 	 *
 	 * @example Using an asynchronous generator function:
-	 *          ```
-	 *          async function *f(): AsyncIterable<string> {
-	 *            yield* ['Array', 'of', 'strings'];
-	 *          }
+	 * ```
+	 * async function *f(): AsyncIterable<string> {
+	 *   yield* ['Array', 'of', 'strings'];
+	 * }
 	 *
-	 *          const previousSize = queue.size();
-	 *          queue.queueAllAsync(f());
-	 *          // ^ We do not await the queueing!
-	 *          // Therefore: queue.size() === previousSize here!
-	 *          // This is indeed guaranteed by JS' execution model. There is
-	 *          // no way queueAllAsync could have queried an element from f()
-	 *          // asynchronously using a promise before this code gives up
-	 *          // the "CPU power" by await or yield.
+	 * const previousSize = queue.size();
+	 * queue.queueAllAsync(f());
+	 * // ^ We do not await the queueing!
+	 * // Therefore: queue.size() === previousSize here!
+	 * // This is indeed guaranteed by JS' execution model. There is
+	 * // no way queueAllAsync could have queried an element from f()
+	 * // asynchronously using a promise before this code gives up
+	 * // the "CPU power" by await or yield.
 	 *
-	 *          await queue.dequeue(); // 'Array'
-	 *          await queue.dequeue(); // 'of'
-	 *          await queue.dequeue(); // 'strings'
+	 * await queue.dequeue(); // 'Array'
+	 * await queue.dequeue(); // 'of'
+	 * await queue.dequeue(); // 'strings'
 	 *
-	 *          // queue.size() === 0 and queue.dequeue() would block
-	 *          // ad infinitum
+	 * // queue.size() === 0 and queue.dequeue() would block
+	 * // ad infinitum
 	 *
-	 *          await queue.queueAllAsync(f());
-	 *          // We now await the queueing!
-	 *          // Therefore: queue.size() === 3 here!
-	 *          ```
+	 * await queue.queueAllAsync(f());
+	 * // We now await the queueing!
+	 * // Therefore: queue.size() === 3 here!
+	 * ```
 	 *
 	 * @example AsyncQueue instances are also asynchronous iterables,
 	 *          meaning that you can stack multiple queues together:
+	 * ```
+	 * const backgroundQueue: IAsyncQueue<string> = new AsyncQueue();
+	 * const foregroundQueue: IAsyncQueue<string> = new AsyncQueue();
 	 *
-	 *          ```
-	 *            const backgroundQueue: IAsyncQueue<string> = new AsyncQueue();
-	 *            const foregroundQueue: IAsyncQueue<string> = new AsyncQueue();
+	 * setTimeout(() => backgroundQueue.queue('Hello World!'), 100);
 	 *
-	 *            setTimeout(() => backgroundQueue.queue('Hello World!'), 100);
+	 * foregroundQueue.queueAllAsync(backgroundQueue);
+	 * const retrievedString = await foregroundQueue.dequeue();
 	 *
-	 *            foregroundQueue.queueAllAsync(backgroundQueue);
-	 *            const retrievedString = await foregroundQueue.dequeue();
-	 *
-	 *            // retrievedString === 'Hello World!'
-	 *          ```
+	 * // retrievedString === 'Hello World!'
+	 * ```
 	 */
 	queueAllAsync(iterable: AsyncIterable<T>): Promise<void>;
 

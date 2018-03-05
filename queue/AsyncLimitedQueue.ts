@@ -15,29 +15,29 @@ import { ISemaphore, Semaphore } from '../semaphore/index';
  * false, 0, undefined, null, [], {} are all valid elements which
  * can be queued and dequeued.
  *
- * {@link IAsyncLimitedQueue#queue} operations are possibly delayed and executed in
- * implementation-dependenent order.
+ * {@link queue IAsyncLimitedQueue#queue} operations are possibly delayed and
+ * executed in implementation-dependenent order.
  *
- * @example
- *   ```
- *   queue.queue(1);
- *   queue.queue(2);
+ * @example Issueing multiple {@link queue} operations without awaiting the
+ *          previous ones may result in implementation-defined insertion order.
+ * ```
+ * queue.queue(1);
+ * queue.queue(2);
  *
- *   await queue.dequeue(); // can be 1 or 2
- *   await queue.dequeue(); // can be 1 or 2 as well (the remaining number)
- *   ```
+ * await queue.dequeue(); // can be 1 or 2
+ * await queue.dequeue(); // can be 1 or 2 as well (the remaining number)
+ * ```
  *
- * @example If you would like to retain the order, await the queue operations,
- *          use {@link IAsyncLimitedQueue#queueAll} or
- *          {@link IAsyncLimitedQueue#queueAllAsync}.
- *  ```
- *  await queue.queue(1);
- *  await queue.queue(2);
- *  ```
- *
- *  ```
- *  queue.queueAll([1, 2]);
- *  ```
+ * @example If you would like to retain the order, await the {@link queue}
+ *          operations, use {@link queueAll IAsyncLimitedQueue#queueAll} or
+ *          {@link queueAllAsync IAsyncLimitedQueue#queueAllAsync}.
+ * ```
+ * await queue.queue(1);
+ * await queue.queue(2);
+ * ```
+ * ```
+ * queue.queueAll([1, 2]);
+ * ```
  *
  * The {@link AsyncIterable} interface iterates the queue's (future) contents
  * ad infinitum. Users are advised to signal the end by manual insertion of a
@@ -48,11 +48,11 @@ export interface IAsyncLimitedQueue<T> extends AsyncIterable<T> {
 	 * Queue an element, waiting for entrance if necessary.
 	 *
 	 * @example
-	 *   ```
-	 *   queue.queue(42).then(() => {
-	 *     // 42 is now stored within the queue
-	 *   });
-	 *   ```
+	 * ```
+	 * queue.queue(42).then(() => {
+	 *   // 42 is now stored within the queue
+	 * });
+	 * ```
 	 */
 	queue(data: T): Promise<void>;
 
@@ -100,11 +100,11 @@ export interface IAsyncLimitedQueue<T> extends AsyncIterable<T> {
 	 *                 The method will stop querying and offering further
 	 *                 elements upon the first {@link offer} call, which
 	 *                 returns `false`.
-	 *
+	 *                 <br>
 	 *                 Contrary to {@link offerAll}, iterables iterating an
 	 *                 infinite number of elements might prevent the Promise,
 	 *                 which {@link offerAllAsync} returns, from ever resolving.
-	 *
+	 *                 <br>
 	 *                 This depends on {@link dequeue} operations which could
 	 *                 get scheduled by the JS VM while elements from the passed
 	 *                 asynchronous iterator are accessed.
@@ -112,7 +112,6 @@ export interface IAsyncLimitedQueue<T> extends AsyncIterable<T> {
 	 * @returns A promise resolving to the number of elements, which could be
 	 *          inserted (offered successfully) consecutively without waiting.
 	 *          Possibly 0 when the queue was full at the time of the call.
-	 *
 	 *          Fulfillment of this promise is not guaranteed in case of infinite
 	 *          iterables.
 	 */
