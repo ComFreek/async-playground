@@ -1,0 +1,261 @@
+<!doctype html>
+<html class="default no-js">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>comfreek-async-playground</title>
+	<meta name="description" content="">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="assets/css/main.css">
+</head>
+<body>
+<header>
+	<div class="tsd-page-toolbar">
+		<div class="container">
+			<div class="table-wrap">
+				<div class="table-cell" id="tsd-search" data-index="assets/js/search.js" data-base=".">
+					<div class="field">
+						<label for="tsd-search-field" class="tsd-widget search no-caption">Search</label>
+						<input id="tsd-search-field" type="text" />
+					</div>
+					<ul class="results">
+						<li class="state loading">Preparing search index...</li>
+						<li class="state failure">The search index is not available</li>
+					</ul>
+					<a href="index.html" class="title">comfreek-async-playground</a>
+				</div>
+				<div class="table-cell" id="tsd-widgets">
+					<div id="tsd-filter">
+						<a href="#" class="tsd-widget options no-caption" data-toggle="options">Options</a>
+						<div class="tsd-filter-group">
+							<div class="tsd-select" id="tsd-filter-visibility">
+								<span class="tsd-select-label">All</span>
+								<ul class="tsd-select-list">
+									<li data-value="public">Public</li>
+									<li data-value="protected">Public/Protected</li>
+									<li data-value="private" class="selected">All</li>
+								</ul>
+							</div>
+							<input type="checkbox" id="tsd-filter-inherited" checked />
+							<label class="tsd-widget" for="tsd-filter-inherited">Inherited</label>
+							<input type="checkbox" id="tsd-filter-externals" checked />
+							<label class="tsd-widget" for="tsd-filter-externals">Externals</label>
+							<input type="checkbox" id="tsd-filter-only-exported" />
+							<label class="tsd-widget" for="tsd-filter-only-exported">Only exported</label>
+						</div>
+					</div>
+					<a href="#" class="tsd-widget menu no-caption" data-toggle="menu">Menu</a>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="tsd-page-title">
+		<div class="container">
+			<ul class="tsd-breadcrumb">
+				<li>
+					<a href="globals.html">Globals</a>
+				</li>
+			</ul>
+			<h1> comfreek-async-playground</h1>
+		</div>
+	</div>
+</header>
+<div class="container container-main">
+	<div class="row">
+		<div class="col-8 col-content">
+			<div class="tsd-panel tsd-typography">
+				<h1 id="comfreek-s-async-generator-promises-playground">ComFreek&#39;s async generator/Promises playground</h1>
+				<p>Inspired by
+				<a href="http://exploringjs.com/es2018-es2019/index.html">Exploring ES2018 and ES2019</a> by <a href="http://dr-axel.de/">Dr. Axel Rauschmayer</a>, especially the part on asynchronous generators, I wrote some TypeScript classes of well-known concepts.</p>
+				<p>It&#39;s fun to (re-)explore these concepts, but with Promises and ECMAScript&#39;s execution model in mind:</p>
+				<ul>
+					<li><p><code>Semaphore</code>: typical counting semaphore implementation</p>
+						<pre><code class="lang-typescript"><span class="hljs-keyword">const</span> sem = <span class="hljs-keyword">new</span> Semaphore();
+doSomeIO().then(<span class="hljs-function"><span class="hljs-params">()</span> =&gt;</span> sem.free());
+<span class="hljs-keyword">await</span> sem.take();
+</code></pre>
+					</li>
+					<li><p><code>AsyncQueue</code>: a queue with asynchronous dequeue operation</p>
+						<pre><code class="lang-typescript"><span class="hljs-keyword">const</span> queue = <span class="hljs-keyword">new</span> AsyncQueue&lt;<span class="hljs-built_in">string</span>&gt;();
+
+getFile(<span class="hljs-string">'test.txt'</span>).on(<span class="hljs-string">'line'</span>, <span class="hljs-function">(<span class="hljs-params">line</span>) =&gt;</span> queue.queue(line));
+
+<span class="hljs-comment">// Process the lines</span>
+<span class="hljs-keyword">await</span> queue.dequeue();
+</code></pre>
+					</li>
+					<li><p><code>AsyncLimitedQueue</code>: a queue where the queue operation is asynchronous as well
+						since it enforces a user-specified limit on the number of entries.</p>
+						<pre><code class="lang-typescript"><span class="hljs-comment">// Only store up to 30 lines at the same time</span>
+<span class="hljs-keyword">const</span> queue = <span class="hljs-keyword">new</span> AsyncLimitedQueue&lt;<span class="hljs-built_in">string</span>&gt;(<span class="hljs-number">30</span>);
+
+<span class="hljs-comment">// queue now returns a promise, which resolves</span>
+<span class="hljs-comment">// when the line has been inserted</span>
+<span class="hljs-comment">// Assumption: the interface behind getFile() waits for this promise as well to resolve</span>
+getFile(<span class="hljs-string">'test.txt'</span>).on(<span class="hljs-string">'line'</span>, <span class="hljs-keyword">async</span> (line) =&gt; queue.queue(line));
+
+<span class="hljs-comment">// Process the lines</span>
+<span class="hljs-keyword">await</span> queue.dequeue();
+</code></pre>
+					</li>
+				</ul>
+				<h2 id="fully-self-contained-example">Fully self-contained example</h2>
+				<p>Cf. <code>examples/queue-stdio-lines.ts</code> and <code>examples/README.md</code> on how to run.</p>
+				<pre><code class="lang-typescript"><span class="hljs-keyword">import</span> { IAsyncQueue, AsyncQueue } <span class="hljs-keyword">from</span> <span class="hljs-string">'../queue/index'</span>;
+
+<span class="hljs-keyword">const</span> readline = <span class="hljs-built_in">require</span>(<span class="hljs-string">'readline'</span>);
+
+<span class="hljs-keyword">async</span> <span class="hljs-function"><span class="hljs-keyword">function</span>* <span class="hljs-title">readInput</span>(<span class="hljs-params"></span>) </span>{
+    <span class="hljs-keyword">const</span> rl = readline.createInterface({
+        input: process.stdin,
+        output: process.stdout,
+        terminal: <span class="hljs-literal">false</span>
+    });
+
+    <span class="hljs-comment">// null signals the end of input</span>
+    <span class="hljs-keyword">const</span> queue: IAsyncQueue&lt;<span class="hljs-built_in">string</span>|<span class="hljs-literal">null</span>&gt; = <span class="hljs-keyword">new</span> AsyncQueue();
+
+    rl.on(<span class="hljs-string">'line'</span>, <span class="hljs-function">(<span class="hljs-params">line: <span class="hljs-built_in">string</span></span>) =&gt;</span> queue.queue(line));
+    rl.on(<span class="hljs-string">'close'</span>, <span class="hljs-function"><span class="hljs-params">()</span> =&gt;</span> queue.queue(<span class="hljs-literal">null</span>));
+
+    <span class="hljs-keyword">yield</span>* queue;
+};
+
+(<span class="hljs-keyword">async</span> <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{
+    <span class="hljs-keyword">for</span> <span class="hljs-keyword">await</span> (<span class="hljs-keyword">const</span> line of readInput()) {
+        <span class="hljs-keyword">if</span> (line === <span class="hljs-literal">null</span>) {
+            <span class="hljs-keyword">break</span>;
+        }
+        <span class="hljs-built_in">console</span>.log(line);
+    }
+})();
+</code></pre>
+				<h2 id="tests">Tests</h2>
+				<ul>
+					<li><code>npm test</code></li>
+					<li>Note that a recent version of Node.js is required and it must be run with the <code>--harmony</code> flag: <code>node --harmony your-script.js</code>. (The flag must also appear before the script name!)</li>
+				</ul>
+				<h2 id="documentation">Documentation</h2>
+				<p><code>npm run build-docs</code></p>
+				<h2 id="contributions-licensing">Contributions &amp; licensing</h2>
+				<p>Ideas and code contributions are welcome! Feel free to copy and redistribute code under the terms of the ISC license, see <code>LICENSE</code>.</p>
+			</div>
+		</div>
+		<div class="col-4 col-menu menu-sticky-wrap menu-highlight">
+			<nav class="tsd-navigation primary">
+				<ul>
+					<li class="globals  ">
+						<a href="globals.html"><em>Globals</em></a>
+					</li>
+					<li class="label tsd-is-external">
+						<span>Internals</span>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="modules/_queue_asynclimitedqueue_.html">"queue/<wbr>Async<wbr>Limited<wbr>Queue"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="modules/_queue_asynclimitedqueue_spec_.html">"queue/<wbr>Async<wbr>Limited<wbr>Queue.spec"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="modules/_queue_asyncqueue_.html">"queue/<wbr>Async<wbr>Queue"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="modules/_queue_asyncqueue_spec_.html">"queue/<wbr>Async<wbr>Queue.spec"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="modules/_queue_queue_common_spec_.html">"queue/<wbr>Queue.common-<wbr>spec"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="modules/_queue_index_.html">"queue/index"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="modules/_semaphore_semaphore_.html">"semaphore/<wbr>Semaphore"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="modules/_semaphore_semaphore_spec_.html">"semaphore/<wbr>Semaphore.spec"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="modules/_semaphore_index_.html">"semaphore/index"</a>
+					</li>
+					<li class="label tsd-is-external">
+						<span>Externals</span>
+					</li>
+					<li class=" tsd-kind-external-module tsd-is-external">
+						<a href="modules/_spec_utils_.html">"spec-<wbr>utils"</a>
+					</li>
+				</ul>
+			</nav>
+			<nav class="tsd-navigation secondary menu-sticky">
+				<ul class="before-current">
+				</ul>
+			</nav>
+		</div>
+	</div>
+</div>
+<footer class="with-border-bottom">
+	<div class="container">
+		<h2>Legend</h2>
+		<div class="tsd-legend-group">
+			<ul class="tsd-legend">
+				<li class="tsd-kind-module"><span class="tsd-kind-icon">Module</span></li>
+				<li class="tsd-kind-object-literal"><span class="tsd-kind-icon">Object literal</span></li>
+				<li class="tsd-kind-variable"><span class="tsd-kind-icon">Variable</span></li>
+				<li class="tsd-kind-function"><span class="tsd-kind-icon">Function</span></li>
+				<li class="tsd-kind-function tsd-has-type-parameter"><span class="tsd-kind-icon">Function with type parameter</span></li>
+				<li class="tsd-kind-index-signature"><span class="tsd-kind-icon">Index signature</span></li>
+				<li class="tsd-kind-type-alias"><span class="tsd-kind-icon">Type alias</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-enum"><span class="tsd-kind-icon">Enumeration</span></li>
+				<li class="tsd-kind-enum-member"><span class="tsd-kind-icon">Enumeration member</span></li>
+				<li class="tsd-kind-property tsd-parent-kind-enum"><span class="tsd-kind-icon">Property</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-enum"><span class="tsd-kind-icon">Method</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-interface"><span class="tsd-kind-icon">Interface</span></li>
+				<li class="tsd-kind-interface tsd-has-type-parameter"><span class="tsd-kind-icon">Interface with type parameter</span></li>
+				<li class="tsd-kind-constructor tsd-parent-kind-interface"><span class="tsd-kind-icon">Constructor</span></li>
+				<li class="tsd-kind-property tsd-parent-kind-interface"><span class="tsd-kind-icon">Property</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-interface"><span class="tsd-kind-icon">Method</span></li>
+				<li class="tsd-kind-index-signature tsd-parent-kind-interface"><span class="tsd-kind-icon">Index signature</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-class"><span class="tsd-kind-icon">Class</span></li>
+				<li class="tsd-kind-class tsd-has-type-parameter"><span class="tsd-kind-icon">Class with type parameter</span></li>
+				<li class="tsd-kind-constructor tsd-parent-kind-class"><span class="tsd-kind-icon">Constructor</span></li>
+				<li class="tsd-kind-property tsd-parent-kind-class"><span class="tsd-kind-icon">Property</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-class"><span class="tsd-kind-icon">Method</span></li>
+				<li class="tsd-kind-accessor tsd-parent-kind-class"><span class="tsd-kind-icon">Accessor</span></li>
+				<li class="tsd-kind-index-signature tsd-parent-kind-class"><span class="tsd-kind-icon">Index signature</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-constructor tsd-parent-kind-class tsd-is-inherited"><span class="tsd-kind-icon">Inherited constructor</span></li>
+				<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited"><span class="tsd-kind-icon">Inherited property</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited"><span class="tsd-kind-icon">Inherited method</span></li>
+				<li class="tsd-kind-accessor tsd-parent-kind-class tsd-is-inherited"><span class="tsd-kind-icon">Inherited accessor</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-property tsd-parent-kind-class tsd-is-protected"><span class="tsd-kind-icon">Protected property</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-class tsd-is-protected"><span class="tsd-kind-icon">Protected method</span></li>
+				<li class="tsd-kind-accessor tsd-parent-kind-class tsd-is-protected"><span class="tsd-kind-icon">Protected accessor</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><span class="tsd-kind-icon">Private property</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-class tsd-is-private"><span class="tsd-kind-icon">Private method</span></li>
+				<li class="tsd-kind-accessor tsd-parent-kind-class tsd-is-private"><span class="tsd-kind-icon">Private accessor</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-property tsd-parent-kind-class tsd-is-static"><span class="tsd-kind-icon">Static property</span></li>
+				<li class="tsd-kind-call-signature tsd-parent-kind-class tsd-is-static"><span class="tsd-kind-icon">Static method</span></li>
+			</ul>
+		</div>
+	</div>
+</footer>
+<div class="container tsd-generator">
+	<p>Generated using <a href="http://typedoc.org/" target="_blank">TypeDoc</a></p>
+</div>
+<div class="overlay"></div>
+<script src="assets/js/main.js"></script>
+<script>if (location.protocol == 'file:') document.write('<script src="assets/js/search.js"><' + '/script>');</script>
+</body>
+</html>
