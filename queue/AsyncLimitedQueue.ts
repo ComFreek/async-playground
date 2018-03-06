@@ -121,7 +121,7 @@ export interface IAsyncLimitedQueue<T> extends AsyncIterable<T> {
 	 * Dequeue an element if available or throw an exception otherwise.
 	 *
 	 * @returns The first element of the queue.
-	 * @throws An exception if the queue is empty at the time of the call.
+	 * @throws A {@link NoElementError} exception if the queue is empty at the time of the call.
 	 */
 	poll(): T;
 
