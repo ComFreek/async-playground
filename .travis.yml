@@ -2,3 +2,17 @@ language: node_js
 node_js:
   - "node"
   - "9"
+
+script:
+  - npm test
+  - npm run builds-docs
+
+deploy:
+  provider: pages
+  local-dir: docs
+  skip-cleanup: true
+  github-token: $GITHUB_PAGES_DEPLOYMENT_TOKEN
+  keep-history: true
+  on:
+    branch: master
+  target-branch: gh-pages
