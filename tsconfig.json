@@ -8,6 +8,8 @@
       "es2015.symbol.wellknown"
     ],
 
+    "inlineSourceMap": true,                  /* For Instanbul code coverage */
+
     "downlevelIteration": true,
 
     "strict": true,

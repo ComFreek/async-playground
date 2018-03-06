@@ -7,6 +7,8 @@ script:
   - npm test
   - npm run build-docs
 
+after_success: npm run coverage
+
 deploy:
   provider: pages
   local-dir: docs
