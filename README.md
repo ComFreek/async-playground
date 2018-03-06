@@ -80,7 +80,7 @@ async function* readInput() {
 
 ## Documentation
 
-- Live on https://comfreek.github.io/async-playground/docs/.
+- Live on https://comfreek.github.io/async-playground.
 - Built by `npm run build-docs` and automatically pushed to the `gh-pages` branch by Travis CI, see `.travis.yml`.
 
 ## Tests
