@@ -78,15 +78,15 @@ async function* readInput() {
 })();
 ```
 
-## Tests
-
-- `npm test`
-- Note that a recent version of Node.js is required and it must be run with the `--harmony` flag: `node --harmony your-script.js`. (The flag must also appear before the script name!)
-
 ## Documentation
 
-- `npm run build-docs`
-- `docs/` is supposed to be then pushed to the `gh-pages` branch, which can be seen live on https://comfreek.github.io/async-playground/docs/.
+- Live on https://comfreek.github.io/async-playground/docs/.
+- Built by `npm run build-docs` and automatically pushed to the `gh-pages` branch by Travis CI, see `.travis.yml`.
+
+## Tests
+
+- Run by `npm test` and automatically performed by Travis CI, see `.travis.yml`.
+- If you would like test scripts on your own, do note that a recent version of Node.js is required and it must be run with the `--harmony` flag: `node --harmony your-script.js`. The flag must also appear before the script name.
 
 ## Contributions & licensing
 
