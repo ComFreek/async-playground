@@ -133,15 +133,15 @@ getFile(<span class="hljs-string">'test.txt'</span>).on(<span class="hljs-string
     }
 })();
 </code></pre>
-				<h2 id="tests">Tests</h2>
-				<ul>
-					<li><code>npm test</code></li>
-					<li>Note that a recent version of Node.js is required and it must be run with the <code>--harmony</code> flag: <code>node --harmony your-script.js</code>. (The flag must also appear before the script name!)</li>
-				</ul>
 				<h2 id="documentation">Documentation</h2>
 				<ul>
-					<li><code>npm run build-docs</code></li>
-					<li><code>docs/</code> is supposed to be then pushed to the <code>gh-pages</code> branch, which can be seen live on <a href="https://comfreek.github.io/async-playground/docs/">https://comfreek.github.io/async-playground/docs/</a>.</li>
+					<li>Live on <a href="https://comfreek.github.io/async-playground/docs/">https://comfreek.github.io/async-playground/docs/</a>.</li>
+					<li>Built by <code>npm run build-docs</code> and automatically pushed to the <code>gh-pages</code> branch by Travis CI, see <code>.travis.yml</code>.</li>
+				</ul>
+				<h2 id="tests">Tests</h2>
+				<ul>
+					<li>Run by <code>npm test</code> and automatically performed by Travis CI, see <code>.travis.yml</code>.</li>
+					<li>If you would like test scripts on your own, do note that a recent version of Node.js is required and it must be run with the <code>--harmony</code> flag: <code>node --harmony your-script.js</code>. The flag must also appear before the script name.</li>
 				</ul>
 				<h2 id="contributions-licensing">Contributions &amp; licensing</h2>
 				<p>Ideas and code contributions are welcome! Feel free to copy and redistribute code under the terms of the ISC license, see <code>LICENSE</code>.</p>
