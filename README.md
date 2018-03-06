@@ -1,5 +1,7 @@
 # ComFreek's async generator/Promises playground
 
+[![Build Status](https://travis-ci.org/ComFreek/async-playground.svg?branch=master)](https://travis-ci.org/ComFreek/async-playground)
+
 Repo: https://github.com/ComFreek/async-playground<br>
 Documentation: https://comfreek.github.io/async-playground/docs/
 
