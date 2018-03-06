@@ -3,7 +3,7 @@
 [![Build Status](https://travis-ci.org/ComFreek/async-playground.svg?branch=master)](https://travis-ci.org/ComFreek/async-playground)
 
 Repo: https://github.com/ComFreek/async-playground<br>
-Documentation: https://comfreek.github.io/async-playground/docs/
+Documentation: https://comfreek.github.io/async-playground
 
 Inspired by
 [Exploring ES2018 and ES2019](http://exploringjs.com/es2018-es2019/index.html) by [Dr. Axel Rauschmayer](http://dr-axel.de/), especially the part on asynchronous generators, I wrote some TypeScript classes of well-known concepts.
