@@ -40,6 +40,40 @@ export interface ISemaphore {
 	tryTake(): boolean;
 
 	/**
+	 * Try taking ('P') a resource within the next `millis` milliseconds.
+	 *
+	 * @example Contrary to {@link tryTake}, you have to await the promise returned
+	 * by this method.
+	 * ```
+	 * tryTakeWithin(500).then((hasTaken) => ...);
+	 *
+	 * // inside an async function
+	 * const hasTaken = await tryTakeWithin(500);
+	 * ```
+	 *
+	 * @example Instead of simply waiting with {@link take}, you can also use
+	 * this method to regularly give up some computation time, so that other
+	 * parts of the code can {@link free} a resource, while still doing some
+	 * useful work in case of an unsuccessful attempt.<br>
+	 * Note that this were impossible with {@link take} since it does not give
+	 * up computation time (it is a synchronous method) and the JS VM is
+	 * single-threaded. Conversely, the other "fibers" must give up their
+	 * computation power as well (e.g. by `yield`ing or `await`ing), this
+	 * is known as cooperative multitasking.
+	 * ```
+	 * // Regularly check for 500ms if we are able to take a resource
+	 * while (!await tryTakeWithin(500)) {
+	 *   // If not, do some other work...
+	 * }
+	 * // We finally acquired the resource
+	 * ```
+	 *
+	 * @return A promise fulfilling with `true` if a resource could be taken or
+	 *         `false` otherwise.
+	 */
+	tryTakeWithin(millis: number): Promise<boolean>;
+
+	/**
 	 * Free or 'V' operation.
 	 *
 	 * If there are any promises returned by {@link take()} still awaiting
@@ -114,6 +148,36 @@ export class Semaphore implements ISemaphore {
 
 		this.counter--;
 		return true;
+	}
+
+	private static async wait(millis: number): Promise<void> {
+		return new Promise<void>(resolve => {
+			setTimeout(resolve, millis);
+		});
+	}
+
+	async tryTakeWithin(millis: number): Promise<boolean> {
+		let alreadyTimedout = false;
+		return Promise.race([
+			this.take().then(() => {
+				// Promises offer no 'cancel' feature, therefore the take()
+				// must be undone in case of a timeout.
+				if (alreadyTimedout) {
+					this.free();
+
+					// Since the other promise won anyway, this return value
+					// will actually be ignored by Promise.race.
+					return false;
+				}
+				else {
+					return true;
+				}
+			}),
+			Semaphore.wait(millis).then(() => {
+				alreadyTimedout = true;
+				return false;
+			})
+		]);
 	}
 
 	public free(): void {
