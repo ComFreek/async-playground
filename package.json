@@ -6,7 +6,7 @@
   "scripts": {
     "test": "nyc mocha --harmony -r ts-node/register -r source-map-support/register **/*.spec.ts",
     "coverage": "nyc report --reporter=text-lcov | coveralls",
-    "build-docs": "node node_modules/typedoc/bin/typedoc --out docs queue/ semaphore/"
+    "build-docs": "node node_modules/typedoc/bin/typedoc --out docs queue/ semaphore/ && echo .nojekyll > docs/.nojekyll"
   },
   "author": "ComFreek <comfreek@outlook.com>",
   "homepage": "https://github.com/ComFreek/async-playground",
