@@ -3,17 +3,17 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>comfreek-async-playground</title>
+	<title>&quot;queue/Queue.common-spec&quot; | comfreek-async-playground</title>
 	<meta name="description" content="">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<link rel="stylesheet" href="assets/css/main.css">
+	<link rel="stylesheet" href="../assets/css/main.css">
 </head>
 <body>
 <header>
 	<div class="tsd-page-toolbar">
 		<div class="container">
 			<div class="table-wrap">
-				<div class="table-cell" id="tsd-search" data-index="assets/js/search.js" data-base=".">
+				<div class="table-cell" id="tsd-search" data-index="../assets/js/search.js" data-base="..">
 					<div class="field">
 						<label for="tsd-search-field" class="tsd-widget search no-caption">Search</label>
 						<input id="tsd-search-field" type="text" />
@@ -22,7 +22,7 @@
 						<li class="state loading">Preparing search index...</li>
 						<li class="state failure">The search index is not available</li>
 					</ul>
-					<a href="index.html" class="title">comfreek-async-playground</a>
+					<a href="../index.html" class="title">comfreek-async-playground</a>
 				</div>
 				<div class="table-cell" id="tsd-widgets">
 					<div id="tsd-filter">
@@ -53,145 +53,176 @@
 		<div class="container">
 			<ul class="tsd-breadcrumb">
 				<li>
-					<a href="globals.html">Globals</a>
+					<a href="../globals.html">Globals</a>
+				</li>
+				<li>
+					<a href="_queue_queue_common_spec_.html">&quot;queue/Queue.common-spec&quot;</a>
 				</li>
 			</ul>
-			<h1> comfreek-async-playground</h1>
+			<h1>External module &quot;queue/Queue.common-spec&quot;</h1>
 		</div>
 	</div>
 </header>
 <div class="container container-main">
 	<div class="row">
 		<div class="col-8 col-content">
-			<div class="tsd-panel tsd-typography">
-				<h1 id="comfreek-s-async-generator-promises-playground">ComFreek&#39;s async generator/Promises playground</h1>
-				<p>Repo: <a href="https://github.com/ComFreek/async-playground">https://github.com/ComFreek/async-playground</a><br>
-				Documentation: <a href="https://comfreek.github.io/async-playground/docs/">https://comfreek.github.io/async-playground/docs/</a></p>
-				<p>Inspired by
-				<a href="http://exploringjs.com/es2018-es2019/index.html">Exploring ES2018 and ES2019</a> by <a href="http://dr-axel.de/">Dr. Axel Rauschmayer</a>, especially the part on asynchronous generators, I wrote some TypeScript classes of well-known concepts.</p>
-				<p>It&#39;s fun to (re-)explore these concepts, but with Promises and ECMAScript&#39;s execution model in mind:</p>
-				<ul>
-					<li><p><code>Semaphore</code>: typical counting semaphore implementation</p>
-						<pre><code class="lang-typescript"><span class="hljs-keyword">const</span> sem = <span class="hljs-keyword">new</span> Semaphore();
-doSomeIO().then(<span class="hljs-function"><span class="hljs-params">()</span> =&gt;</span> sem.free());
-<span class="hljs-keyword">await</span> sem.take();
-</code></pre>
-					</li>
-					<li><p><code>AsyncQueue</code>: a queue with asynchronous dequeue operation</p>
-						<pre><code class="lang-typescript"><span class="hljs-keyword">const</span> queue = <span class="hljs-keyword">new</span> AsyncQueue&lt;<span class="hljs-built_in">string</span>&gt;();
-
-getFile(<span class="hljs-string">'test.txt'</span>).on(<span class="hljs-string">'line'</span>, <span class="hljs-function">(<span class="hljs-params">line</span>) =&gt;</span> queue.queue(line));
-
-<span class="hljs-comment">// Process the lines</span>
-<span class="hljs-keyword">await</span> queue.dequeue();
-</code></pre>
-					</li>
-					<li><p><code>AsyncLimitedQueue</code>: a queue where the queue operation is asynchronous as well
-						since it enforces a user-specified limit on the number of entries.</p>
-						<pre><code class="lang-typescript"><span class="hljs-comment">// Only store up to 30 lines at the same time</span>
-<span class="hljs-keyword">const</span> queue = <span class="hljs-keyword">new</span> AsyncLimitedQueue&lt;<span class="hljs-built_in">string</span>&gt;(<span class="hljs-number">30</span>);
-
-<span class="hljs-comment">// queue now returns a promise, which resolves</span>
-<span class="hljs-comment">// when the line has been inserted</span>
-<span class="hljs-comment">// Assumption: the interface behind getFile() waits for this promise as well to resolve</span>
-getFile(<span class="hljs-string">'test.txt'</span>).on(<span class="hljs-string">'line'</span>, <span class="hljs-keyword">async</span> (line) =&gt; queue.queue(line));
-
-<span class="hljs-comment">// Process the lines</span>
-<span class="hljs-keyword">await</span> queue.dequeue();
-</code></pre>
-					</li>
-				</ul>
-				<h2 id="fully-self-contained-example">Fully self-contained example</h2>
-				<p>Cf. <code>examples/queue-stdio-lines.ts</code> and <code>examples/README.md</code> on how to run.</p>
-				<pre><code class="lang-typescript"><span class="hljs-keyword">import</span> { IAsyncQueue, AsyncQueue } <span class="hljs-keyword">from</span> <span class="hljs-string">'../queue/index'</span>;
-
-<span class="hljs-keyword">const</span> readline = <span class="hljs-built_in">require</span>(<span class="hljs-string">'readline'</span>);
-
-<span class="hljs-keyword">async</span> <span class="hljs-function"><span class="hljs-keyword">function</span>* <span class="hljs-title">readInput</span>(<span class="hljs-params"></span>) </span>{
-    <span class="hljs-keyword">const</span> rl = readline.createInterface({
-        input: process.stdin,
-        output: process.stdout,
-        terminal: <span class="hljs-literal">false</span>
-    });
-
-    <span class="hljs-comment">// null signals the end of input</span>
-    <span class="hljs-keyword">const</span> queue: IAsyncQueue&lt;<span class="hljs-built_in">string</span>|<span class="hljs-literal">null</span>&gt; = <span class="hljs-keyword">new</span> AsyncQueue();
-
-    rl.on(<span class="hljs-string">'line'</span>, <span class="hljs-function">(<span class="hljs-params">line: <span class="hljs-built_in">string</span></span>) =&gt;</span> queue.queue(line));
-    rl.on(<span class="hljs-string">'close'</span>, <span class="hljs-function"><span class="hljs-params">()</span> =&gt;</span> queue.queue(<span class="hljs-literal">null</span>));
-
-    <span class="hljs-keyword">yield</span>* queue;
-};
-
-(<span class="hljs-keyword">async</span> <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{
-    <span class="hljs-keyword">for</span> <span class="hljs-keyword">await</span> (<span class="hljs-keyword">const</span> line of readInput()) {
-        <span class="hljs-keyword">if</span> (line === <span class="hljs-literal">null</span>) {
-            <span class="hljs-keyword">break</span>;
-        }
-        <span class="hljs-built_in">console</span>.log(line);
-    }
-})();
-</code></pre>
-				<h2 id="tests">Tests</h2>
-				<ul>
-					<li><code>npm test</code></li>
-					<li>Note that a recent version of Node.js is required and it must be run with the <code>--harmony</code> flag: <code>node --harmony your-script.js</code>. (The flag must also appear before the script name!)</li>
-				</ul>
-				<h2 id="documentation">Documentation</h2>
-				<ul>
-					<li><code>npm run build-docs</code></li>
-					<li><code>docs/</code> is supposed to be then pushed to the <code>gh-pages</code> branch, which can be seen live on <a href="https://comfreek.github.io/async-playground/docs/">https://comfreek.github.io/async-playground/docs/</a>.</li>
-				</ul>
-				<h2 id="contributions-licensing">Contributions &amp; licensing</h2>
-				<p>Ideas and code contributions are welcome! Feel free to copy and redistribute code under the terms of the ISC license, see <code>LICENSE</code>.</p>
-			</div>
+			<section class="tsd-panel-group tsd-index-group">
+				<h2>Index</h2>
+				<section class="tsd-panel tsd-index-panel">
+					<div class="tsd-index-content">
+						<section class="tsd-index-section ">
+							<h3>Variables</h3>
+							<ul class="tsd-index-list">
+								<li class="tsd-kind-variable tsd-parent-kind-external-module"><a href="_queue_queue_common_spec_.html#deadpill" class="tsd-kind-icon">DEADPILL</a></li>
+								<li class="tsd-kind-variable tsd-parent-kind-external-module"><a href="_queue_queue_common_spec_.html#queue_delta_time" class="tsd-kind-icon">QUEUE_<wbr>DELTA_<wbr>TIME</a></li>
+							</ul>
+						</section>
+						<section class="tsd-index-section ">
+							<h3>Functions</h3>
+							<ul class="tsd-index-list">
+								<li class="tsd-kind-function tsd-parent-kind-external-module"><a href="_queue_queue_common_spec_.html#runcommonqueuetests" class="tsd-kind-icon">run<wbr>Common<wbr>Queue<wbr>Tests</a></li>
+							</ul>
+						</section>
+					</div>
+				</section>
+			</section>
+			<section class="tsd-panel-group tsd-member-group ">
+				<h2>Variables</h2>
+				<section class="tsd-panel tsd-member tsd-kind-variable tsd-parent-kind-external-module">
+					<a name="deadpill" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagConst">Const</span> DEADPILL</h3>
+					<div class="tsd-signature tsd-kind-icon">DEADPILL<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">3735928559</span><span class="tsd-signature-symbol"> =&nbsp;3735928559</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/ComFreek/async-playground/blob/29bb04d/queue/Queue.common-spec.ts#L11">queue/Queue.common-spec.ts:11</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>An element used by some unit tests to signal the end of
+							data insertion.</p>
+						</div>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-variable tsd-parent-kind-external-module">
+					<a name="queue_delta_time" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagConst">Const</span> QUEUE_<wbr>DELTA_<wbr>TIME</h3>
+					<div class="tsd-signature tsd-kind-icon">QUEUE_<wbr>DELTA_<wbr>TIME<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">5</span><span class="tsd-signature-symbol"> =&nbsp;5</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/ComFreek/async-playground/blob/29bb04d/queue/Queue.common-spec.ts#L17">queue/Queue.common-spec.ts:17</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>Time interval in milliseconds which some unit tests use
+							to continuously insert elements into the queue.</p>
+						</div>
+					</div>
+				</section>
+			</section>
+			<section class="tsd-panel-group tsd-member-group ">
+				<h2>Functions</h2>
+				<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-external-module">
+					<a name="runcommonqueuetests" class="tsd-anchor"></a>
+					<h3>run<wbr>Common<wbr>Queue<wbr>Tests</h3>
+					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-external-module">
+						<li class="tsd-signature tsd-kind-icon">run<wbr>Common<wbr>Queue<wbr>Tests<span class="tsd-signature-symbol">(</span>queueCreator<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">function</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">function</span>, COUNT<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/ComFreek/async-playground/blob/29bb04d/queue/Queue.common-spec.ts#L31">queue/Queue.common-spec.ts:31</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Run common queue tests, i.e. this function calls it() for each of its
+									unit tests.</p>
+								</div>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>queueCreator: <span class="tsd-signature-type">function</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">function</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>A &quot;factory function&quot; for queue objects, which is run
+										before each test.</p>
+									</div>
+								</li>
+								<li>
+									<h5>COUNT: <span class="tsd-signature-type">number</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>Each test guarantees that it only holds up to COUNT many
+											elements in the queue at the same time.
+											In case of IAsyncQueue, the caller must provide a value of
+											COUNT &lt;= LIMIT of the respective queue. Otherwise, some tests
+										might run into deadlocks.</p>
+									</div>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+						</li>
+					</ul>
+				</section>
+			</section>
 		</div>
 		<div class="col-4 col-menu menu-sticky-wrap menu-highlight">
 			<nav class="tsd-navigation primary">
 				<ul>
 					<li class="globals  ">
-						<a href="globals.html"><em>Globals</em></a>
+						<a href="../globals.html"><em>Globals</em></a>
 					</li>
 					<li class="label tsd-is-external">
 						<span>Internals</span>
 					</li>
 					<li class=" tsd-kind-external-module">
-						<a href="modules/_queue_asynclimitedqueue_.html">"queue/<wbr>Async<wbr>Limited<wbr>Queue"</a>
+						<a href="_queue_asynclimitedqueue_.html">"queue/<wbr>Async<wbr>Limited<wbr>Queue"</a>
 					</li>
 					<li class=" tsd-kind-external-module">
-						<a href="modules/_queue_asynclimitedqueue_spec_.html">"queue/<wbr>Async<wbr>Limited<wbr>Queue.spec"</a>
+						<a href="_queue_asynclimitedqueue_spec_.html">"queue/<wbr>Async<wbr>Limited<wbr>Queue.spec"</a>
 					</li>
 					<li class=" tsd-kind-external-module">
-						<a href="modules/_queue_asyncqueue_.html">"queue/<wbr>Async<wbr>Queue"</a>
+						<a href="_queue_asyncqueue_.html">"queue/<wbr>Async<wbr>Queue"</a>
 					</li>
 					<li class=" tsd-kind-external-module">
-						<a href="modules/_queue_asyncqueue_spec_.html">"queue/<wbr>Async<wbr>Queue.spec"</a>
+						<a href="_queue_asyncqueue_spec_.html">"queue/<wbr>Async<wbr>Queue.spec"</a>
+					</li>
+					<li class="current tsd-kind-external-module">
+						<a href="_queue_queue_common_spec_.html">"queue/<wbr>Queue.common-<wbr>spec"</a>
 					</li>
 					<li class=" tsd-kind-external-module">
-						<a href="modules/_queue_queue_common_spec_.html">"queue/<wbr>Queue.common-<wbr>spec"</a>
+						<a href="_queue_index_.html">"queue/index"</a>
 					</li>
 					<li class=" tsd-kind-external-module">
-						<a href="modules/_queue_index_.html">"queue/index"</a>
+						<a href="_semaphore_semaphore_.html">"semaphore/<wbr>Semaphore"</a>
 					</li>
 					<li class=" tsd-kind-external-module">
-						<a href="modules/_semaphore_semaphore_.html">"semaphore/<wbr>Semaphore"</a>
+						<a href="_semaphore_semaphore_spec_.html">"semaphore/<wbr>Semaphore.spec"</a>
 					</li>
 					<li class=" tsd-kind-external-module">
-						<a href="modules/_semaphore_semaphore_spec_.html">"semaphore/<wbr>Semaphore.spec"</a>
-					</li>
-					<li class=" tsd-kind-external-module">
-						<a href="modules/_semaphore_index_.html">"semaphore/index"</a>
+						<a href="_semaphore_index_.html">"semaphore/index"</a>
 					</li>
 					<li class="label tsd-is-external">
 						<span>Externals</span>
 					</li>
 					<li class=" tsd-kind-external-module tsd-is-external">
-						<a href="modules/_spec_utils_.html">"spec-<wbr>utils"</a>
+						<a href="_spec_utils_.html">"spec-<wbr>utils"</a>
 					</li>
 				</ul>
 			</nav>
 			<nav class="tsd-navigation secondary menu-sticky">
 				<ul class="before-current">
+					<li class=" tsd-kind-variable tsd-parent-kind-external-module">
+						<a href="_queue_queue_common_spec_.html#deadpill" class="tsd-kind-icon">DEADPILL</a>
+					</li>
+					<li class=" tsd-kind-variable tsd-parent-kind-external-module">
+						<a href="_queue_queue_common_spec_.html#queue_delta_time" class="tsd-kind-icon">QUEUE_<wbr>DELTA_<wbr>TIME</a>
+					</li>
+					<li class=" tsd-kind-function tsd-parent-kind-external-module">
+						<a href="_queue_queue_common_spec_.html#runcommonqueuetests" class="tsd-kind-icon">run<wbr>Common<wbr>Queue<wbr>Tests</a>
+					</li>
 				</ul>
 			</nav>
 		</div>
@@ -260,7 +291,7 @@ getFile(<span class="hljs-string">'test.txt'</span>).on(<span class="hljs-string
 	<p>Generated using <a href="http://typedoc.org/" target="_blank">TypeDoc</a></p>
 </div>
 <div class="overlay"></div>
-<script src="assets/js/main.js"></script>
-<script>if (location.protocol == 'file:') document.write('<script src="assets/js/search.js"><' + '/script>');</script>
+<script src="../assets/js/main.js"></script>
+<script>if (location.protocol == 'file:') document.write('<script src="../assets/js/search.js"><' + '/script>');</script>
 </body>
 </html>

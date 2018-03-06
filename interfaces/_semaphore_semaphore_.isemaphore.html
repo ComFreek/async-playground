@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>&quot;queue/Queue.common-spec&quot; | comfreek-async-playground</title>
+	<title>ISemaphore | comfreek-async-playground</title>
 	<meta name="description" content="">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="../assets/css/main.css">
@@ -56,113 +56,150 @@
 					<a href="../globals.html">Globals</a>
 				</li>
 				<li>
-					<a href="_queue_queue_common_spec_.html">&quot;queue/Queue.common-spec&quot;</a>
+					<a href="../modules/_semaphore_semaphore_.html">&quot;semaphore/Semaphore&quot;</a>
+				</li>
+				<li>
+					<a href="_semaphore_semaphore_.isemaphore.html">ISemaphore</a>
 				</li>
 			</ul>
-			<h1>External module &quot;queue/Queue.common-spec&quot;</h1>
+			<h1>Interface ISemaphore</h1>
 		</div>
 	</div>
 </header>
 <div class="container container-main">
 	<div class="row">
 		<div class="col-8 col-content">
+			<section class="tsd-panel tsd-comment">
+				<div class="tsd-comment tsd-typography">
+					<div class="lead">
+						<p>General counting semaphore with Promises.</p>
+					</div>
+					<p>It allows arbitrary <a href="_semaphore_semaphore_.isemaphore.html#take">take</a> (also referred to as &quot;P&quot;) and <a href="_semaphore_semaphore_.isemaphore.html#free">free</a>
+					(&quot;V&quot;) calls.</p>
+					<p>To use implementations with the normal JS execution model
+						(single-threaded + queue), <a href="_semaphore_semaphore_.isemaphore.html#take">take</a> and <a href="_semaphore_semaphore_.isemaphore.html#free">free</a> are supposed
+						to be called on different &#39;fibers&#39;. For example, <a href="_semaphore_semaphore_.isemaphore.html#take">take</a>
+						can be awaited in the business logic processing data
+						while <a href="_semaphore_semaphore_.isemaphore.html#free">free</a> is called inside a filesystem API callback
+					putting the data into an array.</p>
+					<dl class="tsd-comment-tags">
+						<dt>example</dt>
+						<dd><p>All of the following examples assume a semaphore initialized with a count of 0.</p>
+							<ul>
+								<li><a href="_semaphore_semaphore_.isemaphore.html#take">take</a> is called 10 times. <a href="_semaphore_semaphore_.isemaphore.html#free">free</a> is then called once.
+									Exactly one of the previous 10 promises is fulfilled. It is
+								implementation-defined which of them is chosen.</li>
+								<li><a href="_semaphore_semaphore_.isemaphore.html#free">free</a> is called 5 times. <a href="_semaphore_semaphore_.isemaphore.html#take">take</a> is then called 6 times.
+									Exactly 5 of the returned promises get fulfilled &quot;immediately&quot; (for some
+								informal value of immediately).</li>
+							</ul>
+						</dd>
+					</dl>
+				</div>
+			</section>
+			<section class="tsd-panel tsd-hierarchy">
+				<h3>Hierarchy</h3>
+				<ul class="tsd-hierarchy">
+					<li>
+						<span class="target">ISemaphore</span>
+					</li>
+				</ul>
+			</section>
+			<section class="tsd-panel">
+				<h3>Implemented by</h3>
+				<ul class="tsd-hierarchy">
+					<li><a href="../classes/_semaphore_semaphore_.semaphore.html" class="tsd-signature-type">Semaphore</a></li>
+				</ul>
+			</section>
 			<section class="tsd-panel-group tsd-index-group">
 				<h2>Index</h2>
 				<section class="tsd-panel tsd-index-panel">
 					<div class="tsd-index-content">
 						<section class="tsd-index-section ">
-							<h3>Variables</h3>
+							<h3>Methods</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-variable tsd-parent-kind-external-module"><a href="_queue_queue_common_spec_.html#deadpill" class="tsd-kind-icon">DEADPILL</a></li>
-								<li class="tsd-kind-variable tsd-parent-kind-external-module"><a href="_queue_queue_common_spec_.html#queue_delta_time" class="tsd-kind-icon">QUEUE_<wbr>DELTA_<wbr>TIME</a></li>
-							</ul>
-						</section>
-						<section class="tsd-index-section ">
-							<h3>Functions</h3>
-							<ul class="tsd-index-list">
-								<li class="tsd-kind-function tsd-parent-kind-external-module"><a href="_queue_queue_common_spec_.html#runcommonqueuetests" class="tsd-kind-icon">run<wbr>Common<wbr>Queue<wbr>Tests</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-interface"><a href="_semaphore_semaphore_.isemaphore.html#free" class="tsd-kind-icon">free</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-interface"><a href="_semaphore_semaphore_.isemaphore.html#take" class="tsd-kind-icon">take</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-interface"><a href="_semaphore_semaphore_.isemaphore.html#trytake" class="tsd-kind-icon">try<wbr>Take</a></li>
 							</ul>
 						</section>
 					</div>
 				</section>
 			</section>
 			<section class="tsd-panel-group tsd-member-group ">
-				<h2>Variables</h2>
-				<section class="tsd-panel tsd-member tsd-kind-variable tsd-parent-kind-external-module">
-					<a name="deadpill" class="tsd-anchor"></a>
-					<h3><span class="tsd-flag ts-flagConst">Const</span> DEADPILL</h3>
-					<div class="tsd-signature tsd-kind-icon">DEADPILL<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">3735928559</span><span class="tsd-signature-symbol"> =&nbsp;3735928559</span></div>
-					<aside class="tsd-sources">
-						<ul>
-							<li>Defined in <a href="https://github.com/ComFreek/async-playground/blob/21d4f9e/queue/Queue.common-spec.ts#L11">queue/Queue.common-spec.ts:11</a></li>
-						</ul>
-					</aside>
-					<div class="tsd-comment tsd-typography">
-						<div class="lead">
-							<p>An element used by some unit tests to signal the end of
-							data insertion.</p>
-						</div>
-					</div>
-				</section>
-				<section class="tsd-panel tsd-member tsd-kind-variable tsd-parent-kind-external-module">
-					<a name="queue_delta_time" class="tsd-anchor"></a>
-					<h3><span class="tsd-flag ts-flagConst">Const</span> QUEUE_<wbr>DELTA_<wbr>TIME</h3>
-					<div class="tsd-signature tsd-kind-icon">QUEUE_<wbr>DELTA_<wbr>TIME<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">5</span><span class="tsd-signature-symbol"> =&nbsp;5</span></div>
-					<aside class="tsd-sources">
-						<ul>
-							<li>Defined in <a href="https://github.com/ComFreek/async-playground/blob/21d4f9e/queue/Queue.common-spec.ts#L17">queue/Queue.common-spec.ts:17</a></li>
-						</ul>
-					</aside>
-					<div class="tsd-comment tsd-typography">
-						<div class="lead">
-							<p>Time interval in milliseconds which some unit tests use
-							to continuously insert elements into the queue.</p>
-						</div>
-					</div>
-				</section>
-			</section>
-			<section class="tsd-panel-group tsd-member-group ">
-				<h2>Functions</h2>
-				<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-external-module">
-					<a name="runcommonqueuetests" class="tsd-anchor"></a>
-					<h3>run<wbr>Common<wbr>Queue<wbr>Tests</h3>
-					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-external-module">
-						<li class="tsd-signature tsd-kind-icon">run<wbr>Common<wbr>Queue<wbr>Tests<span class="tsd-signature-symbol">(</span>queueCreator<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">function</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">function</span>, COUNT<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+				<h2>Methods</h2>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-interface">
+					<a name="free" class="tsd-anchor"></a>
+					<h3>free</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-interface">
+						<li class="tsd-signature tsd-kind-icon">free<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/ComFreek/async-playground/blob/21d4f9e/queue/Queue.common-spec.ts#L31">queue/Queue.common-spec.ts:31</a></li>
+									<li>Defined in <a href="https://github.com/ComFreek/async-playground/blob/29bb04d/semaphore/Semaphore.ts#L49">semaphore/Semaphore.ts:49</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
 								<div class="lead">
-									<p>Run common queue tests, i.e. this function calls it() for each of its
-									unit tests.</p>
+									<p>Free or &#39;V&#39; operation.</p>
+								</div>
+								<p>If there are any promises returned by {@link take()} still awaiting
+									their fulfillment, exactly of them is fulfilled. The order of
+								fulfillment is implementation-defined.</p>
+							</div>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-interface">
+					<a name="take" class="tsd-anchor"></a>
+					<h3>take</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-interface">
+						<li class="tsd-signature tsd-kind-icon">take<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/ComFreek/async-playground/blob/29bb04d/semaphore/Semaphore.ts#L32">semaphore/Semaphore.ts:32</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Take or &#39;P&#39; operation.</p>
 								</div>
 							</div>
-							<h4 class="tsd-parameters-title">Parameters</h4>
-							<ul class="tsd-parameters">
-								<li>
-									<h5>queueCreator: <span class="tsd-signature-type">function</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">function</span></h5>
-									<div class="tsd-comment tsd-typography">
-										<p>A &quot;factory function&quot; for queue objects, which is run
-										before each test.</p>
-									</div>
-								</li>
-								<li>
-									<h5>COUNT: <span class="tsd-signature-type">number</span></h5>
-									<div class="tsd-comment tsd-typography">
-										<p>Each test guarantees that it only holds up to COUNT many
-											elements in the queue at the same time.
-											In case of IAsyncQueue, the caller must provide a value of
-											COUNT &lt;= LIMIT of the respective queue. Otherwise, some tests
-										might run into deadlocks.</p>
-									</div>
-								</li>
-							</ul>
-							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span></h4>
+							<p>A promise which is fulfilled when &gt;= 1 of the resource
+								represented by the internal counter is available. This might be
+								the case either if <a href="_semaphore_semaphore_.isemaphore.html#free">free</a> is called or if the semaphore is
+							initialized with a value &gt; 0.</p>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-interface">
+					<a name="trytake" class="tsd-anchor"></a>
+					<h3>try<wbr>Take</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-interface">
+						<li class="tsd-signature tsd-kind-icon">try<wbr>Take<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/ComFreek/async-playground/blob/29bb04d/semaphore/Semaphore.ts#L40">semaphore/Semaphore.ts:40</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Take (&#39;P&#39;) if a resource is still available (&lt;=&gt; counter &gt;= 1).
+									Otherwise, do <em>not</em> block (as <a href="_semaphore_semaphore_.isemaphore.html#take">take</a> does) and return false.</p>
+								</div>
+							</div>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">boolean</span></h4>
+							<p>True if a resource could be taken, False otherwise.</p>
 						</li>
 					</ul>
 				</section>
@@ -178,51 +215,63 @@
 						<span>Internals</span>
 					</li>
 					<li class=" tsd-kind-external-module">
-						<a href="_queue_asynclimitedqueue_.html">"queue/<wbr>Async<wbr>Limited<wbr>Queue"</a>
+						<a href="../modules/_queue_asynclimitedqueue_.html">"queue/<wbr>Async<wbr>Limited<wbr>Queue"</a>
 					</li>
 					<li class=" tsd-kind-external-module">
-						<a href="_queue_asynclimitedqueue_spec_.html">"queue/<wbr>Async<wbr>Limited<wbr>Queue.spec"</a>
+						<a href="../modules/_queue_asynclimitedqueue_spec_.html">"queue/<wbr>Async<wbr>Limited<wbr>Queue.spec"</a>
 					</li>
 					<li class=" tsd-kind-external-module">
-						<a href="_queue_asyncqueue_.html">"queue/<wbr>Async<wbr>Queue"</a>
+						<a href="../modules/_queue_asyncqueue_.html">"queue/<wbr>Async<wbr>Queue"</a>
 					</li>
 					<li class=" tsd-kind-external-module">
-						<a href="_queue_asyncqueue_spec_.html">"queue/<wbr>Async<wbr>Queue.spec"</a>
+						<a href="../modules/_queue_asyncqueue_spec_.html">"queue/<wbr>Async<wbr>Queue.spec"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="../modules/_queue_queue_common_spec_.html">"queue/<wbr>Queue.common-<wbr>spec"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="../modules/_queue_index_.html">"queue/index"</a>
 					</li>
 					<li class="current tsd-kind-external-module">
-						<a href="_queue_queue_common_spec_.html">"queue/<wbr>Queue.common-<wbr>spec"</a>
+						<a href="../modules/_semaphore_semaphore_.html">"semaphore/<wbr>Semaphore"</a>
 					</li>
 					<li class=" tsd-kind-external-module">
-						<a href="_queue_index_.html">"queue/index"</a>
+						<a href="../modules/_semaphore_semaphore_spec_.html">"semaphore/<wbr>Semaphore.spec"</a>
 					</li>
 					<li class=" tsd-kind-external-module">
-						<a href="_semaphore_semaphore_.html">"semaphore/<wbr>Semaphore"</a>
-					</li>
-					<li class=" tsd-kind-external-module">
-						<a href="_semaphore_semaphore_spec_.html">"semaphore/<wbr>Semaphore.spec"</a>
-					</li>
-					<li class=" tsd-kind-external-module">
-						<a href="_semaphore_index_.html">"semaphore/index"</a>
+						<a href="../modules/_semaphore_index_.html">"semaphore/index"</a>
 					</li>
 					<li class="label tsd-is-external">
 						<span>Externals</span>
 					</li>
 					<li class=" tsd-kind-external-module tsd-is-external">
-						<a href="_spec_utils_.html">"spec-<wbr>utils"</a>
+						<a href="../modules/_spec_utils_.html">"spec-<wbr>utils"</a>
 					</li>
 				</ul>
 			</nav>
 			<nav class="tsd-navigation secondary menu-sticky">
 				<ul class="before-current">
-					<li class=" tsd-kind-variable tsd-parent-kind-external-module">
-						<a href="_queue_queue_common_spec_.html#deadpill" class="tsd-kind-icon">DEADPILL</a>
+					<li class=" tsd-kind-class tsd-parent-kind-external-module">
+						<a href="../classes/_semaphore_semaphore_.semaphore.html" class="tsd-kind-icon">Semaphore</a>
 					</li>
-					<li class=" tsd-kind-variable tsd-parent-kind-external-module">
-						<a href="_queue_queue_common_spec_.html#queue_delta_time" class="tsd-kind-icon">QUEUE_<wbr>DELTA_<wbr>TIME</a>
+				</ul>
+				<ul class="current">
+					<li class="current tsd-kind-interface tsd-parent-kind-external-module">
+						<a href="_semaphore_semaphore_.isemaphore.html" class="tsd-kind-icon">ISemaphore</a>
+						<ul>
+							<li class=" tsd-kind-method tsd-parent-kind-interface">
+								<a href="_semaphore_semaphore_.isemaphore.html#free" class="tsd-kind-icon">free</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-interface">
+								<a href="_semaphore_semaphore_.isemaphore.html#take" class="tsd-kind-icon">take</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-interface">
+								<a href="_semaphore_semaphore_.isemaphore.html#trytake" class="tsd-kind-icon">try<wbr>Take</a>
+							</li>
+						</ul>
 					</li>
-					<li class=" tsd-kind-function tsd-parent-kind-external-module">
-						<a href="_queue_queue_common_spec_.html#runcommonqueuetests" class="tsd-kind-icon">run<wbr>Common<wbr>Queue<wbr>Tests</a>
-					</li>
+				</ul>
+				<ul class="after-current">
 				</ul>
 			</nav>
 		</div>
