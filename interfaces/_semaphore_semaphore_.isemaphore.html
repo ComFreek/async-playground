@@ -121,6 +121,7 @@
 								<li class="tsd-kind-method tsd-parent-kind-interface"><a href="_semaphore_semaphore_.isemaphore.html#free" class="tsd-kind-icon">free</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-interface"><a href="_semaphore_semaphore_.isemaphore.html#take" class="tsd-kind-icon">take</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-interface"><a href="_semaphore_semaphore_.isemaphore.html#trytake" class="tsd-kind-icon">try<wbr>Take</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-interface"><a href="_semaphore_semaphore_.isemaphore.html#trytakewithin" class="tsd-kind-icon">try<wbr>Take<wbr>Within</a></li>
 							</ul>
 						</section>
 					</div>
@@ -138,7 +139,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/ComFreek/async-playground/blob/4b55a2c/semaphore/Semaphore.ts#L49">semaphore/Semaphore.ts:49</a></li>
+									<li>Defined in <a href="https://github.com/ComFreek/async-playground/blob/083e1fd/semaphore/Semaphore.ts#L83">semaphore/Semaphore.ts:83</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -163,7 +164,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/ComFreek/async-playground/blob/4b55a2c/semaphore/Semaphore.ts#L32">semaphore/Semaphore.ts:32</a></li>
+									<li>Defined in <a href="https://github.com/ComFreek/async-playground/blob/083e1fd/semaphore/Semaphore.ts#L32">semaphore/Semaphore.ts:32</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -189,7 +190,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/ComFreek/async-playground/blob/4b55a2c/semaphore/Semaphore.ts#L40">semaphore/Semaphore.ts:40</a></li>
+									<li>Defined in <a href="https://github.com/ComFreek/async-playground/blob/083e1fd/semaphore/Semaphore.ts#L40">semaphore/Semaphore.ts:40</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -200,6 +201,62 @@
 							</div>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">boolean</span></h4>
 							<p>True if a resource could be taken, False otherwise.</p>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-interface">
+					<a name="trytakewithin" class="tsd-anchor"></a>
+					<h3>try<wbr>Take<wbr>Within</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-interface">
+						<li class="tsd-signature tsd-kind-icon">try<wbr>Take<wbr>Within<span class="tsd-signature-symbol">(</span>millis<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">&gt;</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/ComFreek/async-playground/blob/083e1fd/semaphore/Semaphore.ts#L74">semaphore/Semaphore.ts:74</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Try taking (&#39;P&#39;) a resource within the next <code>millis</code> milliseconds.</p>
+								</div>
+								<dl class="tsd-comment-tags">
+									<dt>example</dt>
+									<dd><p>Contrary to <a href="_semaphore_semaphore_.isemaphore.html#trytake">tryTake</a>, you have to await the promise returned
+										by this method.</p>
+										<pre><code>tryTakeWithin(<span class="hljs-number">500</span>).then(<span class="hljs-function">(<span class="hljs-params">hasTaken</span>) =&gt;</span> ...);
+
+<span class="hljs-comment">// inside an async function</span>
+<span class="hljs-keyword">const</span> hasTaken = <span class="hljs-keyword">await</span> tryTakeWithin(<span class="hljs-number">500</span>);
+</code></pre></dd>
+									<dt>example</dt>
+									<dd><p>Instead of simply waiting with <a href="_semaphore_semaphore_.isemaphore.html#take">take</a>, you can also use
+											this method to regularly give up some computation time, so that other
+											parts of the code can <a href="_semaphore_semaphore_.isemaphore.html#free">free</a> a resource, while still doing some
+											useful work in case of an unsuccessful attempt.<br>
+											Note that this were impossible with <a href="_semaphore_semaphore_.isemaphore.html#take">take</a> since it does not give
+											up computation time (it is a synchronous method) and the JS VM is
+											single-threaded. Conversely, the other &quot;fibers&quot; must give up their
+											computation power as well (e.g. by <code>yield</code>ing or <code>await</code>ing), this
+										is known as cooperative multitasking.</p>
+										<pre><code>// Regularly<span class="hljs-built_in"> check </span>for 500ms<span class="hljs-built_in"> if </span>we are able to take a resource
+while (!await tryTakeWithin(500)) {
+  // If not, do some other work...
+}
+// We<span class="hljs-keyword"> final</span>ly acquired the resource
+</code></pre></dd>
+								</dl>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>millis: <span class="tsd-signature-type">number</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">&gt;</span></h4>
+							<p>A promise fulfilling with <code>true</code> if a resource could be taken or
+							<code>false</code> otherwise.</p>
 						</li>
 					</ul>
 				</section>
@@ -267,6 +324,9 @@
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-interface">
 								<a href="_semaphore_semaphore_.isemaphore.html#trytake" class="tsd-kind-icon">try<wbr>Take</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-interface">
+								<a href="_semaphore_semaphore_.isemaphore.html#trytakewithin" class="tsd-kind-icon">try<wbr>Take<wbr>Within</a>
 							</li>
 						</ul>
 					</li>
