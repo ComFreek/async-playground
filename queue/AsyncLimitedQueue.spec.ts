@@ -2,7 +2,7 @@ import { AsyncLimitedQueue, IAsyncLimitedQueue } from './AsyncLimitedQueue';
 import * as chai from 'chai';
 import 'mocha';
 
-import { wait, promiseFasterThan } from '../spec-utils';
+import { TIME_STEP, wait, expectNever } from '../timing.common-spec';
 
 import chaiAsPromised = require('chai-as-promised');
 import { runCommonQueueTests } from './Queue.common-spec';
@@ -64,7 +64,7 @@ describe('AsyncLimitedQueue', () => {
 			await queue.queue(i);
 		}
 
-		wait(50).then(async () => {
+		wait(TIME_STEP).then(async () => {
 			for (let i = 0; i < LIMIT + COUNT; i++) {
 				await expect(queue.dequeue()).to.eventually.equal(i);
 			}
@@ -88,7 +88,7 @@ describe('AsyncLimitedQueue', () => {
 			await expect(queue.dequeue()).to.eventually.equal(i);
 		}
 
-		await expect(promiseFasterThan(queue.dequeue(), 50)).to.eventually.be.false;
+		await expectNever(queue.dequeue());
 	});
 
 	it('alternating polls/offers', async () => {

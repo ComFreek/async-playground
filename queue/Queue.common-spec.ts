@@ -1,5 +1,5 @@
 import { expect } from 'chai';
-import { wait } from '../spec-utils';
+import { wait } from '../timing.common-spec';
 
 import { IAsyncQueue } from './AsyncQueue';
 import { IAsyncLimitedQueue } from './AsyncLimitedQueue';
