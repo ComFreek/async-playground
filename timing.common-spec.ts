@@ -145,3 +145,19 @@ export async function expectNever(promise: PromiseLike<any>, timeoutMillis: numb
 	const realPromise = new Promise(resolve => promise.then(resolve));
 	await expect(promiseFasterThan(realPromise, timeoutMillis)).to.eventually.be.false;
 }
+
+/**
+ * Expect a promise to be "instantly" resolved by waiting for
+ * `upperBuffer` ms at maximum.
+ * @param promise
+ * @param upperBuffer
+ *
+ * @return A void promise which is
+ *           - resolved iff. the given promise is resolved within the time frame
+ *             `[0, upperBuffer]`.
+ *           - rejected in all other cases. The rejection occurs no later than
+ *             `upperBuffer`.
+ */
+export async function expectInstantly(promise: PromiseLike<any>, upperBuffer: number = 10): Promise<void> {
+	await expectTimelyIn(promise, 0, upperBuffer, 0);
+}

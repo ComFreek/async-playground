@@ -3,7 +3,7 @@ import { NoElementError } from './AsyncQueue';
 import * as chai from 'chai';
 import 'mocha';
 
-import { TIME_STEP, wait, expectNever } from '../timing.common-spec';
+import { TIME_STEP, wait, expectInstantly, expectTimelyIn, expectNever } from '../timing.common-spec';
 
 import chaiAsPromised = require('chai-as-promised');
 import { runCommonQueueTests } from './Queue.common-spec';
@@ -67,13 +67,17 @@ describe('AsyncLimitedQueue', () => {
 
 		wait(TIME_STEP).then(async () => {
 			for (let i = 0; i < LIMIT + COUNT; i++) {
-				await expect(queue.dequeue()).to.eventually.equal(i);
+				await expectInstantly(expect(queue.dequeue()).to.eventually.equal(i));
 			}
 		});
 
-		for (let i = 0; i < COUNT; i++) {
-			// TODO Also test that these calls are blocking
-			await queue.queue(i + LIMIT);
+
+		// COUNT-many queues
+		// Only the first queue has to wait for the above timeout to occur
+		await expectTimelyIn(queue.queue(LIMIT), TIME_STEP);
+
+		for (let i = 1; i < COUNT; i++) {
+			await expectInstantly(queue.queue(i + LIMIT));
 		}
 	});
 
@@ -86,7 +90,7 @@ describe('AsyncLimitedQueue', () => {
 		expect(queue.offer(LIMIT + 1)).to.be.false;
 
 		for (let i = 0; i < LIMIT; i++) {
-			await expect(queue.dequeue()).to.eventually.equal(i);
+			await expectInstantly(expect(queue.dequeue()).to.eventually.equal(i));
 		}
 
 		await expectNever(queue.dequeue());
@@ -111,7 +115,7 @@ describe('AsyncLimitedQueue', () => {
 		expect(queue.offerAll(numbers)).to.equal(LIMIT - 1);
 
 		for (let i = 0; i < LIMIT - 1; i++) {
-			await expect(queue.dequeue()).to.eventually.equal(i);
+			await expectInstantly(expect(queue.dequeue()).to.eventually.equal(i));
 		}
 		expect(queue.size()).to.equal(0);
 	});
@@ -121,7 +125,7 @@ describe('AsyncLimitedQueue', () => {
 		expect(queue.offerAll(numbers)).to.equal(LIMIT);
 
 		for (let i = 0; i < LIMIT; i++) {
-			await expect(queue.dequeue()).to.eventually.equal(i);
+			await expectInstantly(expect(queue.dequeue()).to.eventually.equal(i));
 		}
 		expect(queue.size()).to.equal(0);
 	});
@@ -131,7 +135,7 @@ describe('AsyncLimitedQueue', () => {
 		await expect(queue.offerAllAsync(numbers)).to.eventually.equal(LIMIT);
 
 		for (let i = 0; i < LIMIT; i++) {
-			await expect(queue.dequeue()).to.eventually.equal(i);
+			await expectInstantly(expect(queue.dequeue()).to.eventually.equal(i));
 		}
 		expect(queue.size()).to.equal(0);
 	});
@@ -141,7 +145,7 @@ describe('AsyncLimitedQueue', () => {
 		await expect(queue.offerAllAsync(numbers)).to.eventually.equal(LIMIT);
 
 		for (let i = 0; i < LIMIT; i++) {
-			await expect(queue.dequeue()).to.eventually.equal(i);
+			await expectInstantly(expect(queue.dequeue()).to.eventually.equal(i));
 		}
 		expect(queue.size()).to.equal(0);
 	});
