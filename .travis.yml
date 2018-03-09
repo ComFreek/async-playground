@@ -2,11 +2,18 @@ language: node_js
 node_js:
   - "node"
 
-script:
-  - npm test
-  - npm run build-docs
+os:
+  # Guarantee that the "cp" below in before_deploy exists and works
+  # (Might as well be Mac OS X; in any case not Windows where "cp" is
+  #  named "copy".)
+  - linux
 
+script: npm test
 after_success: npm run coverage
+
+before_deploy:
+  - npm run build-docs
+  - "cp -a ./coverage ./docs"
 
 deploy:
   provider: pages

@@ -1,9 +1,7 @@
 # ComFreek's async generator/Promises playground
 
 [![Build Status](https://travis-ci.org/ComFreek/async-playground.svg?branch=master)](https://travis-ci.org/ComFreek/async-playground) [![Coverage Status](https://coveralls.io/repos/github/ComFreek/async-playground/badge.svg?branch=master)](https://coveralls.io/github/ComFreek/async-playground?branch=master)
-
-Repo: https://github.com/ComFreek/async-playground<br>
-Documentation: https://comfreek.github.io/async-playground
+&nbsp; &nbsp; [GitHub Repo](https://github.com/ComFreek/async-playground) | [Documentation](https://comfreek.github.io/async-playground) | [Coverage results](https://comfreek.github.io/async-playground/coverage)
 
 Inspired by
 [Exploring ES2018 and ES2019](http://exploringjs.com/es2018-es2019/index.html) by [Dr. Axel Rauschmayer](http://dr-axel.de/), especially the part on asynchronous generators, I wrote some TypeScript classes of well-known concepts.
