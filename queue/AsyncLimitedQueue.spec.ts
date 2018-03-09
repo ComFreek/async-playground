@@ -28,6 +28,30 @@ async function *syncToAsyncIterable<T>(iterable: Iterable<T>): AsyncIterable<T> 
 	}
 }
 
+async function dequeueMany<T>(queue: IAsyncLimitedQueue<T>, count: number): Promise<T[]> {
+	if (!(count >= 0 && Number.isInteger(count))) {
+		throw new Error('dequeueMany: count must be an integer >= 0.');
+	}
+
+	if (count === 0) {
+		return [];
+	}
+
+	const buffer: T[] = [];
+
+	let dequeuedElements = 0;
+	for await (const element of queue) {
+		buffer.push(element);
+
+		dequeuedElements++;
+		if (dequeuedElements === count) {
+			break;
+		}
+	}
+
+	return buffer;
+}
+
 describe('AsyncLimitedQueue', () => {
 	/**
 	 * Number of test entries which some unit tests insert and then dequeue
@@ -66,9 +90,9 @@ describe('AsyncLimitedQueue', () => {
 		}
 
 		wait(TIME_STEP).then(async () => {
-			for (let i = 0; i < LIMIT + COUNT; i++) {
-				await expectInstantly(expect(queue.dequeue()).to.eventually.equal(i));
-			}
+			await expectInstantly(expect(
+				dequeueMany(queue, LIMIT + COUNT)
+			).to.eventually.deep.equal([...range(0, LIMIT + COUNT)]));
 		});
 
 
@@ -89,9 +113,9 @@ describe('AsyncLimitedQueue', () => {
 
 		expect(queue.offer(LIMIT + 1)).to.be.false;
 
-		for (let i = 0; i < LIMIT; i++) {
-			await expectInstantly(expect(queue.dequeue()).to.eventually.equal(i));
-		}
+		await expectInstantly(
+			expect(dequeueMany(queue, LIMIT)).to.eventually.deep.equal([...range(0, LIMIT)])
+		, 500);
 
 		await expectNever(queue.dequeue());
 	});
@@ -114,9 +138,9 @@ describe('AsyncLimitedQueue', () => {
 		let numbers = range(0, LIMIT - 1);
 		expect(queue.offerAll(numbers)).to.equal(LIMIT - 1);
 
-		for (let i = 0; i < LIMIT - 1; i++) {
-			await expectInstantly(expect(queue.dequeue()).to.eventually.equal(i));
-		}
+		await expectInstantly(
+			expect(dequeueMany(queue, LIMIT - 1)).to.eventually.deep.equal([...range(0, LIMIT - 1)])
+		);
 		expect(queue.size()).to.equal(0);
 	});
 
@@ -124,9 +148,9 @@ describe('AsyncLimitedQueue', () => {
 		let numbers = range(0, LIMIT + COUNT);
 		expect(queue.offerAll(numbers)).to.equal(LIMIT);
 
-		for (let i = 0; i < LIMIT; i++) {
-			await expectInstantly(expect(queue.dequeue()).to.eventually.equal(i));
-		}
+		await expectInstantly(
+			expect(dequeueMany(queue, LIMIT)).to.eventually.deep.equal([...range(0, LIMIT)])
+		);
 		expect(queue.size()).to.equal(0);
 	});
 
@@ -134,9 +158,9 @@ describe('AsyncLimitedQueue', () => {
 		let numbers = syncToAsyncIterable(range(0, LIMIT));
 		await expect(queue.offerAllAsync(numbers)).to.eventually.equal(LIMIT);
 
-		for (let i = 0; i < LIMIT; i++) {
-			await expectInstantly(expect(queue.dequeue()).to.eventually.equal(i));
-		}
+		await expectInstantly(
+			expect(dequeueMany(queue, LIMIT)).to.eventually.deep.equal([...range(0, LIMIT)])
+		);
 		expect(queue.size()).to.equal(0);
 	});
 
@@ -144,9 +168,10 @@ describe('AsyncLimitedQueue', () => {
 		let numbers = syncToAsyncIterable(range(0, LIMIT + COUNT));
 		await expect(queue.offerAllAsync(numbers)).to.eventually.equal(LIMIT);
 
-		for (let i = 0; i < LIMIT; i++) {
-			await expectInstantly(expect(queue.dequeue()).to.eventually.equal(i));
-		}
+		await expectInstantly(
+			expect(dequeueMany(queue, LIMIT)).to.eventually.deep.equal([...range(0, LIMIT)])
+		);
+
 		expect(queue.size()).to.equal(0);
 	});
 
