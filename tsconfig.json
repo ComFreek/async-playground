@@ -1,6 +1,7 @@
 {
   "compilerOptions": {
-    "target": "ES5",
+    /* Target >= ES 6 required to cleanly inherit from the built-in Error class, see NoElementError. */
+    "target": "ES6",
     "module": "commonjs",
     "lib": [
       "es6",

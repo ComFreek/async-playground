@@ -1,4 +1,5 @@
 import { AsyncLimitedQueue, IAsyncLimitedQueue } from './AsyncLimitedQueue';
+import { NoElementError } from './AsyncQueue';
 import * as chai from 'chai';
 import 'mocha';
 
@@ -93,7 +94,7 @@ describe('AsyncLimitedQueue', () => {
 
 	it('alternating polls/offers', async () => {
 		for (let i = 0; i < LIMIT; i++) {
-			expect(() => queue.poll()).to.throw;
+			expect(() => queue.poll()).to.throw(NoElementError);
 			queue.offer(i);
 			expect(queue.poll()).to.equal(i);
 		}
@@ -101,7 +102,7 @@ describe('AsyncLimitedQueue', () => {
 		// Must ideally throw for an infinite amount of calls, we just
 		// test 50 times.
 		for (let i = 0; i < 50; i++) {
-			expect(() => queue.poll).to.throw;
+			expect(() => queue.poll()).to.throw(NoElementError);
 		}
 	});
 

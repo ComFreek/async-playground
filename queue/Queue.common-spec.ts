@@ -1,7 +1,7 @@
 import { expect } from 'chai';
 import { wait } from '../timing.common-spec';
 
-import { IAsyncQueue } from './AsyncQueue';
+import { IAsyncQueue, NoElementError } from './AsyncQueue';
 import { IAsyncLimitedQueue } from './AsyncLimitedQueue';
 
 /**
@@ -114,7 +114,7 @@ export function runCommonQueueTests(queueCreator: (() => IAsyncQueue<number>) | 
 
 	it('poll on empty queue throws', async () => {
 		expect(queue.size()).to.equal(0);
-		expect(() => queue.poll).to.throw;
+		expect(() => queue.poll()).to.throw(NoElementError);
 	});
 
 	it('polls on non-empty queue succeed until it is empty', async () => {
@@ -129,7 +129,7 @@ export function runCommonQueueTests(queueCreator: (() => IAsyncQueue<number>) | 
 
 		// Must ideally throw for an infinite amount of calls
 		for (let i = 0; i < COUNT; i++) {
-			expect(() => queue.poll).to.throw;
+			expect(() => queue.poll()).to.throw;
 			expect(queue.size()).to.equal(0);
 		}
 	});

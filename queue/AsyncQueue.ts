@@ -129,6 +129,13 @@ export interface IAsyncQueue<T> extends AsyncIterable<T> {
 	size(): number;
 }
 
+/**
+ * A NoElementError indicating the lack of at least one element required for
+ * an operation.
+ *
+ * Requires a TypeScript target >= ES6. Otherwise, the specs, which effectively
+ * test for `err instanceof NoElementError`, fail.
+ */
 export class NoElementError extends Error {
 }
 
