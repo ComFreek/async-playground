@@ -1,6 +1,8 @@
 # ComFreek's async generator/Promises playground
 
-[![Build Status](https://travis-ci.org/ComFreek/async-playground.svg?branch=master)](https://travis-ci.org/ComFreek/async-playground) [![Coverage Status](https://coveralls.io/repos/github/ComFreek/async-playground/badge.svg?branch=master)](https://coveralls.io/github/ComFreek/async-playground?branch=master)
+
+![Build Status](https://img.shields.io/travis/ComFreek/async-playground.svg)
+![Coverage Status](https://img.shields.io/coveralls/ComFreek/async-playground.svg)
 &nbsp; &nbsp; [GitHub Repo](https://github.com/ComFreek/async-playground) | [Documentation](https://comfreek.github.io/async-playground) | [Coverage results](https://comfreek.github.io/async-playground/coverage)
 
 Inspired by
