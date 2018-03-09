@@ -126,7 +126,17 @@ describe('AsyncLimitedQueue', () => {
 		expect(queue.size()).to.equal(0);
 	});
 
-	it('offerAllAsync', async () => {
+	it('offerAllAsync: exactly LIMIT elements', async() => {
+		let numbers = syncToAsyncIterable(range(0, LIMIT));
+		await expect(queue.offerAllAsync(numbers)).to.eventually.equal(LIMIT);
+
+		for (let i = 0; i < LIMIT; i++) {
+			await expect(queue.dequeue()).to.eventually.equal(i);
+		}
+		expect(queue.size()).to.equal(0);
+	});
+
+	it('offerAllAsync: more than LIMIT elements', async () => {
 		let numbers = syncToAsyncIterable(range(0, LIMIT + COUNT));
 		await expect(queue.offerAllAsync(numbers)).to.eventually.equal(LIMIT);
 
