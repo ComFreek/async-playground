@@ -80,6 +80,7 @@
 						<section class="tsd-index-section tsd-is-external">
 							<h3>Functions</h3>
 							<ul class="tsd-index-list">
+								<li class="tsd-kind-function tsd-parent-kind-external-module tsd-is-external"><a href="_timing_common_spec_.html#expectinstantly" class="tsd-kind-icon">expect<wbr>Instantly</a></li>
 								<li class="tsd-kind-function tsd-parent-kind-external-module tsd-is-external"><a href="_timing_common_spec_.html#expectnever" class="tsd-kind-icon">expect<wbr>Never</a></li>
 								<li class="tsd-kind-function tsd-parent-kind-external-module tsd-is-external"><a href="_timing_common_spec_.html#expecttimelyin" class="tsd-kind-icon">expect<wbr>Timely<wbr>In</a></li>
 								<li class="tsd-kind-function tsd-parent-kind-external-module tsd-is-external"><a href="_timing_common_spec_.html#expecttimelywithin" class="tsd-kind-icon">expect<wbr>Timely<wbr>Within</a></li>
@@ -98,7 +99,7 @@
 					<div class="tsd-signature tsd-kind-icon">TIME_<wbr>STEP<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">50</span><span class="tsd-signature-symbol"> =&nbsp;50</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/ComFreek/async-playground/blob/9af4e51/timing.common-spec.ts#L7">timing.common-spec.ts:7</a></li>
+							<li>Defined in <a href="https://github.com/ComFreek/async-playground/blob/2d26fb2/timing.common-spec.ts#L7">timing.common-spec.ts:7</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -108,13 +109,53 @@
 					<div class="tsd-signature tsd-kind-icon">expect<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">ExpectStatic</span><span class="tsd-signature-symbol"> =&nbsp;chai.expect</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/ComFreek/async-playground/blob/9af4e51/timing.common-spec.ts#L5">timing.common-spec.ts:5</a></li>
+							<li>Defined in <a href="https://github.com/ComFreek/async-playground/blob/2d26fb2/timing.common-spec.ts#L5">timing.common-spec.ts:5</a></li>
 						</ul>
 					</aside>
 				</section>
 			</section>
 			<section class="tsd-panel-group tsd-member-group tsd-is-external">
 				<h2>Functions</h2>
+				<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-external-module tsd-is-external">
+					<a name="expectinstantly" class="tsd-anchor"></a>
+					<h3>expect<wbr>Instantly</h3>
+					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-external-module tsd-is-external">
+						<li class="tsd-signature tsd-kind-icon">expect<wbr>Instantly<span class="tsd-signature-symbol">(</span>promise<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">PromiseLike</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span>, upperBuffer<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/ComFreek/async-playground/blob/2d26fb2/timing.common-spec.ts#L161">timing.common-spec.ts:161</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Expect a promise to be &quot;instantly&quot; resolved by waiting for
+									<code>upperBuffer</code> ms at maximum.</p>
+								</div>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>promise: <span class="tsd-signature-type">PromiseLike</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span></h5>
+								</li>
+								<li>
+									<h5><span class="tsd-flag ts-flagDefault value">Default value</span> upperBuffer: <span class="tsd-signature-type">number</span><span class="tsd-signature-symbol"> =&nbsp;10</span></h5>
+									<div class="tsd-comment tsd-typography">
+									</div>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span></h4>
+							<p>A void promise which is</p>
+							<pre><code>      - resolved iff. the given promise is resolved within the time frame
+        `[<span class="hljs-number">0</span>, upperBuffer]`.
+      - rejected <span class="hljs-keyword">in</span> all other cases. The rejection occurs no later than
+        `upperBuffer`.
+</code></pre>
+						</li>
+					</ul>
+				</section>
 				<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-external-module tsd-is-external">
 					<a name="expectnever" class="tsd-anchor"></a>
 					<h3>expect<wbr>Never</h3>
@@ -125,7 +166,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/ComFreek/async-playground/blob/9af4e51/timing.common-spec.ts#L144">timing.common-spec.ts:144</a></li>
+									<li>Defined in <a href="https://github.com/ComFreek/async-playground/blob/2d26fb2/timing.common-spec.ts#L144">timing.common-spec.ts:144</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -166,7 +207,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/ComFreek/async-playground/blob/9af4e51/timing.common-spec.ts#L126">timing.common-spec.ts:126</a></li>
+									<li>Defined in <a href="https://github.com/ComFreek/async-playground/blob/2d26fb2/timing.common-spec.ts#L126">timing.common-spec.ts:126</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -217,7 +258,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/ComFreek/async-playground/blob/9af4e51/timing.common-spec.ts#L52">timing.common-spec.ts:52</a></li>
+									<li>Defined in <a href="https://github.com/ComFreek/async-playground/blob/2d26fb2/timing.common-spec.ts#L52">timing.common-spec.ts:52</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -286,7 +327,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/ComFreek/async-playground/blob/9af4e51/timing.common-spec.ts#L13">timing.common-spec.ts:13</a></li>
+									<li>Defined in <a href="https://github.com/ComFreek/async-playground/blob/2d26fb2/timing.common-spec.ts#L13">timing.common-spec.ts:13</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -312,7 +353,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/ComFreek/async-playground/blob/9af4e51/timing.common-spec.ts#L9">timing.common-spec.ts:9</a></li>
+									<li>Defined in <a href="https://github.com/ComFreek/async-playground/blob/2d26fb2/timing.common-spec.ts#L9">timing.common-spec.ts:9</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -378,6 +419,9 @@
 					</li>
 					<li class=" tsd-kind-variable tsd-parent-kind-external-module tsd-is-external tsd-is-not-exported">
 						<a href="_timing_common_spec_.html#expect" class="tsd-kind-icon">expect</a>
+					</li>
+					<li class=" tsd-kind-function tsd-parent-kind-external-module tsd-is-external">
+						<a href="_timing_common_spec_.html#expectinstantly" class="tsd-kind-icon">expect<wbr>Instantly</a>
 					</li>
 					<li class=" tsd-kind-function tsd-parent-kind-external-module tsd-is-external">
 						<a href="_timing_common_spec_.html#expectnever" class="tsd-kind-icon">expect<wbr>Never</a>
