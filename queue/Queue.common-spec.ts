@@ -95,7 +95,7 @@ export function runCommonQueueTests(queueCreator: (() => IAsyncQueue<number>) | 
 
 	it('x blocking dequeues, x freeing queues', async () => {
 		// Milliseconds to wait between consecutive queues
-		const QUEUE_DELTA_TIME = 5;
+		const QUEUE_DELTA_TIME = 20;
 
 		// Insert the numbers [0, COUNT - 1] in-order (!) into the queue.
 		for (let i = 0; i < COUNT; i++) {

@@ -95,7 +95,7 @@ export async function promiseFasterThan(promise: Promise<any>, timeout: number) 
 		wait(maxMillis).then(() => {
 			maxOccurred = true;
 			if (!promiseResolved) {
-				reject('Promise has not resolved within the "max" time constraint.');
+				reject(`Promise has not resolved within the "max" timeout of ${maxMillis} ms.`);
 			}
 		}).catch(reject);
 	})).to.eventually.be.fulfilled;
