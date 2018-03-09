@@ -186,11 +186,14 @@ export class Semaphore implements ISemaphore {
 		if (this.resolvers.length >= 1) {
 			// Resolve exactly one waiting take() promise!
 			const resolver = this.resolvers.shift();
+
+			/* istanbul ignore if */
 			if (resolver === undefined) {
 				throw new Error('Semaphore free: internal data structure \
-				corrupted. Expected the existence of an unfulfilled promise, \
-				but found none.');
+ corrupted. Internal buffer of unfulfilled promises \
+ either empty or contains an "undefined" value.');
 			}
+
 			resolver();
 		}
 	}
