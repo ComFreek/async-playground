@@ -1,0 +1,692 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>Code coverage report for queue/AsyncQueue.ts</title>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="../prettify.css" />
+    <link rel="stylesheet" href="../base.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style type='text/css'>
+        .coverage-summary .sorter {
+            background-image: url(../sort-arrow-sprite.png);
+        }
+    </style>
+</head>
+<body>
+<div class='wrapper'>
+  <div class='pad1'>
+    <h1>
+      <a href="../index.html">All files</a> / <a href="index.html">queue</a> AsyncQueue.ts
+    </h1>
+    <div class='clearfix'>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">100% </span>
+        <span class="quiet">Statements</span>
+        <span class='fraction'>22/22</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">100% </span>
+        <span class="quiet">Branches</span>
+        <span class='fraction'>2/2</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">100% </span>
+        <span class="quiet">Functions</span>
+        <span class='fraction'>8/8</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">100% </span>
+        <span class="quiet">Lines</span>
+        <span class='fraction'>21/21</span>
+      </div>
+    </div>
+  </div>
+  <div class='status-line high'></div>
+<pre><table class="coverage">
+<tr><td class="line-count quiet">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81
+82
+83
+84
+85
+86
+87
+88
+89
+90
+91
+92
+93
+94
+95
+96
+97
+98
+99
+100
+101
+102
+103
+104
+105
+106
+107
+108
+109
+110
+111
+112
+113
+114
+115
+116
+117
+118
+119
+120
+121
+122
+123
+124
+125
+126
+127
+128
+129
+130
+131
+132
+133
+134
+135
+136
+137
+138
+139
+140
+141
+142
+143
+144
+145
+146
+147
+148
+149
+150
+151
+152
+153
+154
+155
+156
+157
+158
+159
+160
+161
+162
+163
+164
+165
+166
+167
+168
+169
+170
+171
+172
+173
+174
+175
+176
+177
+178
+179
+180
+181
+182
+183
+184
+185
+186
+187
+188
+189
+190
+191
+192
+193
+194
+195
+196
+197
+198
+199
+200
+201
+202
+203
+204
+205
+206
+207
+208
+209
+210</td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">71x</span>
+<span class="cline-any cline-yes">71x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">269x</span>
+<span class="cline-any cline-yes">269x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">10x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">20x</span>
+<span class="cline-any cline-yes">20x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">216x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">215x</span>
+<span class="cline-any cline-yes">215x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">321x</span>
+<span class="cline-any cline-yes">259x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">259x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">62x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">85x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">20x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import { ISemaphore, Semaphore } from '../semaphore/index';
+&nbsp;
+/**
+ * Asynchronous FIFO queue with a Promise-driven dequeue operation.
+ *
+ * All element values are allowed, especially falsy ones, e.g.
+ * false, 0, undefined, null, [], {} are all valid elements which
+ * can be queued and dequeued.
+ *
+ * The {@link AsyncIterable} interface iterates the queue's (future) contents
+ * ad infinitum. Users are advised to signal the end by manual insertion of a
+ * special value (a so-called poison pill):
+ *
+ * ```
+ * const queue = new AsyncQueue&lt;string|null&gt;();
+ * file.on('data', (data) =&gt; queue.queue(data));
+ * file.on('close', () =&gt; queue.queue(null));
+ *
+ * for await (const data of queue) {
+ *   if (data === null) {
+ *     break;
+ *   }
+ *   // Otherwise, process data
+ * }
+ * ```
+ */
+export interface IAsyncQueue&lt;T&gt; extends AsyncIterable&lt;T&gt; {
+	/**
+	 * Queue an element immediately.
+	 */
+	queue(data: T): void;
+&nbsp;
+	/**
+	 * Queue all elements of an iterable, e.g. an array or a generator function.
+	 *
+	 * @example `queue.queueAll(['myArray', 'of', 'strings'])`
+	 *
+	 * @example If one has a generator function f:
+	 *          `function *f(): Iterable&lt;string&gt; { ... }`
+	 *          then you can call `queue.queueAll(f())`.
+	 */
+	queueAll(iterable: Iterable&lt;T&gt;): void;
+&nbsp;
+	/**
+	 * Queue all elements of an asynchronous iterable, e.g. an asynchronous
+	 * generator functions.
+	 *
+	 * @example Using an asynchronous generator function:
+	 * ```
+	 * async function *f(): AsyncIterable&lt;string&gt; {
+	 *   yield* ['Array', 'of', 'strings'];
+	 * }
+	 *
+	 * const previousSize = queue.size();
+	 * queue.queueAllAsync(f());
+	 * // ^ We do not await the queueing!
+	 * // Therefore: queue.size() === previousSize here!
+	 * // This is indeed guaranteed by JS' execution model. There is
+	 * // no way queueAllAsync could have queried an element from f()
+	 * // asynchronously using a promise before this code gives up
+	 * // the "CPU power" by await or yield.
+	 *
+	 * await queue.dequeue(); // 'Array'
+	 * await queue.dequeue(); // 'of'
+	 * await queue.dequeue(); // 'strings'
+	 *
+	 * // queue.size() === 0 and queue.dequeue() would block
+	 * // ad infinitum
+	 *
+	 * await queue.queueAllAsync(f());
+	 * // We now await the queueing!
+	 * // Therefore: queue.size() === 3 here!
+	 * ```
+	 *
+	 * @example AsyncQueue instances are also asynchronous iterables,
+	 *          meaning that you can stack multiple queues together:
+	 * ```
+	 * const backgroundQueue: IAsyncQueue&lt;string&gt; = new AsyncQueue();
+	 * const foregroundQueue: IAsyncQueue&lt;string&gt; = new AsyncQueue();
+	 *
+	 * setTimeout(() =&gt; backgroundQueue.queue('Hello World!'), 100);
+	 *
+	 * foregroundQueue.queueAllAsync(backgroundQueue);
+	 * const retrievedString = await foregroundQueue.dequeue();
+	 *
+	 * // retrievedString === 'Hello World!'
+	 * ```
+	 */
+	queueAllAsync(iterable: AsyncIterable&lt;T&gt;): Promise&lt;void&gt;;
+&nbsp;
+	/**
+	 * Dequeue an element, waiting for data to be available if necessary.
+	 *
+	 * @returns A promise which is fulfilled when an element (as queued by
+	 *          queue()) becomes available.
+	 *          If multiple dequeus() are issued sequentially, it is
+	 *          implementation-defined whether they are fulfilled in the same
+	 *          order or not. However, the data is still retrieved in FIFO
+	 *          fashion, meaning the first fulfilled promise gets the first
+	 *          element, the second fulfilled the second one and so forth.
+	 */
+	dequeue(): Promise&lt;T&gt;;
+&nbsp;
+	/**
+	 * Dequeue an element if available or throw an exception otherwise.
+	 *
+	 * @returns The first element of the queue.
+	 * @throws A {@link NoElementError} exception if the queue is empty at the time of the call.
+	 */
+	poll(): T;
+&nbsp;
+	/**
+	 * Return the current size at the moment of the call.
+	 *
+	 * Even though code like
+	 * ```
+	 * if (queue.size() &gt;= 1) {
+	 *   const element = queue.poll();
+	 * }
+	 * ```
+	 * is technically not wrong (due to JS' execution model), users are
+	 * advised to avoid this pattern. Instead, users are encouraged to
+	 *
+	 *  - in cases where waiting for a promise is impossible, to use
+	 *    {@link poll} and catch the exception,
+	 *  - or to use {@link dequeue} with JS' `await` or
+	 *    `queue.dequeue().then(...)`.
+	 */
+	size(): number;
+}
+&nbsp;
+/**
+ * A NoElementError indicating the lack of at least one element required for
+ * an operation.
+ *
+ * Requires a TypeScript target &gt;= ES6. Otherwise, the specs, which effectively
+ * test for `err instanceof NoElementError`, fail.
+ */
+export class NoElementError extends Error {
+}
+&nbsp;
+export class AsyncQueue&lt;T&gt; implements IAsyncQueue&lt;T&gt; {
+	private buffer: T[] = [];
+	private elementSem: ISemaphore = new Semaphore(0);
+&nbsp;
+	public queue(data: T): void {
+		this.buffer.push(data);
+		this.elementSem.free();
+	}
+&nbsp;
+	public queueAll(iterable: Iterable&lt;T&gt;): void {
+		for (const element of iterable) {
+			this.queue(element);
+		}
+	}
+&nbsp;
+	public async queueAllAsync(iterable: AsyncIterable&lt;T&gt;): Promise&lt;void&gt; {
+		for await (const element of iterable) {
+			this.queue(element);
+		}
+	}
+&nbsp;
+	public async dequeue(): Promise&lt;T&gt; {
+		await this.elementSem.take();
+&nbsp;
+		try {
+			return this.poll();
+		}
+		catch (err) {
+			/* istanbul ignore next: poll() should never throw after a take(). */
+			if (err instanceof NoElementError) {
+				throw new Error('AsyncQueue dequeue: poll() threw an exception \
+ even though dequeue() waited for its element semaphore to be available via take().');
+			}
+			else {
+				throw err;
+			}
+		}
+	}
+&nbsp;
+	public poll(): T {
+		if (this.buffer.length &gt;= 1) {
+			const dequeuedElement = this.buffer.shift();
+&nbsp;
+			// Force-cast the element since we know that the buffer contains
+			// at least one element and JS' execution model prohibits other
+			// interleaving fibers to modify the buffer (=&gt; no race condition).
+			//
+			// Also, we cannot check for shift() returning undefined as the queue
+			// might well contain "undefined" as such.
+			return (dequeuedElement as T);
+		}
+		else {
+			throw new NoElementError('AsyncQueue poll() called on an empty AsyncQueue.\
+ Users of this function must generally expect this exception (being more of a return value in disguise).\
+ Did you forget to surround your code with a try-catch?');
+		}
+	}
+&nbsp;
+	public size(): number {
+		return this.buffer.length;
+	}
+&nbsp;
+	public async *[Symbol.asyncIterator](): AsyncIterableIterator&lt;T&gt; {
+		while (true) {
+			yield this.dequeue();
+		}
+	}
+}
+&nbsp;</pre></td></tr>
+</table></pre>
+<div class='push'></div><!-- for sticky footer -->
+</div><!-- /wrapper -->
+<div class='footer quiet pad2 space-top1 center small'>
+  Code coverage
+  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Fri Mar 09 2018 14:22:31 GMT+0000 (UTC)
+</div>
+</div>
+<script src="../prettify.js"></script>
+<script>
+window.onload = function () {
+        if (typeof prettyPrint === 'function') {
+            prettyPrint();
+        }
+};
+</script>
+<script src="../sorter.js"></script>
+</body>
+</html>
