@@ -190,7 +190,9 @@ export class AsyncQueue<T> implements IAsyncQueue<T> {
 			return (dequeuedElement as T);
 		}
 		else {
-			throw new NoElementError();
+			throw new NoElementError('AsyncQueue poll() called on an empty AsyncQueue.\
+ Users of this function must generally expect this exception (being more of a return value in disguise).\
+ Did you forget to surround your code with a try-catch?');
 		}
 	}
 
