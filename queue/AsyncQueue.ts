@@ -167,6 +167,7 @@ export class AsyncQueue<T> implements IAsyncQueue<T> {
 			return this.poll();
 		}
 		catch (err) {
+			/* istanbul ignore next: poll() should never throw after a take(). */
 			if (err instanceof NoElementError) {
 				throw new Error('AsyncQueue dequeue: poll() threw an exception \
  even though dequeue() waited for its element semaphore to be available via take().');
