@@ -1,5 +1,7 @@
 # ComFreek's async generator/Promises playground
 
+[![Greenkeeper badge](https://badges.greenkeeper.io/ComFreek/async-playground.svg)](https://greenkeeper.io/)
+
 
 [![Build Status](https://img.shields.io/travis/ComFreek/async-playground.svg)](https://travis-ci.org/ComFreek/async-playground)
 [![Coverage Status](https://img.shields.io/coveralls/ComFreek/async-playground.svg)](https://coveralls.io/github/ComFreek/async-playground?branch=master)
