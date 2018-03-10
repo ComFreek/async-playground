@@ -101,6 +101,30 @@ getFile(<span class="hljs-string">'test.txt'</span>).on(<span class="hljs-string
 <span class="hljs-keyword">await</span> queue.dequeue();
 </code></pre>
 					</li>
+					<li><p><code>CriticalSection</code>: a non-reentrant critical section.</p>
+						<pre><code class="lang-typescript"><span class="hljs-keyword">const</span> queue = <span class="hljs-keyword">new</span> AsyncQueue&lt;<span class="hljs-built_in">number</span>&gt;(<span class="hljs-number">30</span>);
+
+<span class="hljs-comment">// Sum consecutive (!) lines every 50ms or when an IO event occurred</span>
+setTimeout(sumConsecutiveNumbers, <span class="hljs-number">50</span>);
+IO.on(<span class="hljs-string">'sum'</span>, sumConsecutiveNumbers);
+IO.on(<span class="hljs-string">'data'</span>, <span class="hljs-function">(<span class="hljs-params">x: <span class="hljs-built_in">number</span></span>) =&gt;</span> queue.queue(x));
+
+<span class="hljs-keyword">async</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">sumConsecutiveNumbers</span>(<span class="hljs-params"></span>) </span>{
+  <span class="hljs-comment">// Must wrap it in a section, otherwise two "sumConsecutiveNumbers"</span>
+  <span class="hljs-comment">// calls from timeout/IO or timeout/timeout or IO/IO may overlap</span>
+  <span class="hljs-comment">// due to the 'await' below!</span>
+  <span class="hljs-keyword">await</span> CriticalSection.for(sumConsecutiveNumbers).do({
+      <span class="hljs-keyword">const</span> numberOfElementsToSum = <span class="hljs-number">10</span>;
+      <span class="hljs-keyword">let</span> sum = <span class="hljs-number">0</span>;
+
+      <span class="hljs-keyword">for</span> (<span class="hljs-keyword">let</span> i = <span class="hljs-number">0</span>; i &lt; numberOfElementsToSum; i++) {
+          sum += <span class="hljs-keyword">await</span> queue.dequeue();
+      }
+      <span class="hljs-built_in">console</span>.log(sum);
+  });
+}
+</code></pre>
+					</li>
 				</ul>
 				<h2 id="fully-self-contained-example">Fully self-contained example</h2>
 				<p>Cf. <code>examples/queue-stdio-lines.ts</code> and <code>examples/README.md</code> on how to run.</p>
@@ -173,6 +197,12 @@ getFile(<span class="hljs-string">'test.txt'</span>).on(<span class="hljs-string
 					</li>
 					<li class=" tsd-kind-external-module">
 						<a href="modules/_queue_index_.html">"queue/index"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="modules/_semaphore_criticalsection_.html">"semaphore/<wbr>Critical<wbr>Section"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="modules/_semaphore_criticalsection_spec_.html">"semaphore/<wbr>Critical<wbr>Section.spec"</a>
 					</li>
 					<li class=" tsd-kind-external-module">
 						<a href="modules/_semaphore_semaphore_.html">"semaphore/<wbr>Semaphore"</a>

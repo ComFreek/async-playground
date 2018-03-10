@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>&quot;queue/AsyncLimitedQueue.spec&quot; | comfreek-async-playground</title>
+	<title>&quot;semaphore/CriticalSection&quot; | comfreek-async-playground</title>
 	<meta name="description" content="">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="../assets/css/main.css">
@@ -56,10 +56,10 @@
 					<a href="../globals.html">Globals</a>
 				</li>
 				<li>
-					<a href="_queue_asynclimitedqueue_spec_.html">&quot;queue/AsyncLimitedQueue.spec&quot;</a>
+					<a href="_semaphore_criticalsection_.html">&quot;semaphore/CriticalSection&quot;</a>
 				</li>
 			</ul>
-			<h1>External module &quot;queue/AsyncLimitedQueue.spec&quot;</h1>
+			<h1>External module &quot;semaphore/CriticalSection&quot;</h1>
 		</div>
 	</div>
 </header>
@@ -70,124 +70,19 @@
 				<h2>Index</h2>
 				<section class="tsd-panel tsd-index-panel">
 					<div class="tsd-index-content">
-						<section class="tsd-index-section tsd-is-not-exported">
-							<h3>Variables</h3>
+						<section class="tsd-index-section ">
+							<h3>Classes</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-variable tsd-parent-kind-external-module tsd-is-not-exported"><a href="_queue_asynclimitedqueue_spec_.html#expect" class="tsd-kind-icon">expect</a></li>
+								<li class="tsd-kind-class tsd-parent-kind-external-module"><a href="../classes/_semaphore_criticalsection_.criticalsection.html" class="tsd-kind-icon">Critical<wbr>Section</a></li>
 							</ul>
 						</section>
-						<section class="tsd-index-section tsd-is-not-exported">
-							<h3>Functions</h3>
+						<section class="tsd-index-section ">
+							<h3>Interfaces</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-function tsd-parent-kind-external-module tsd-has-type-parameter tsd-is-not-exported"><a href="_queue_asynclimitedqueue_spec_.html#dequeuemany" class="tsd-kind-icon">dequeue<wbr>Many</a></li>
-								<li class="tsd-kind-function tsd-parent-kind-external-module tsd-is-not-exported"><a href="_queue_asynclimitedqueue_spec_.html#range" class="tsd-kind-icon">range</a></li>
-								<li class="tsd-kind-function tsd-parent-kind-external-module tsd-has-type-parameter tsd-is-not-exported"><a href="_queue_asynclimitedqueue_spec_.html#synctoasynciterable" class="tsd-kind-icon">sync<wbr>ToAsync<wbr>Iterable</a></li>
+								<li class="tsd-kind-interface tsd-parent-kind-external-module"><a href="../interfaces/_semaphore_criticalsection_.icriticalsection.html" class="tsd-kind-icon">ICritical<wbr>Section</a></li>
 							</ul>
 						</section>
 					</div>
-				</section>
-			</section>
-			<section class="tsd-panel-group tsd-member-group tsd-is-not-exported">
-				<h2>Variables</h2>
-				<section class="tsd-panel tsd-member tsd-kind-variable tsd-parent-kind-external-module tsd-is-not-exported">
-					<a name="expect" class="tsd-anchor"></a>
-					<h3><span class="tsd-flag ts-flagConst">Const</span> expect</h3>
-					<div class="tsd-signature tsd-kind-icon">expect<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">ExpectStatic</span><span class="tsd-signature-symbol"> =&nbsp;chai.expect</span></div>
-					<aside class="tsd-sources">
-						<ul>
-							<li>Defined in <a href="https://github.com/ComFreek/async-playground/blob/987cca4/queue/AsyncLimitedQueue.spec.ts#L11">queue/AsyncLimitedQueue.spec.ts:11</a></li>
-						</ul>
-					</aside>
-				</section>
-			</section>
-			<section class="tsd-panel-group tsd-member-group tsd-is-not-exported">
-				<h2>Functions</h2>
-				<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-external-module tsd-has-type-parameter tsd-is-not-exported">
-					<a name="dequeuemany" class="tsd-anchor"></a>
-					<h3>dequeue<wbr>Many</h3>
-					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-external-module tsd-has-type-parameter tsd-is-not-exported">
-						<li class="tsd-signature tsd-kind-icon">dequeue<wbr>Many&lt;T&gt;<span class="tsd-signature-symbol">(</span>queue<span class="tsd-signature-symbol">: </span><a href="../interfaces/_queue_asynclimitedqueue_.iasynclimitedqueue.html" class="tsd-signature-type">IAsyncLimitedQueue</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">&gt;</span>, count<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">&gt;</span></li>
-					</ul>
-					<ul class="tsd-descriptions">
-						<li class="tsd-description">
-							<aside class="tsd-sources">
-								<ul>
-									<li>Defined in <a href="https://github.com/ComFreek/async-playground/blob/987cca4/queue/AsyncLimitedQueue.spec.ts#L31">queue/AsyncLimitedQueue.spec.ts:31</a></li>
-								</ul>
-							</aside>
-							<h4 class="tsd-type-parameters-title">Type parameters</h4>
-							<ul class="tsd-type-parameters">
-								<li>
-									<h4>T</h4>
-								</li>
-							</ul>
-							<h4 class="tsd-parameters-title">Parameters</h4>
-							<ul class="tsd-parameters">
-								<li>
-									<h5>queue: <a href="../interfaces/_queue_asynclimitedqueue_.iasynclimitedqueue.html" class="tsd-signature-type">IAsyncLimitedQueue</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">&gt;</span></h5>
-								</li>
-								<li>
-									<h5>count: <span class="tsd-signature-type">number</span></h5>
-								</li>
-							</ul>
-							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">&gt;</span></h4>
-						</li>
-					</ul>
-				</section>
-				<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-external-module tsd-is-not-exported">
-					<a name="range" class="tsd-anchor"></a>
-					<h3>range</h3>
-					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-external-module tsd-is-not-exported">
-						<li class="tsd-signature tsd-kind-icon">range<span class="tsd-signature-symbol">(</span>min<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span>, exclusiveMax<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">IterableIterator</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">&gt;</span></li>
-					</ul>
-					<ul class="tsd-descriptions">
-						<li class="tsd-description">
-							<aside class="tsd-sources">
-								<ul>
-									<li>Defined in <a href="https://github.com/ComFreek/async-playground/blob/987cca4/queue/AsyncLimitedQueue.spec.ts#L13">queue/AsyncLimitedQueue.spec.ts:13</a></li>
-								</ul>
-							</aside>
-							<h4 class="tsd-parameters-title">Parameters</h4>
-							<ul class="tsd-parameters">
-								<li>
-									<h5>min: <span class="tsd-signature-type">number</span></h5>
-								</li>
-								<li>
-									<h5>exclusiveMax: <span class="tsd-signature-type">number</span></h5>
-								</li>
-							</ul>
-							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">IterableIterator</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">&gt;</span></h4>
-						</li>
-					</ul>
-				</section>
-				<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-external-module tsd-has-type-parameter tsd-is-not-exported">
-					<a name="synctoasynciterable" class="tsd-anchor"></a>
-					<h3>sync<wbr>ToAsync<wbr>Iterable</h3>
-					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-external-module tsd-has-type-parameter tsd-is-not-exported">
-						<li class="tsd-signature tsd-kind-icon">sync<wbr>ToAsync<wbr>Iterable&lt;T&gt;<span class="tsd-signature-symbol">(</span>iterable<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Iterable</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">AsyncIterable</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">&gt;</span></li>
-					</ul>
-					<ul class="tsd-descriptions">
-						<li class="tsd-description">
-							<aside class="tsd-sources">
-								<ul>
-									<li>Defined in <a href="https://github.com/ComFreek/async-playground/blob/987cca4/queue/AsyncLimitedQueue.spec.ts#L25">queue/AsyncLimitedQueue.spec.ts:25</a></li>
-								</ul>
-							</aside>
-							<h4 class="tsd-type-parameters-title">Type parameters</h4>
-							<ul class="tsd-type-parameters">
-								<li>
-									<h4>T</h4>
-								</li>
-							</ul>
-							<h4 class="tsd-parameters-title">Parameters</h4>
-							<ul class="tsd-parameters">
-								<li>
-									<h5>iterable: <span class="tsd-signature-type">Iterable</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">&gt;</span></h5>
-								</li>
-							</ul>
-							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">AsyncIterable</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">&gt;</span></h4>
-						</li>
-					</ul>
 				</section>
 			</section>
 		</div>
@@ -203,7 +98,7 @@
 					<li class=" tsd-kind-external-module">
 						<a href="_queue_asynclimitedqueue_.html">"queue/<wbr>Async<wbr>Limited<wbr>Queue"</a>
 					</li>
-					<li class="current tsd-kind-external-module">
+					<li class=" tsd-kind-external-module">
 						<a href="_queue_asynclimitedqueue_spec_.html">"queue/<wbr>Async<wbr>Limited<wbr>Queue.spec"</a>
 					</li>
 					<li class=" tsd-kind-external-module">
@@ -218,7 +113,7 @@
 					<li class=" tsd-kind-external-module">
 						<a href="_queue_index_.html">"queue/index"</a>
 					</li>
-					<li class=" tsd-kind-external-module">
+					<li class="current tsd-kind-external-module">
 						<a href="_semaphore_criticalsection_.html">"semaphore/<wbr>Critical<wbr>Section"</a>
 					</li>
 					<li class=" tsd-kind-external-module">
@@ -243,17 +138,11 @@
 			</nav>
 			<nav class="tsd-navigation secondary menu-sticky">
 				<ul class="before-current">
-					<li class=" tsd-kind-variable tsd-parent-kind-external-module tsd-is-not-exported">
-						<a href="_queue_asynclimitedqueue_spec_.html#expect" class="tsd-kind-icon">expect</a>
+					<li class=" tsd-kind-class tsd-parent-kind-external-module">
+						<a href="../classes/_semaphore_criticalsection_.criticalsection.html" class="tsd-kind-icon">Critical<wbr>Section</a>
 					</li>
-					<li class=" tsd-kind-function tsd-parent-kind-external-module tsd-has-type-parameter tsd-is-not-exported">
-						<a href="_queue_asynclimitedqueue_spec_.html#dequeuemany" class="tsd-kind-icon">dequeue<wbr>Many</a>
-					</li>
-					<li class=" tsd-kind-function tsd-parent-kind-external-module tsd-is-not-exported">
-						<a href="_queue_asynclimitedqueue_spec_.html#range" class="tsd-kind-icon">range</a>
-					</li>
-					<li class=" tsd-kind-function tsd-parent-kind-external-module tsd-has-type-parameter tsd-is-not-exported">
-						<a href="_queue_asynclimitedqueue_spec_.html#synctoasynciterable" class="tsd-kind-icon">sync<wbr>ToAsync<wbr>Iterable</a>
+					<li class=" tsd-kind-interface tsd-parent-kind-external-module">
+						<a href="../interfaces/_semaphore_criticalsection_.icriticalsection.html" class="tsd-kind-icon">ICritical<wbr>Section</a>
 					</li>
 				</ul>
 			</nav>
