@@ -45,29 +45,29 @@ It's fun to (re-)explore these concepts, but with Promises and ECMAScript's exec
 
   - `CriticalSection`: a non-reentrant critical section.
 
-  ```typescript
-  const queue = new AsyncQueue<number>(30);
+    ```typescript
+    const queue = new AsyncQueue<number>(30);
 
-  // Sum consecutive (!) lines every 50ms or when an IO event occurred
-  setTimeout(sumConsecutiveNumbers, 50);
-  IO.on('sum', sumConsecutiveNumbers);
-  IO.on('data', (x: number) => queue.queue(x));
+    // Sum consecutive (!) lines every 50ms or when an IO event occurred
+    setTimeout(sumConsecutiveNumbers, 50);
+    IO.on('sum', sumConsecutiveNumbers);
+    IO.on('data', (x: number) => queue.queue(x));
 
-  async function sumConsecutiveNumbers() {
-      // Must wrap it in a section, otherwise two "sumConsecutiveNumbers"
-      // calls from timeout/IO or timeout/timeout or IO/IO may overlap
-      // due to the 'await' below!
-      await CriticalSection.for(sumConsecutiveNumbers).do({
-          const numberOfElementsToSum = 10;
-          let sum = 0;
+    async function sumConsecutiveNumbers() {
+    	// Must wrap it in a section, otherwise two "sumConsecutiveNumbers"
+    	// calls from timeout/IO or timeout/timeout or IO/IO may overlap
+    	// due to the 'await' below!
+    	await CriticalSection.for(sumConsecutiveNumbers).do({
+    		const numberOfElementsToSum = 10;
+    		let sum = 0;
 
-          for (let i = 0; i < numberOfElementsToSum; i++) {
-              sum += await queue.dequeue();
-          }
-          console.log(sum);
-      });
-  }
-  ```
+    		for (let i = 0; i < numberOfElementsToSum; i++) {
+    			sum += await queue.dequeue();
+    		}
+    		console.log(sum);
+    	});
+    }
+    ```
 
 ## Fully self-contained example
 
