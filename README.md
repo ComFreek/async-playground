@@ -46,7 +46,8 @@ It's fun to (re-)explore these concepts, but with Promises and ECMAScript's exec
   - `CriticalSection`: a non-reentrant critical section.
 
     ```typescript
-    const queue = new AsyncQueue<number>(30);
+    // see examples/critical-section.ts
+    const queue = new AsyncQueue<number>();
 
     // Sum consecutive (!) lines every 50ms or when an IO event occurred
     setTimeout(sumConsecutiveNumbers, 50);
@@ -57,7 +58,7 @@ It's fun to (re-)explore these concepts, but with Promises and ECMAScript's exec
     	// Must wrap it in a section, otherwise two "sumConsecutiveNumbers"
     	// calls from timeout/IO or timeout/timeout or IO/IO may overlap
     	// due to the 'await' below!
-    	await CriticalSection.for(sumConsecutiveNumbers).do({
+    	await CriticalSection.for(sumConsecutiveNumbers).do(async () => {
     		const numberOfElementsToSum = 10;
     		let sum = 0;
 
