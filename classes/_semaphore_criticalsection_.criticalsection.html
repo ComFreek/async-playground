@@ -112,7 +112,7 @@
 					<div class="tsd-signature tsd-kind-icon">lock<span class="tsd-signature-symbol">:</span> <a href="../interfaces/_semaphore_semaphore_.isemaphore.html" class="tsd-signature-type">ISemaphore</a><span class="tsd-signature-symbol"> =&nbsp;new Semaphore(1)</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/ComFreek/async-playground/blob/55b92fa/semaphore/CriticalSection.ts#L73">semaphore/CriticalSection.ts:73</a></li>
+							<li>Defined in <a href="https://github.com/ComFreek/async-playground/blob/8b75fd1/semaphore/CriticalSection.ts#L73">semaphore/CriticalSection.ts:73</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -122,7 +122,7 @@
 					<div class="tsd-signature tsd-kind-icon">object<wbr>Accessor<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">symbol</span><span class="tsd-signature-symbol"> =&nbsp;Symbol(&#x27;CriticalSection associated with the object&#x27;)</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/ComFreek/async-playground/blob/55b92fa/semaphore/CriticalSection.ts#L75">semaphore/CriticalSection.ts:75</a></li>
+							<li>Defined in <a href="https://github.com/ComFreek/async-playground/blob/8b75fd1/semaphore/CriticalSection.ts#L75">semaphore/CriticalSection.ts:75</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -139,7 +139,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/ComFreek/async-playground/blob/55b92fa/semaphore/CriticalSection.ts#L77">semaphore/CriticalSection.ts:77</a></li>
+									<li>Defined in <a href="https://github.com/ComFreek/async-playground/blob/8b75fd1/semaphore/CriticalSection.ts#L77">semaphore/CriticalSection.ts:77</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-type-parameters-title">Type parameters</h4>
@@ -183,7 +183,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/ComFreek/async-playground/blob/55b92fa/semaphore/CriticalSection.ts#L142">semaphore/CriticalSection.ts:142</a></li>
+									<li>Defined in <a href="https://github.com/ComFreek/async-playground/blob/8b75fd1/semaphore/CriticalSection.ts#L158">semaphore/CriticalSection.ts:158</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -216,6 +216,22 @@ console.log(firstSection === secondSection);
 
 <span class="hljs-comment">// true</span>
 console.log(CriticalSection.<span class="hljs-keyword">for</span>(<span class="hljs-keyword">object</span>) !== firstSection);
+</code></pre></dd>
+									<dt>example</dt>
+									<dd><p>Beware of iframes and inter-website communicating code, e.g.
+											the <code>Array</code> constructors differ and are therefore considered
+										distinct objects by this method.</p>
+										<pre><code><span class="hljs-keyword">var</span> iframe = <span class="hljs-built_in">document</span>.createElement(<span class="hljs-string">'iframe'</span>);
+<span class="hljs-built_in">document</span>.body.appendChild(iframe);
+<span class="hljs-keyword">const</span> xArray = <span class="hljs-built_in">window</span>.frames[<span class="hljs-built_in">window</span>.frames.length<span class="hljs-number">-1</span>].Array;
+
+<span class="hljs-keyword">const</span> iframeArr = <span class="hljs-keyword">new</span> xArray(<span class="hljs-number">1</span>,<span class="hljs-number">2</span>,<span class="hljs-number">3</span>);
+<span class="hljs-keyword">const</span> thisSiteArr = [<span class="hljs-number">4</span>, <span class="hljs-number">5</span>, <span class="hljs-number">6</span>];
+
+<span class="hljs-comment">// true in both cases</span>
+console.log(iframeArr.constructor !== thisSiteArr.constructor);
+console.log(CriticalSection.<span class="hljs-keyword">for</span>(iframeArr.constructor) !==
+            CriticalSection.<span class="hljs-keyword">for</span>(thisSiteArr.constructor));
 </code></pre></dd>
 									<dt>throws</dt>
 									<dd><p>A {@link TypeError} is raised when <code>object</code> is a <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures">primitive value</a>.</p>

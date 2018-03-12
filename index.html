@@ -103,7 +103,8 @@ getFile(<span class="hljs-string">'test.txt'</span>).on(<span class="hljs-string
 </code></pre>
 					</li>
 					<li><p><code>CriticalSection</code>: a non-reentrant critical section.</p>
-						<pre><code class="lang-typescript"><span class="hljs-keyword">const</span> queue = <span class="hljs-keyword">new</span> AsyncQueue&lt;<span class="hljs-built_in">number</span>&gt;(<span class="hljs-number">30</span>);
+						<pre><code class="lang-typescript"><span class="hljs-comment">// see examples/critical-section.ts</span>
+<span class="hljs-keyword">const</span> queue = <span class="hljs-keyword">new</span> AsyncQueue&lt;<span class="hljs-built_in">number</span>&gt;();
 
 <span class="hljs-comment">// Sum consecutive (!) lines every 50ms or when an IO event occurred</span>
 setTimeout(sumConsecutiveNumbers, <span class="hljs-number">50</span>);
@@ -114,7 +115,7 @@ IO.on(<span class="hljs-string">'data'</span>, <span class="hljs-function">(<spa
     <span class="hljs-comment">// Must wrap it in a section, otherwise two "sumConsecutiveNumbers"</span>
     <span class="hljs-comment">// calls from timeout/IO or timeout/timeout or IO/IO may overlap</span>
     <span class="hljs-comment">// due to the 'await' below!</span>
-    <span class="hljs-keyword">await</span> CriticalSection.for(sumConsecutiveNumbers).do({
+    <span class="hljs-keyword">await</span> CriticalSection.for(sumConsecutiveNumbers).do(<span class="hljs-keyword">async</span> () =&gt; {
         <span class="hljs-keyword">const</span> numberOfElementsToSum = <span class="hljs-number">10</span>;
         <span class="hljs-keyword">let</span> sum = <span class="hljs-number">0</span>;
 
