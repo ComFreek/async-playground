@@ -116,6 +116,22 @@ export class CriticalSection implements ICriticalSection {
 	 * // true
 	 * console.log(CriticalSection.for(object) !== firstSection);
 	 * ```
+	 * @example Beware of iframes and inter-website communicating code, e.g.
+	 *          the `Array` constructors differ and are therefore considered
+	 *          distinct objects by this method.
+	 * ```
+	 * var iframe = document.createElement('iframe');
+	 * document.body.appendChild(iframe);
+	 * const xArray = window.frames[window.frames.length-1].Array;
+	 *
+	 * const iframeArr = new xArray(1,2,3);
+	 * const thisSiteArr = [4, 5, 6];
+	 *
+	 * // true in both cases
+	 * console.log(iframeArr.constructor !== thisSiteArr.constructor);
+	 * console.log(CriticalSection.for(iframeArr.constructor) !==
+	 *             CriticalSection.for(thisSiteArr.constructor));
+	 * ```
 	 *
 	 * @param object The object with which a new critical section bond should
 	 *               be created if it does not exists yet.
