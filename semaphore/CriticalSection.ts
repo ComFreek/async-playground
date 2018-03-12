@@ -120,7 +120,7 @@ export class CriticalSection implements ICriticalSection {
 	 *          the `Array` constructors differ and are therefore considered
 	 *          distinct objects by this method.
 	 * ```
-	 * var iframe = document.createElement('iframe');
+	 * const iframe = document.createElement('iframe');
 	 * document.body.appendChild(iframe);
 	 * const xArray = window.frames[window.frames.length-1].Array;
 	 *
