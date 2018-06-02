@@ -4,8 +4,7 @@
   "description": "",
   "private": true,
   "scripts": {
-    "test": "nyc mocha --harmony -r ts-node/register -r source-map-support/register **/*.spec.ts",
-    "test-fast": "mocha --harmony -r ts-node/register **/*.spec.ts",
+    "test": "nyc mocha --opts mocha.opts",
     "coverage": "nyc report --reporter=text-lcov | coveralls",
     "build-docs": "node node_modules/typedoc/bin/typedoc --out docs queue/ semaphore/ && echo .nojekyll > docs/.nojekyll"
   },
@@ -20,19 +19,18 @@
       ".tsx"
     ],
     "exclude": [
-      "**/node_modules/**",
+      "**/*.spec.ts",
+      "**/*.common-spec.ts",
       "coverage/**",
-      "**/*.common-spec.{js|ts}",
-      "**/*.spec.{js|ts}",
-      "**/*.d.ts",
-      "**/index.js",
+
       "docs/**",
       "examples/**"
     ],
     "reporter": [
       "html"
     ],
-    "all": true
+    "all": true,
+    "cache": false
   },
   "dependencies": {},
   "devDependencies": {
