@@ -93,16 +93,13 @@
 <span class="hljs-built_in">queue</span>.<span class="hljs-built_in">queue</span>(<span class="hljs-number">2</span>);
 
 await <span class="hljs-built_in">queue</span>.dequeue(); <span class="hljs-comment">// can be 1 or 2</span>
-await <span class="hljs-built_in">queue</span>.dequeue(); <span class="hljs-comment">// can be 1 or 2 as well (the remaining number)</span>
-</code></pre></dd>
+await <span class="hljs-built_in">queue</span>.dequeue(); <span class="hljs-comment">// can be 1 or 2 as well (the remaining number)</span></code></pre></dd>
 						<dt>example</dt>
 						<dd><p>If you would like to retain the order, await the <a href="_queue_asynclimitedqueue_.iasynclimitedqueue.html#queue">queue</a>
 								operations, use <a href="_queue_asynclimitedqueue_.iasynclimitedqueue.html#queueall">IAsyncLimitedQueue#queueAll</a> or
 							<a href="_queue_asynclimitedqueue_.iasynclimitedqueue.html#queueallasync">IAsyncLimitedQueue#queueAllAsync</a>.</p>
 							<pre><code>await <span class="hljs-built_in">queue</span>.<span class="hljs-built_in">queue</span>(<span class="hljs-number">1</span>);
-await <span class="hljs-built_in">queue</span>.<span class="hljs-built_in">queue</span>(<span class="hljs-number">2</span>);
-</code></pre><pre><code><span class="hljs-selector-tag">queue</span><span class="hljs-selector-class">.queueAll</span>(<span class="hljs-selector-attr">[1, 2]</span>);
-</code></pre><p>The {@link AsyncIterable} interface iterates the queue&#39;s (future) contents
+await <span class="hljs-built_in">queue</span>.<span class="hljs-built_in">queue</span>(<span class="hljs-number">2</span>);</code></pre><pre><code><span class="hljs-selector-tag">queue</span><span class="hljs-selector-class">.queueAll</span>(<span class="hljs-selector-attr">[1, 2]</span>);</code></pre><p>The {@link AsyncIterable} interface iterates the queue&#39;s (future) contents
 								ad infinitum. Users are advised to signal the end by manual insertion of a
 							special value (a so-called poison pill), see <a href="_queue_asyncqueue_.iasyncqueue.html">IAsyncQueue</a>.</p>
 						</dd>
@@ -188,7 +185,7 @@ await <span class="hljs-built_in">queue</span>.<span class="hljs-built_in">queue
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/ComFreek/async-playground/blob/82d864d/queue/AsyncLimitedQueue.ts#L139">queue/AsyncLimitedQueue.ts:139</a></li>
+									<li>Defined in <a href="https://github.com/ComFreek/async-playground/blob/5a9c727/queue/AsyncLimitedQueue.ts#L139">queue/AsyncLimitedQueue.ts:139</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -217,7 +214,7 @@ await <span class="hljs-built_in">queue</span>.<span class="hljs-built_in">queue
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/ComFreek/async-playground/blob/82d864d/queue/AsyncLimitedQueue.ts#L80">queue/AsyncLimitedQueue.ts:80</a></li>
+									<li>Defined in <a href="https://github.com/ComFreek/async-playground/blob/5a9c727/queue/AsyncLimitedQueue.ts#L80">queue/AsyncLimitedQueue.ts:80</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -248,7 +245,7 @@ await <span class="hljs-built_in">queue</span>.<span class="hljs-built_in">queue
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/ComFreek/async-playground/blob/82d864d/queue/AsyncLimitedQueue.ts#L93">queue/AsyncLimitedQueue.ts:93</a></li>
+									<li>Defined in <a href="https://github.com/ComFreek/async-playground/blob/5a9c727/queue/AsyncLimitedQueue.ts#L93">queue/AsyncLimitedQueue.ts:93</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -284,7 +281,7 @@ await <span class="hljs-built_in">queue</span>.<span class="hljs-built_in">queue
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/ComFreek/async-playground/blob/82d864d/queue/AsyncLimitedQueue.ts#L118">queue/AsyncLimitedQueue.ts:118</a></li>
+									<li>Defined in <a href="https://github.com/ComFreek/async-playground/blob/5a9c727/queue/AsyncLimitedQueue.ts#L118">queue/AsyncLimitedQueue.ts:118</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -332,7 +329,7 @@ await <span class="hljs-built_in">queue</span>.<span class="hljs-built_in">queue
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/ComFreek/async-playground/blob/82d864d/queue/AsyncLimitedQueue.ts#L126">queue/AsyncLimitedQueue.ts:126</a></li>
+									<li>Defined in <a href="https://github.com/ComFreek/async-playground/blob/5a9c727/queue/AsyncLimitedQueue.ts#L126">queue/AsyncLimitedQueue.ts:126</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -360,7 +357,7 @@ await <span class="hljs-built_in">queue</span>.<span class="hljs-built_in">queue
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/ComFreek/async-playground/blob/82d864d/queue/AsyncLimitedQueue.ts#L57">queue/AsyncLimitedQueue.ts:57</a></li>
+									<li>Defined in <a href="https://github.com/ComFreek/async-playground/blob/5a9c727/queue/AsyncLimitedQueue.ts#L57">queue/AsyncLimitedQueue.ts:57</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -371,8 +368,7 @@ await <span class="hljs-built_in">queue</span>.<span class="hljs-built_in">queue
 									<dt>example</dt>
 									<dd><pre><code>queue.queue(<span class="hljs-number">42</span>).<span class="hljs-keyword">then</span>(<span class="hljs-function"><span class="hljs-params">()</span> =&gt;</span> {
   <span class="hljs-regexp">//</span> <span class="hljs-number">42</span> <span class="hljs-keyword">is</span> now stored within the queue
-});
-</code></pre></dd>
+});</code></pre></dd>
 								</dl>
 							</div>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -395,7 +391,7 @@ await <span class="hljs-built_in">queue</span>.<span class="hljs-built_in">queue
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/ComFreek/async-playground/blob/82d864d/queue/AsyncLimitedQueue.ts#L63">queue/AsyncLimitedQueue.ts:63</a></li>
+									<li>Defined in <a href="https://github.com/ComFreek/async-playground/blob/5a9c727/queue/AsyncLimitedQueue.ts#L63">queue/AsyncLimitedQueue.ts:63</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -428,7 +424,7 @@ await <span class="hljs-built_in">queue</span>.<span class="hljs-built_in">queue
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/ComFreek/async-playground/blob/82d864d/queue/AsyncLimitedQueue.ts#L71">queue/AsyncLimitedQueue.ts:71</a></li>
+									<li>Defined in <a href="https://github.com/ComFreek/async-playground/blob/5a9c727/queue/AsyncLimitedQueue.ts#L71">queue/AsyncLimitedQueue.ts:71</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -462,7 +458,7 @@ await <span class="hljs-built_in">queue</span>.<span class="hljs-built_in">queue
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/ComFreek/async-playground/blob/82d864d/queue/AsyncLimitedQueue.ts#L158">queue/AsyncLimitedQueue.ts:158</a></li>
+									<li>Defined in <a href="https://github.com/ComFreek/async-playground/blob/5a9c727/queue/AsyncLimitedQueue.ts#L158">queue/AsyncLimitedQueue.ts:158</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -472,8 +468,7 @@ await <span class="hljs-built_in">queue</span>.<span class="hljs-built_in">queue
 								<p>Even though code like</p>
 								<pre><code><span class="hljs-keyword">if</span> (<span class="hljs-built_in">queue</span>.size() &gt;= <span class="hljs-number">1</span>) {
   <span class="hljs-keyword">const</span> element = <span class="hljs-built_in">queue</span>.poll();
-}
-</code></pre><p>is technically not wrong (due to JS&#39; execution model), users are
+}</code></pre><p>is technically not wrong (due to JS&#39; execution model), users are
 								advised to avoid this pattern. Instead, users are encouraged to</p>
 								<ul>
 									<li>in cases where waiting for a promise is impossible, to use

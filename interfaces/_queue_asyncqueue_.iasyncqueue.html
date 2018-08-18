@@ -89,8 +89,7 @@ for await (const <span class="hljs-built_in">data</span> of <span class="hljs-bu
     break;
   }
   <span class="hljs-comment">// Otherwise, process data</span>
-}
-</code></pre>
+}</code></pre>
 				</div>
 			</section>
 			<section class="tsd-panel tsd-type-parameters">
@@ -169,7 +168,7 @@ for await (const <span class="hljs-built_in">data</span> of <span class="hljs-bu
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/ComFreek/async-playground/blob/82d864d/queue/AsyncQueue.ts#L102">queue/AsyncQueue.ts:102</a></li>
+									<li>Defined in <a href="https://github.com/ComFreek/async-playground/blob/5a9c727/queue/AsyncQueue.ts#L102">queue/AsyncQueue.ts:102</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -198,7 +197,7 @@ for await (const <span class="hljs-built_in">data</span> of <span class="hljs-bu
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/ComFreek/async-playground/blob/82d864d/queue/AsyncQueue.ts#L110">queue/AsyncQueue.ts:110</a></li>
+									<li>Defined in <a href="https://github.com/ComFreek/async-playground/blob/5a9c727/queue/AsyncQueue.ts#L110">queue/AsyncQueue.ts:110</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -226,7 +225,7 @@ for await (const <span class="hljs-built_in">data</span> of <span class="hljs-bu
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/ComFreek/async-playground/blob/82d864d/queue/AsyncQueue.ts#L31">queue/AsyncQueue.ts:31</a></li>
+									<li>Defined in <a href="https://github.com/ComFreek/async-playground/blob/5a9c727/queue/AsyncQueue.ts#L31">queue/AsyncQueue.ts:31</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -254,7 +253,7 @@ for await (const <span class="hljs-built_in">data</span> of <span class="hljs-bu
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/ComFreek/async-playground/blob/82d864d/queue/AsyncQueue.ts#L42">queue/AsyncQueue.ts:42</a></li>
+									<li>Defined in <a href="https://github.com/ComFreek/async-playground/blob/5a9c727/queue/AsyncQueue.ts#L42">queue/AsyncQueue.ts:42</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -292,7 +291,7 @@ for await (const <span class="hljs-built_in">data</span> of <span class="hljs-bu
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/ComFreek/async-playground/blob/82d864d/queue/AsyncQueue.ts#L89">queue/AsyncQueue.ts:89</a></li>
+									<li>Defined in <a href="https://github.com/ComFreek/async-playground/blob/5a9c727/queue/AsyncQueue.ts#L89">queue/AsyncQueue.ts:89</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -325,8 +324,7 @@ queue.queueAllAsync(f());
 
 <span class="hljs-keyword">await</span> queue.queueAllAsync(f());
 <span class="hljs-comment">// We now await the queueing!</span>
-<span class="hljs-comment">// Therefore: queue.size() === 3 here!</span>
-</code></pre></dd>
+<span class="hljs-comment">// Therefore: queue.size() === 3 here!</span></code></pre></dd>
 									<dt>example</dt>
 									<dd><p>AsyncQueue instances are also asynchronous iterables,
 										meaning that you can stack multiple queues together:</p>
@@ -338,8 +336,7 @@ setTimeout(<span class="hljs-function"><span class="hljs-params">()</span> =&gt;
 foregroundQueue.queueAllAsync(backgroundQueue);
 <span class="hljs-keyword">const</span> retrievedString = <span class="hljs-keyword">await</span> foregroundQueue.dequeue();
 
-<span class="hljs-comment">// retrievedString === 'Hello World!'</span>
-</code></pre></dd>
+<span class="hljs-comment">// retrievedString === 'Hello World!'</span></code></pre></dd>
 								</dl>
 							</div>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -362,7 +359,7 @@ foregroundQueue.queueAllAsync(backgroundQueue);
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/ComFreek/async-playground/blob/82d864d/queue/AsyncQueue.ts#L129">queue/AsyncQueue.ts:129</a></li>
+									<li>Defined in <a href="https://github.com/ComFreek/async-playground/blob/5a9c727/queue/AsyncQueue.ts#L129">queue/AsyncQueue.ts:129</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -372,8 +369,7 @@ foregroundQueue.queueAllAsync(backgroundQueue);
 								<p>Even though code like</p>
 								<pre><code><span class="hljs-keyword">if</span> (<span class="hljs-built_in">queue</span>.size() &gt;= <span class="hljs-number">1</span>) {
   <span class="hljs-keyword">const</span> element = <span class="hljs-built_in">queue</span>.poll();
-}
-</code></pre><p>is technically not wrong (due to JS&#39; execution model), users are
+}</code></pre><p>is technically not wrong (due to JS&#39; execution model), users are
 								advised to avoid this pattern. Instead, users are encouraged to</p>
 								<ul>
 									<li>in cases where waiting for a promise is impossible, to use

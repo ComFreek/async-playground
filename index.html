@@ -74,23 +74,21 @@
 				<p>It&#39;s fun to (re-)explore these concepts, but with Promises and ECMAScript&#39;s execution model in mind:</p>
 				<ul>
 					<li><p><code>Semaphore</code>: typical counting semaphore implementation</p>
-						<pre><code class="lang-typescript"><span class="hljs-keyword">const</span> sem = <span class="hljs-keyword">new</span> Semaphore();
+						<pre><code class="language-typescript"><span class="hljs-keyword">const</span> sem = <span class="hljs-keyword">new</span> Semaphore();
 doSomeIO().then(<span class="hljs-function"><span class="hljs-params">()</span> =&gt;</span> sem.free());
-<span class="hljs-keyword">await</span> sem.take();
-</code></pre>
+<span class="hljs-keyword">await</span> sem.take();</code></pre>
 					</li>
 					<li><p><code>AsyncQueue</code>: a queue with asynchronous dequeue operation</p>
-						<pre><code class="lang-typescript"><span class="hljs-keyword">const</span> queue = <span class="hljs-keyword">new</span> AsyncQueue&lt;<span class="hljs-built_in">string</span>&gt;();
+						<pre><code class="language-typescript"><span class="hljs-keyword">const</span> queue = <span class="hljs-keyword">new</span> AsyncQueue&lt;<span class="hljs-built_in">string</span>&gt;();
 
 getFile(<span class="hljs-string">'test.txt'</span>).on(<span class="hljs-string">'line'</span>, <span class="hljs-function">(<span class="hljs-params">line</span>) =&gt;</span> queue.queue(line));
 
 <span class="hljs-comment">// Process the lines</span>
-<span class="hljs-keyword">await</span> queue.dequeue();
-</code></pre>
+<span class="hljs-keyword">await</span> queue.dequeue();</code></pre>
 					</li>
 					<li><p><code>AsyncLimitedQueue</code>: a queue where the queue operation is asynchronous as well
 						since it enforces a user-specified limit on the number of entries.</p>
-						<pre><code class="lang-typescript"><span class="hljs-comment">// Only store up to 30 lines at the same time</span>
+						<pre><code class="language-typescript"><span class="hljs-comment">// Only store up to 30 lines at the same time</span>
 <span class="hljs-keyword">const</span> queue = <span class="hljs-keyword">new</span> AsyncLimitedQueue&lt;<span class="hljs-built_in">string</span>&gt;(<span class="hljs-number">30</span>);
 
 <span class="hljs-comment">// queue now returns a promise, which resolves</span>
@@ -99,11 +97,10 @@ getFile(<span class="hljs-string">'test.txt'</span>).on(<span class="hljs-string
 getFile(<span class="hljs-string">'test.txt'</span>).on(<span class="hljs-string">'line'</span>, <span class="hljs-keyword">async</span> (line) =&gt; queue.queue(line));
 
 <span class="hljs-comment">// Process the lines</span>
-<span class="hljs-keyword">await</span> queue.dequeue();
-</code></pre>
+<span class="hljs-keyword">await</span> queue.dequeue();</code></pre>
 					</li>
 					<li><p><code>CriticalSection</code>: a non-reentrant critical section.</p>
-						<pre><code class="lang-typescript"><span class="hljs-comment">// see examples/critical-section.ts</span>
+						<pre><code class="language-typescript"><span class="hljs-comment">// see examples/critical-section.ts</span>
 <span class="hljs-keyword">const</span> queue = <span class="hljs-keyword">new</span> AsyncQueue&lt;<span class="hljs-built_in">number</span>&gt;();
 
 <span class="hljs-comment">// Sum consecutive (!) lines every 50ms or when an IO event occurred</span>
@@ -124,13 +121,12 @@ IO.on(<span class="hljs-string">'data'</span>, <span class="hljs-function">(<spa
         }
         <span class="hljs-built_in">console</span>.log(sum);
     });
-}
-</code></pre>
+}</code></pre>
 					</li>
 				</ul>
 				<h2 id="fully-self-contained-example">Fully self-contained example</h2>
 				<p>Cf. <code>examples/queue-stdio-lines.ts</code> and <code>examples/README.md</code> on how to run.</p>
-				<pre><code class="lang-typescript"><span class="hljs-keyword">import</span> { IAsyncQueue, AsyncQueue } <span class="hljs-keyword">from</span> <span class="hljs-string">'../queue/index'</span>;
+				<pre><code class="language-typescript"><span class="hljs-keyword">import</span> { IAsyncQueue, AsyncQueue } <span class="hljs-keyword">from</span> <span class="hljs-string">'../queue/index'</span>;
 
 <span class="hljs-keyword">const</span> readline = <span class="hljs-built_in">require</span>(<span class="hljs-string">'readline'</span>);
 
@@ -157,8 +153,7 @@ IO.on(<span class="hljs-string">'data'</span>, <span class="hljs-function">(<spa
         }
         <span class="hljs-built_in">console</span>.log(line);
     }
-})();
-</code></pre>
+})();</code></pre>
 				<h2 id="documentation">Documentation</h2>
 				<ul>
 					<li>Live on <a href="https://comfreek.github.io/async-playground">https://comfreek.github.io/async-playground</a>.</li>

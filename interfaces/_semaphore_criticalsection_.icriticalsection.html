@@ -82,8 +82,7 @@
 							<pre><code><span class="hljs-keyword">await</span> criticalSection.<span class="hljs-keyword">do</span>(() =&gt; {
   <span class="hljs-comment">// We acquired the (internal) lock</span>
   <span class="hljs-comment">// Do something exclusively</span>
-});
-</code></pre></dd>
+});</code></pre></dd>
 						<dt>example</dt>
 						<dd><p>Exceptions in a synchronous exclusive function:</p>
 							<pre><code><span class="hljs-keyword">try</span> {
@@ -95,8 +94,7 @@
 <span class="hljs-keyword">catch</span> (err) {
   <span class="hljs-comment">// Here we will receive the error</span>
   <span class="hljs-built_in">console</span>.log(err);
-}
-</code></pre></dd>
+}</code></pre></dd>
 						<dt>example</dt>
 						<dd><p>Rejections in an asynchronous exclusive function:</p>
 							<pre><code><span class="hljs-keyword">try</span> {
@@ -111,8 +109,7 @@
 <span class="hljs-keyword">catch</span> (err) {
   <span class="hljs-comment">// Here we will receive the error</span>
   console.log(err);
-}
-</code></pre></dd>
+}</code></pre></dd>
 					</dl>
 				</div>
 			</section>
@@ -155,7 +152,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/ComFreek/async-playground/blob/82d864d/semaphore/CriticalSection.ts#L69">semaphore/CriticalSection.ts:69</a></li>
+									<li>Defined in <a href="https://github.com/ComFreek/async-playground/blob/5a9c727/semaphore/CriticalSection.ts#L69">semaphore/CriticalSection.ts:69</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
