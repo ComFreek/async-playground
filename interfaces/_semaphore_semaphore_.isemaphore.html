@@ -139,7 +139,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/ComFreek/async-playground/blob/daf988e/semaphore/Semaphore.ts#L83">semaphore/Semaphore.ts:83</a></li>
+									<li>Defined in <a href="https://github.com/ComFreek/async-playground/blob/a75b53b/semaphore/Semaphore.ts#L83">semaphore/Semaphore.ts:83</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -164,7 +164,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/ComFreek/async-playground/blob/daf988e/semaphore/Semaphore.ts#L32">semaphore/Semaphore.ts:32</a></li>
+									<li>Defined in <a href="https://github.com/ComFreek/async-playground/blob/a75b53b/semaphore/Semaphore.ts#L32">semaphore/Semaphore.ts:32</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -190,7 +190,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/ComFreek/async-playground/blob/daf988e/semaphore/Semaphore.ts#L40">semaphore/Semaphore.ts:40</a></li>
+									<li>Defined in <a href="https://github.com/ComFreek/async-playground/blob/a75b53b/semaphore/Semaphore.ts#L40">semaphore/Semaphore.ts:40</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -214,7 +214,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/ComFreek/async-playground/blob/daf988e/semaphore/Semaphore.ts#L74">semaphore/Semaphore.ts:74</a></li>
+									<li>Defined in <a href="https://github.com/ComFreek/async-playground/blob/a75b53b/semaphore/Semaphore.ts#L74">semaphore/Semaphore.ts:74</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -225,10 +225,10 @@
 									<dt>example</dt>
 									<dd><p>Contrary to <a href="_semaphore_semaphore_.isemaphore.html#trytake">tryTake</a>, you have to await the promise returned
 										by this method.</p>
-										<pre><code>tryTakeWithin(<span class="hljs-number">500</span>).then(<span class="hljs-function">(<span class="hljs-params">hasTaken</span>) =&gt;</span> ...);
+										<pre><code><span class="hljs-keyword">try</span><span class="hljs-constructor">TakeWithin(500)</span>.<span class="hljs-keyword">then</span>((hasTaken) =&gt; ...);
 
 <span class="hljs-comment">// inside an async function</span>
-<span class="hljs-keyword">const</span> hasTaken = <span class="hljs-keyword">await</span> tryTakeWithin(<span class="hljs-number">500</span>);</code></pre></dd>
+const hasTaken = await <span class="hljs-keyword">try</span><span class="hljs-constructor">TakeWithin(500)</span>;</code></pre></dd>
 									<dt>example</dt>
 									<dd><p>Instead of simply waiting with <a href="_semaphore_semaphore_.isemaphore.html#take">take</a>, you can also use
 											this method to regularly give up some computation time, so that other
