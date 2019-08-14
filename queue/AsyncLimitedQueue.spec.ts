@@ -112,10 +112,9 @@ describe('AsyncLimitedQueue', () => {
 		}
 
 		expect(queue.offer(LIMIT + 1)).to.be.false;
-
 		await expectInstantly(
 			expect(dequeueMany(queue, LIMIT)).to.eventually.deep.equal([...range(0, LIMIT)])
-		, 500);
+		);
 
 		await expectNever(queue.dequeue());
 	});
