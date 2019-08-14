@@ -99,7 +99,7 @@
 					<div class="tsd-signature tsd-kind-icon">TIME_<wbr>STEP<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">50</span><span class="tsd-signature-symbol"> =&nbsp;50</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/ComFreek/async-playground/blob/8cbac61/timing.common-spec.ts#L7">timing.common-spec.ts:7</a></li>
+							<li>Defined in <a href="https://github.com/ComFreek/async-playground/blob/985129d/timing.common-spec.ts#L7">timing.common-spec.ts:7</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -109,7 +109,7 @@
 					<div class="tsd-signature tsd-kind-icon">expect<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">ExpectStatic</span><span class="tsd-signature-symbol"> =&nbsp;chai.expect</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/ComFreek/async-playground/blob/8cbac61/timing.common-spec.ts#L5">timing.common-spec.ts:5</a></li>
+							<li>Defined in <a href="https://github.com/ComFreek/async-playground/blob/985129d/timing.common-spec.ts#L5">timing.common-spec.ts:5</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -126,7 +126,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/ComFreek/async-playground/blob/8cbac61/timing.common-spec.ts#L161">timing.common-spec.ts:161</a></li>
+									<li>Defined in <a href="https://github.com/ComFreek/async-playground/blob/985129d/timing.common-spec.ts#L179">timing.common-spec.ts:179</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -147,11 +147,11 @@
 								</li>
 							</ul>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span></h4>
-							<p>A void promise which is</p>
-							<pre><code>      - resolved iff. the given promise <span class="hljs-keyword">is</span> resolved <span class="hljs-keyword">within</span> the <span class="hljs-type">time</span> frame
-        `[<span class="hljs-number">0</span>, upperBuffer]`.
-      - rejected <span class="hljs-keyword">in</span> <span class="hljs-keyword">all</span> other cases. The rejection occurs <span class="hljs-keyword">no</span> later than
-        `upperBuffer`.</code></pre>
+							<p>A void promise which is
+								- resolved iff. the given promise is resolved within the time frame
+								<code>[0, upperBuffer]</code>.
+								- rejected in all other cases. The rejection occurs no later than
+							<code>upperBuffer</code>.</p>
 						</li>
 					</ul>
 				</section>
@@ -165,7 +165,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/ComFreek/async-playground/blob/8cbac61/timing.common-spec.ts#L144">timing.common-spec.ts:144</a></li>
+									<li>Defined in <a href="https://github.com/ComFreek/async-playground/blob/985129d/timing.common-spec.ts#L162">timing.common-spec.ts:162</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -186,12 +186,12 @@
 								</li>
 							</ul>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span></h4>
-							<p>A void promise which is</p>
-							<pre><code>      - resolved <span class="hljs-keyword">after</span> `timeoutMillis` ms iff. <span class="hljs-keyword">the</span> given promise
-        was <span class="hljs-keyword">not</span> resolved during that <span class="hljs-built_in">time</span> period.
-      - rejected iff. <span class="hljs-keyword">the</span> given promise was resolved <span class="hljs-keyword">within</span>
-        `timeoutMillis` ms. In this <span class="hljs-keyword">case</span>, rejection occurs <span class="hljs-literal">right</span>
-        <span class="hljs-keyword">after</span> <span class="hljs-keyword">the</span> given promise is resolved.</code></pre>
+							<p>A void promise which is
+								- resolved after <code>timeoutMillis</code> ms iff. the given promise
+								was not resolved during that time period.
+								- rejected iff. the given promise was resolved within
+								<code>timeoutMillis</code> ms. In this case, rejection occurs right
+							after the given promise is resolved.</p>
 						</li>
 					</ul>
 				</section>
@@ -205,7 +205,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/ComFreek/async-playground/blob/8cbac61/timing.common-spec.ts#L126">timing.common-spec.ts:126</a></li>
+									<li>Defined in <a href="https://github.com/ComFreek/async-playground/blob/985129d/timing.common-spec.ts#L144">timing.common-spec.ts:144</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -235,13 +235,13 @@
 								</li>
 							</ul>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span></h4>
-							<p>A void promise which is</p>
-							<pre><code>       - resolved iff. <span class="hljs-keyword">the</span> given promise is resolved <span class="hljs-keyword">in</span> <span class="hljs-keyword">the</span> <span class="hljs-built_in">time</span> frame
-         explained above. In this <span class="hljs-keyword">case</span>, <span class="hljs-keyword">the</span> fulfillment occurs <span class="hljs-literal">right</span>
-         <span class="hljs-keyword">after</span> <span class="hljs-keyword">the</span> given promise is resolved.
-       - rejected iff. <span class="hljs-keyword">the</span> given promise is <span class="hljs-keyword">not</span> resolved <span class="hljs-keyword">in</span> <span class="hljs-keyword">the</span> <span class="hljs-built_in">time</span>
-         frame. In this <span class="hljs-keyword">case</span>, <span class="hljs-keyword">the</span> rejection occurs <span class="hljs-keyword">after</span>
-         `(millis + upperBuffer)` ms.</code></pre>
+							<p>A void promise which is
+								- resolved iff. the given promise is resolved in the time frame
+								explained above. In this case, the fulfillment occurs right
+								after the given promise is resolved.
+								- rejected iff. the given promise is not resolved in the time
+								frame. In this case, the rejection occurs after
+							<code>(millis + upperBuffer)</code> ms.</p>
 						</li>
 					</ul>
 				</section>
@@ -255,7 +255,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/ComFreek/async-playground/blob/8cbac61/timing.common-spec.ts#L52">timing.common-spec.ts:52</a></li>
+									<li>Defined in <a href="https://github.com/ComFreek/async-playground/blob/985129d/timing.common-spec.ts#L65">timing.common-spec.ts:65</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -302,14 +302,26 @@
 								</li>
 							</ul>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span></h4>
-							<p>A void promise, which is</p>
-							<pre><code>      - fulfilled iff. <span class="hljs-keyword">the</span> given promise resolved <span class="hljs-keyword">in</span> <span class="hljs-keyword">the</span> <span class="hljs-built_in">time</span> frame.
-        In this <span class="hljs-keyword">case</span>, <span class="hljs-keyword">the</span> fulfillment occurs <span class="hljs-literal">right</span> <span class="hljs-keyword">after</span> <span class="hljs-keyword">the</span> given
-        promise is resolved.
-      - rejected iff. <span class="hljs-keyword">the</span> given promise did <span class="hljs-keyword">not</span> <span class="hljs-built_in">resolve</span> <span class="hljs-keyword">in</span> <span class="hljs-keyword">the</span> <span class="hljs-built_in">time</span>
-        frame. In this <span class="hljs-keyword">case</span>, <span class="hljs-keyword">the</span> rejection occurs either <span class="hljs-literal">right</span> <span class="hljs-keyword">after</span>
-        <span class="hljs-keyword">the</span> given promise is resolved <span class="hljs-keyword">before</span> <span class="hljs-keyword">the</span> `minMillis` timeout
-        <span class="hljs-keyword">or</span> <span class="hljs-literal">right</span> <span class="hljs-keyword">after</span> <span class="hljs-keyword">the</span> `maxMillis` timeout.</code></pre>
+							<p>A void promise, which is
+								- fulfilled iff. the given promise resolved in the time frame.
+								In this case, the fulfillment occurs right after the given
+								promise is resolved.
+							- rejected iff. one of the conditions below are fulfilled</p>
+							<pre><code>        - <span class="hljs-keyword">the</span> given promise did <span class="hljs-keyword">not</span> <span class="hljs-built_in">resolve</span> inside <span class="hljs-keyword">the</span> specified
+          <span class="hljs-built_in">time</span> framein <span class="hljs-keyword">the</span> <span class="hljs-built_in">time</span>. That means, <span class="hljs-keyword">it</span> either resolved
+          <span class="hljs-keyword">before</span> `minMillis`, <span class="hljs-keyword">after</span> `maxMillis` <span class="hljs-keyword">or</span> <span class="hljs-keyword">not</span> <span class="hljs-keyword">at</span> all <span class="hljs-keyword">before</span>
+          `maxMillis`.
+
+          If <span class="hljs-keyword">the</span> promise resolved <span class="hljs-keyword">before</span> `minMillis`, <span class="hljs-keyword">the</span> overall
+          returned promise <span class="hljs-keyword">of</span> `expectTimelyWithin` is rejected <span class="hljs-literal">right</span>
+          <span class="hljs-keyword">after</span> that.
+          If <span class="hljs-keyword">the</span> promise resolved <span class="hljs-keyword">after</span> `maxMillis` <span class="hljs-keyword">or</span> <span class="hljs-keyword">not</span> <span class="hljs-keyword">at</span> all
+          <span class="hljs-keyword">before</span> `maxMillis`, <span class="hljs-keyword">the</span> overall returned promise <span class="hljs-keyword">of</span>
+          `expectTimelyWithin` is rejected <span class="hljs-literal">right</span> <span class="hljs-keyword">after</span> <span class="hljs-keyword">the</span> `maxMillis`
+          timeout.
+
+        - <span class="hljs-keyword">the</span> given promise supports `.<span class="hljs-keyword">catch</span>` handlers <span class="hljs-keyword">and</span> was
+          rejected (does <span class="hljs-keyword">not</span> matter when)</code></pre>
 						</li>
 					</ul>
 				</section>
@@ -323,7 +335,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/ComFreek/async-playground/blob/8cbac61/timing.common-spec.ts#L13">timing.common-spec.ts:13</a></li>
+									<li>Defined in <a href="https://github.com/ComFreek/async-playground/blob/985129d/timing.common-spec.ts#L13">timing.common-spec.ts:13</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -343,13 +355,13 @@
 					<a name="wait" class="tsd-anchor"></a>
 					<h3>wait</h3>
 					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-external-module tsd-is-external">
-						<li class="tsd-signature tsd-kind-icon">wait<span class="tsd-signature-symbol">(</span>timeout<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">Object</span><span class="tsd-signature-symbol">&gt;</span></li>
+						<li class="tsd-signature tsd-kind-icon">wait<span class="tsd-signature-symbol">(</span>timeout<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">unknown</span><span class="tsd-signature-symbol">&gt;</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/ComFreek/async-playground/blob/8cbac61/timing.common-spec.ts#L9">timing.common-spec.ts:9</a></li>
+									<li>Defined in <a href="https://github.com/ComFreek/async-playground/blob/985129d/timing.common-spec.ts#L9">timing.common-spec.ts:9</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -358,7 +370,7 @@
 									<h5>timeout: <span class="tsd-signature-type">number</span></h5>
 								</li>
 							</ul>
-							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">Object</span><span class="tsd-signature-symbol">&gt;</span></h4>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">unknown</span><span class="tsd-signature-symbol">&gt;</span></h4>
 						</li>
 					</ul>
 				</section>
@@ -457,6 +469,7 @@
 				<li class="tsd-kind-function tsd-has-type-parameter"><span class="tsd-kind-icon">Function with type parameter</span></li>
 				<li class="tsd-kind-index-signature"><span class="tsd-kind-icon">Index signature</span></li>
 				<li class="tsd-kind-type-alias"><span class="tsd-kind-icon">Type alias</span></li>
+				<li class="tsd-kind-type-alias tsd-has-type-parameter"><span class="tsd-kind-icon">Type alias with type parameter</span></li>
 			</ul>
 			<ul class="tsd-legend">
 				<li class="tsd-kind-enum"><span class="tsd-kind-icon">Enumeration</span></li>
@@ -505,7 +518,7 @@
 	</div>
 </footer>
 <div class="container tsd-generator">
-	<p>Generated using <a href="http://typedoc.org/" target="_blank">TypeDoc</a></p>
+	<p>Generated using <a href="https://typedoc.org/" target="_blank">TypeDoc</a></p>
 </div>
 <div class="overlay"></div>
 <script src="../assets/js/main.js"></script>
