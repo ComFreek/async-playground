@@ -44,10 +44,23 @@ export async function promiseFasterThan(promise: Promise<any>, timeout: number) 
   *           - fulfilled iff. the given promise resolved in the time frame.
   *             In this case, the fulfillment occurs right after the given
   *             promise is resolved.
-  *           - rejected iff. the given promise did not resolve in the time
-  *             frame. In this case, the rejection occurs either right after
-  *             the given promise is resolved before the `minMillis` timeout
-  *             or right after the `maxMillis` timeout.
+  *           - rejected iff. one of the conditions below are fulfilled
+  *
+  *             - the given promise did not resolve inside the specified
+  *               time framein the time. That means, it either resolved
+  *               before `minMillis`, after `maxMillis` or not at all before
+  *               `maxMillis`.
+  *
+  *               If the promise resolved before `minMillis`, the overall
+  *               returned promise of `expectTimelyWithin` is rejected right
+  *               after that.
+  *               If the promise resolved after `maxMillis` or not at all
+  *               before `maxMillis`, the overall returned promise of
+  *               `expectTimelyWithin` is rejected right after the `maxMillis`
+  *               timeout.
+  *
+  *             - the given promise supports `.catch` handlers and was
+  *               rejected (does not matter when)
   */
  export async function expectTimelyWithin(promise: PromiseLike<any>, minMillis: number, maxMillis: number): Promise<void> {
 	const expectTimelyCallTimestamp = Date.now();
@@ -81,6 +94,7 @@ export async function promiseFasterThan(promise: Promise<any>, timeout: number) 
 				}
 			}).catch(reject);
 		}
+
 		promise.then(() => {
 			promiseResolved = true;
 			if (!minOccurred) {
@@ -92,6 +106,10 @@ export async function promiseFasterThan(promise: Promise<any>, timeout: number) 
 				resolve();
 			}
 		});
+		if ((promise as Promise<any>).catch) {
+			(promise as Promise<any>).catch(reject);
+		}
+
 		wait(maxMillis).then(() => {
 			maxOccurred = true;
 			if (!promiseResolved) {
