@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>CriticalSection | comfreek-async-playground</title>
+	<title>CriticalSection | comfreek-async-playground - v0.0.1</title>
 	<meta name="description" content="">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="../assets/css/main.css">
@@ -22,7 +22,7 @@
 						<li class="state loading">Preparing search index...</li>
 						<li class="state failure">The search index is not available</li>
 					</ul>
-					<a href="../index.html" class="title">comfreek-async-playground</a>
+					<a href="../index.html" class="title">comfreek-async-playground - v0.0.1</a>
 				</div>
 				<div class="table-cell" id="tsd-widgets">
 					<div id="tsd-filter">
@@ -112,7 +112,7 @@
 					<div class="tsd-signature tsd-kind-icon">lock<span class="tsd-signature-symbol">:</span> <a href="../interfaces/_semaphore_semaphore_.isemaphore.html" class="tsd-signature-type">ISemaphore</a><span class="tsd-signature-symbol"> =&nbsp;new Semaphore(1)</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/ComFreek/async-playground/blob/155793b/semaphore/CriticalSection.ts#L73">semaphore/CriticalSection.ts:73</a></li>
+							<li>Defined in <a href="https://github.com/ComFreek/async-playground/blob/8bfecdf/semaphore/CriticalSection.ts#L73">semaphore/CriticalSection.ts:73</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -122,7 +122,7 @@
 					<div class="tsd-signature tsd-kind-icon">object<wbr>Accessor<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">symbol</span><span class="tsd-signature-symbol"> =&nbsp;Symbol(&#x27;CriticalSection associated with the object&#x27;)</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/ComFreek/async-playground/blob/155793b/semaphore/CriticalSection.ts#L75">semaphore/CriticalSection.ts:75</a></li>
+							<li>Defined in <a href="https://github.com/ComFreek/async-playground/blob/8bfecdf/semaphore/CriticalSection.ts#L75">semaphore/CriticalSection.ts:75</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -139,7 +139,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/ComFreek/async-playground/blob/155793b/semaphore/CriticalSection.ts#L77">semaphore/CriticalSection.ts:77</a></li>
+									<li>Defined in <a href="https://github.com/ComFreek/async-playground/blob/8bfecdf/semaphore/CriticalSection.ts#L77">semaphore/CriticalSection.ts:77</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-type-parameters-title">Type parameters</h4>
@@ -154,7 +154,7 @@
 									<h5>func: <span class="tsd-signature-type">function</span></h5>
 									<ul class="tsd-parameters">
 										<li class="tsd-parameter-siganture">
-											<ul class="tsd-signatures tsd-kind-type-literal tsd-is-not-exported">
+											<ul class="tsd-signatures tsd-kind-type-literal">
 												<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">&gt;</span></li>
 											</ul>
 											<ul class="tsd-descriptions">
@@ -183,7 +183,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/ComFreek/async-playground/blob/155793b/semaphore/CriticalSection.ts#L158">semaphore/CriticalSection.ts:158</a></li>
+									<li>Defined in <a href="https://github.com/ComFreek/async-playground/blob/8bfecdf/semaphore/CriticalSection.ts#L158">semaphore/CriticalSection.ts:158</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -198,14 +198,14 @@
 									<dd><p>Multiple calls on the same object return the same
 										<a href="_semaphore_criticalsection_.criticalsection.html">CriticalSection</a>:</p>
 										<pre><code><span class="hljs-comment">// The object can also be a function</span>
-<span class="hljs-keyword">const</span> myObj = <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">()</span> </span>{
+<span class="hljs-keyword">const</span> myObj = <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>{
   <span class="hljs-comment">// ...</span>
 };
-<span class="hljs-keyword">const</span> firstSection = CriticalSection.<span class="hljs-keyword">for</span>(myObj);
-<span class="hljs-keyword">const</span> secondSection = CriticalSection.<span class="hljs-keyword">for</span>(myObj);
+<span class="hljs-keyword">const</span> firstSection = CriticalSection.for(myObj);
+<span class="hljs-keyword">const</span> secondSection = CriticalSection.for(myObj);
 
 <span class="hljs-comment">// true</span>
-console.log(firstSection === secondSection);</code></pre></dd>
+<span class="hljs-built_in">console</span>.log(firstSection === secondSection);</code></pre></dd>
 									<dt>example</dt>
 									<dd><p>No inheritance with respect to the prototype chain:</p>
 										<pre><code><span class="hljs-keyword">const</span> myPrototype = <span class="hljs-comment">{}</span>;
@@ -221,15 +221,15 @@ console.log(CriticalSection.<span class="hljs-keyword">for</span>(<span class="h
 										distinct objects by this method.</p>
 										<pre><code><span class="hljs-keyword">const</span> iframe = document.createElement(<span class="hljs-string">'iframe'</span>);
 document.body.appendChild(iframe);
-<span class="hljs-keyword">const</span> xArray = window.frames[window.frames.length<span class="hljs-number">-1</span>].Array;
+<span class="hljs-keyword">const</span> xArray = window.frames[window.frames.length-<span class="hljs-number">1</span>].<span class="hljs-keyword">Array</span>;
 
 <span class="hljs-keyword">const</span> iframeArr = new xArray(<span class="hljs-number">1</span>,<span class="hljs-number">2</span>,<span class="hljs-number">3</span>);
 <span class="hljs-keyword">const</span> thisSiteArr = [<span class="hljs-number">4</span>, <span class="hljs-number">5</span>, <span class="hljs-number">6</span>];
 
 <span class="hljs-comment">// true in both cases</span>
-console.log(iframeArr.constructor !== thisSiteArr.constructor);
-console.log(CriticalSection.<span class="hljs-keyword">for</span>(iframeArr.constructor) !==
-            CriticalSection.<span class="hljs-keyword">for</span>(thisSiteArr.constructor));</code></pre></dd>
+console.log(iframeArr<span class="hljs-function">.<span class="hljs-keyword">constructor</span> !== <span class="hljs-title">thisSiteArr</span>.<span class="hljs-title">constructor</span>);</span>
+console.log(CriticalSection.<span class="hljs-keyword">for</span>(iframeArr<span class="hljs-function">.<span class="hljs-keyword">constructor</span>) !==
+            <span class="hljs-title">CriticalSection</span>.<span class="hljs-title">for</span><span class="hljs-params">(thisSiteArr.<span class="hljs-keyword">constructor</span>)</span>);</span></code></pre></dd>
 									<dt>throws</dt>
 									<dd><p>A {@link TypeError} is raised when <code>object</code> is a <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures">primitive value</a>.</p>
 									</dd>
@@ -277,43 +277,43 @@ console.log(CriticalSection.<span class="hljs-keyword">for</span>(iframeArr.cons
 						<span>Internals</span>
 					</li>
 					<li class=" tsd-kind-external-module">
-						<a href="../modules/_queue_asynclimitedqueue_.html">"queue/<wbr>Async<wbr>Limited<wbr>Queue"</a>
+						<a href="../modules/_queue_asynclimitedqueue_.html">&quot;queue/<wbr>Async<wbr>Limited<wbr>Queue&quot;</a>
 					</li>
 					<li class=" tsd-kind-external-module">
-						<a href="../modules/_queue_asynclimitedqueue_spec_.html">"queue/<wbr>Async<wbr>Limited<wbr>Queue.spec"</a>
+						<a href="../modules/_queue_asynclimitedqueue_spec_.html">&quot;queue/<wbr>Async<wbr>Limited<wbr>Queue.spec&quot;</a>
 					</li>
 					<li class=" tsd-kind-external-module">
-						<a href="../modules/_queue_asyncqueue_.html">"queue/<wbr>Async<wbr>Queue"</a>
+						<a href="../modules/_queue_asyncqueue_.html">&quot;queue/<wbr>Async<wbr>Queue&quot;</a>
 					</li>
 					<li class=" tsd-kind-external-module">
-						<a href="../modules/_queue_asyncqueue_spec_.html">"queue/<wbr>Async<wbr>Queue.spec"</a>
+						<a href="../modules/_queue_asyncqueue_spec_.html">&quot;queue/<wbr>Async<wbr>Queue.spec&quot;</a>
 					</li>
 					<li class=" tsd-kind-external-module">
-						<a href="../modules/_queue_queue_common_spec_.html">"queue/<wbr>Queue.common-<wbr>spec"</a>
+						<a href="../modules/_queue_queue_common_spec_.html">&quot;queue/<wbr>Queue.common-<wbr>spec&quot;</a>
 					</li>
 					<li class=" tsd-kind-external-module">
-						<a href="../modules/_queue_index_.html">"queue/index"</a>
+						<a href="../modules/_queue_index_.html">&quot;queue/index&quot;</a>
 					</li>
 					<li class="current tsd-kind-external-module">
-						<a href="../modules/_semaphore_criticalsection_.html">"semaphore/<wbr>Critical<wbr>Section"</a>
+						<a href="../modules/_semaphore_criticalsection_.html">&quot;semaphore/<wbr>Critical<wbr>Section&quot;</a>
 					</li>
 					<li class=" tsd-kind-external-module">
-						<a href="../modules/_semaphore_criticalsection_spec_.html">"semaphore/<wbr>Critical<wbr>Section.spec"</a>
+						<a href="../modules/_semaphore_criticalsection_spec_.html">&quot;semaphore/<wbr>Critical<wbr>Section.spec&quot;</a>
 					</li>
 					<li class=" tsd-kind-external-module">
-						<a href="../modules/_semaphore_semaphore_.html">"semaphore/<wbr>Semaphore"</a>
+						<a href="../modules/_semaphore_semaphore_.html">&quot;semaphore/<wbr>Semaphore&quot;</a>
 					</li>
 					<li class=" tsd-kind-external-module">
-						<a href="../modules/_semaphore_semaphore_spec_.html">"semaphore/<wbr>Semaphore.spec"</a>
+						<a href="../modules/_semaphore_semaphore_spec_.html">&quot;semaphore/<wbr>Semaphore.spec&quot;</a>
 					</li>
 					<li class=" tsd-kind-external-module">
-						<a href="../modules/_semaphore_index_.html">"semaphore/index"</a>
+						<a href="../modules/_semaphore_index_.html">&quot;semaphore/index&quot;</a>
 					</li>
 					<li class="label tsd-is-external">
 						<span>Externals</span>
 					</li>
 					<li class=" tsd-kind-external-module tsd-is-external">
-						<a href="../modules/_timing_common_spec_.html">"timing.common-<wbr>spec"</a>
+						<a href="../modules/_timing_common_spec_.html">&quot;timing.common-<wbr>spec&quot;</a>
 					</li>
 				</ul>
 			</nav>
