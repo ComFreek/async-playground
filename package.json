@@ -31,6 +31,9 @@
     "all": true,
     "cache": false
   },
+  "renovate": {
+    "extend": ["config:base"]
+  },
   "dependencies": {},
   "devDependencies": {
     "@types/chai": "^4.2.2",
