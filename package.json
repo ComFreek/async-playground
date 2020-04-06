@@ -32,7 +32,7 @@
     "cache": false
   },
   "renovate": {
-    "extend": ["config:base"]
+    "extends": ["config:base"]
   },
   "dependencies": {},
   "devDependencies": {
