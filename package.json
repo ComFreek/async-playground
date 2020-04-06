@@ -36,19 +36,19 @@
   },
   "dependencies": {},
   "devDependencies": {
-    "@types/chai": "^4.2.2",
-    "@types/chai-as-promised": "^7.1.2",
-    "@types/lodash": "^4.14.136",
-    "@types/mocha": "^7.0.0",
-    "@types/node": "^13.1.0",
-    "chai": "^4.2.0",
-    "chai-as-promised": "^7.1.1",
-    "coveralls": "^3.0.6",
-    "mocha": "^7.0.1",
-    "nyc": "^15.0.0",
-    "source-map-support": "^0.5.13",
-    "ts-node": "^8.3.0",
-    "typedoc": "^0.17.0",
-    "typescript": "^3.5.3"
+    "@types/chai": "4.2.2",
+    "@types/chai-as-promised": "7.1.2",
+    "@types/lodash": "4.14.136",
+    "@types/mocha": "7.0.0",
+    "@types/node": "13.1.0",
+    "chai": "4.2.0",
+    "chai-as-promised": "7.1.1",
+    "coveralls": "3.0.6",
+    "mocha": "7.0.1",
+    "nyc": "15.0.0",
+    "source-map-support": "0.5.13",
+    "ts-node": "8.3.0",
+    "typedoc": "0.17.0",
+    "typescript": "3.5.3"
   }
 }
