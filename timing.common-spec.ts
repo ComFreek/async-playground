@@ -103,10 +103,10 @@ export async function promiseFasterThan(promise: Promise<any>, timeout: number) 
  (measured after the call to expectTimelyWithin).`);
 			}
 			else if (!maxOccurred) {
-				resolve();
+				resolve(true);
 			}
-		});
-		if ((promise as Promise<any>).catch) {
+		})
+		if ('catch' in promise) {
 			(promise as Promise<any>).catch(reject);
 		}
 
