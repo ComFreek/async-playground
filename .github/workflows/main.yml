@@ -18,14 +18,17 @@ jobs:
         uses: bahmutov/npm-install@v1.6.0
       - name: Run tests
         run: npm test
-      - name: Generate HTML coverage reports
-        run: npm run coverage
       - name: Generate and publish coveralls coverage reports
         run: npm run coveralls
         env:
           COVERALLS_REPO_TOKEN: ${{ secrets.COVERALLS_REPO_TOKEN }}
+
       - name: Create deployment folder
         run: mkdir ./deploy && touch ./.nojekyll
+      - name: Generate HTML coverage reports
+        run: npm run coverage
+      - name: debug
+        run: ls -ar
       - name: Copy HTML coverage reports to deployment folder
         run: cp -a ./coverage ./deploy
       - name: Build documentation
