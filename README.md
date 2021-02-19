@@ -1,6 +1,6 @@
 # ComFreek's async generator/Promises playground
 
-[![Build Status](https://img.shields.io/travis/ComFreek/async-playground.svg)](https://travis-ci.org/ComFreek/async-playground)
+[![CI](https://github.com/ComFreek/async-playground/actions/workflows/main.yml/badge.svg)](https://github.com/ComFreek/async-playground/actions/workflows/main.yml)
 [![Coverage Status](https://img.shields.io/coveralls/ComFreek/async-playground.svg)](https://coveralls.io/github/ComFreek/async-playground?branch=master)
 
 &nbsp; &nbsp; [GitHub Repo](https://github.com/ComFreek/async-playground) | [Documentation](https://comfreek.github.io/async-playground) | [Coverage results](https://comfreek.github.io/async-playground/coverage)
@@ -107,14 +107,16 @@ async function* readInput() {
 
 ## Documentation
 
-- Live on https://comfreek.github.io/async-playground.
-- Built by `npm run build-docs` and automatically pushed to the `gh-pages` branch by Travis CI, see `.travis.yml`.
+Live on <https://comfreek.github.io/async-playground> and built by `npm run build-docs`.
 
-## Tests
+## Tests & Coverage
 
-- Run by `npm test` and automatically performed by Travis CI, see `.travis.yml`.
+- Run tests by `npm test`.
+- Coverage live on <https://comfreek.github.io/async-playground/coverage> and built by `npm coverage`.
 - If you would like test scripts on your own, do note that a recent version of Node.js is required and it must be run with the `--harmony` flag: `node --harmony your-script.js`. The flag must also appear before the script name.
 
-## Contributions & licensing
+See also our GitHub actions [workflow `./github/workflows/main.yml`](.github/workflows/main.yml) which runs the tests, generates coverage reports, and publishes the documentation upon every commit to `master`.
+
+## Contributions & Licensing
 
 Ideas and code contributions are welcome! Feel free to copy and redistribute code under the terms of the ISC license, see `LICENSE`.
