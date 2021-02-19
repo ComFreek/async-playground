@@ -32,9 +32,10 @@
     "cache": false
   },
   "renovate": {
-    "extends": ["config:base"]
+    "extends": [
+      "config:base"
+    ]
   },
-  "dependencies": {},
   "devDependencies": {
     "@types/chai": "4.2.15",
     "@types/chai-as-promised": "7.1.3",
