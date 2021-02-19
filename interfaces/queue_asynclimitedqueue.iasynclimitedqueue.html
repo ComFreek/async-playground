@@ -3,17 +3,18 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>IAsyncLimitedQueue | comfreek-async-playground - v0.0.1</title>
-	<meta name="description" content="">
+	<title>IAsyncLimitedQueue | comfreek-async-playground</title>
+	<meta name="description" content="Documentation for comfreek-async-playground">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="../assets/css/main.css">
+	<script async src="../assets/js/search.js" id="search-script"></script>
 </head>
 <body>
 <header>
 	<div class="tsd-page-toolbar">
 		<div class="container">
 			<div class="table-wrap">
-				<div class="table-cell" id="tsd-search" data-index="../assets/js/search.js" data-base="..">
+				<div class="table-cell" id="tsd-search" data-index="../assets/js/search.json" data-base="..">
 					<div class="field">
 						<label for="tsd-search-field" class="tsd-widget search no-caption">Search</label>
 						<input id="tsd-search-field" type="text" />
@@ -22,7 +23,7 @@
 						<li class="state loading">Preparing search index...</li>
 						<li class="state failure">The search index is not available</li>
 					</ul>
-					<a href="../index.html" class="title">comfreek-async-playground - v0.0.1</a>
+					<a href="../index.html" class="title">comfreek-async-playground</a>
 				</div>
 				<div class="table-cell" id="tsd-widgets">
 					<div id="tsd-filter">
@@ -40,8 +41,6 @@
 							<label class="tsd-widget" for="tsd-filter-inherited">Inherited</label>
 							<input type="checkbox" id="tsd-filter-externals" checked />
 							<label class="tsd-widget" for="tsd-filter-externals">Externals</label>
-							<input type="checkbox" id="tsd-filter-only-exported" />
-							<label class="tsd-widget" for="tsd-filter-only-exported">Only exported</label>
 						</div>
 					</div>
 					<a href="#" class="tsd-widget menu no-caption" data-toggle="menu">Menu</a>
@@ -53,13 +52,13 @@
 		<div class="container">
 			<ul class="tsd-breadcrumb">
 				<li>
-					<a href="../globals.html">Globals</a>
+					<a href="../modules.html">comfreek-async-playground</a>
 				</li>
 				<li>
-					<a href="../modules/_queue_asynclimitedqueue_.html">&quot;queue/AsyncLimitedQueue&quot;</a>
+					<a href="../modules/queue_asynclimitedqueue.html">queue/AsyncLimitedQueue</a>
 				</li>
 				<li>
-					<a href="_queue_asynclimitedqueue_.iasynclimitedqueue.html">IAsyncLimitedQueue</a>
+					<a href="queue_asynclimitedqueue.iasynclimitedqueue.html">IAsyncLimitedQueue</a>
 				</li>
 			</ul>
 			<h1>Interface IAsyncLimitedQueue&lt;T&gt;</h1>
@@ -74,34 +73,40 @@
 					<div class="lead">
 						<p>Asynchronous entrance-limited FIFO queue with a Promise-driven dequeue operation.</p>
 					</div>
-					<p>Contrary to <a href="_queue_asyncqueue_.iasyncqueue.html">IAsyncQueue</a>, the queue operation is Promise-driven as well,
+					<p>Contrary to <a href="queue_asyncqueue.iasyncqueue.html">IAsyncQueue</a>, the queue operation is Promise-driven as well,
 						e.g. implementations might delay entrance into the queue, e.g. to enforce a
 						limit on the number of elements stored in the queue at the same time, cf.
-						<a href="../classes/_queue_asynclimitedqueue_.asynclimitedqueue.html">AsyncLimitedQueue</a>.
+						<a href="../classes/queue_asynclimitedqueue.asynclimitedqueue.html">AsyncLimitedQueue</a>.
 						Other types of entrance limitations are conceivable as well, such as a
 					restriction on the sum of contained elements in case of a number queue.</p>
 					<p>All element values are allowed, especially falsy ones, e.g.
 						false, 0, undefined, null, [], {} are all valid elements which
 					can be queued and dequeued.</p>
-					<p><a href="_queue_asynclimitedqueue_.iasynclimitedqueue.html#queue">IAsyncLimitedQueue#queue</a> operations are possibly delayed and
+					<p><a href="queue_asynclimitedqueue.iasynclimitedqueue.html#queue">IAsyncLimitedQueue#queue</a> operations are possibly delayed and
 					executed in implementation-dependenent order.</p>
 					<dl class="tsd-comment-tags">
 						<dt>example</dt>
-						<dd><p>Issueing multiple <a href="_queue_asynclimitedqueue_.iasynclimitedqueue.html#queue">queue</a> operations without awaiting the
+						<dd><p>Issueing multiple <a href="queue_asynclimitedqueue.iasynclimitedqueue.html#queue">queue</a> operations without awaiting the
 							previous ones may result in implementation-defined insertion order.</p>
-							<pre><code><span class="hljs-built_in">queue</span>.<span class="hljs-built_in">queue</span>(<span class="hljs-number">1</span>);
-<span class="hljs-built_in">queue</span>.<span class="hljs-built_in">queue</span>(<span class="hljs-number">2</span>);
+							<pre><code><span style="color: #001080">queue</span><span style="color: #000000">.</span><span style="color: #795E26">queue</span><span style="color: #000000">(</span><span style="color: #098658">1</span><span style="color: #000000">);</span>
+<span style="color: #001080">queue</span><span style="color: #000000">.</span><span style="color: #795E26">queue</span><span style="color: #000000">(</span><span style="color: #098658">2</span><span style="color: #000000">);</span>
 
-await <span class="hljs-built_in">queue</span>.dequeue(); <span class="hljs-comment">// can be 1 or 2</span>
-await <span class="hljs-built_in">queue</span>.dequeue(); <span class="hljs-comment">// can be 1 or 2 as well (the remaining number)</span></code></pre></dd>
+<span style="color: #AF00DB">await</span><span style="color: #000000"> </span><span style="color: #001080">queue</span><span style="color: #000000">.</span><span style="color: #795E26">dequeue</span><span style="color: #000000">(); </span><span style="color: #008000">// can be 1 or 2</span>
+<span style="color: #AF00DB">await</span><span style="color: #000000"> </span><span style="color: #001080">queue</span><span style="color: #000000">.</span><span style="color: #795E26">dequeue</span><span style="color: #000000">(); </span><span style="color: #008000">// can be 1 or 2 as well (the remaining number)</span>
+</code></pre>
+						</dd>
 						<dt>example</dt>
-						<dd><p>If you would like to retain the order, await the <a href="_queue_asynclimitedqueue_.iasynclimitedqueue.html#queue">queue</a>
-								operations, use <a href="_queue_asynclimitedqueue_.iasynclimitedqueue.html#queueall">IAsyncLimitedQueue#queueAll</a> or
-							<a href="_queue_asynclimitedqueue_.iasynclimitedqueue.html#queueallasync">IAsyncLimitedQueue#queueAllAsync</a>.</p>
-							<pre><code>await <span class="hljs-built_in">queue</span>.<span class="hljs-built_in">queue</span>(<span class="hljs-number">1</span>);
-await <span class="hljs-built_in">queue</span>.<span class="hljs-built_in">queue</span>(<span class="hljs-number">2</span>);</code></pre><pre><code>queue.queueAll([<span class="hljs-number">1</span>, <span class="hljs-number">2</span>]);</code></pre><p>The {@link AsyncIterable} interface iterates the queue&#39;s (future) contents
+						<dd><p>If you would like to retain the order, await the <a href="queue_asynclimitedqueue.iasynclimitedqueue.html#queue">queue</a>
+								operations, use <a href="queue_asynclimitedqueue.iasynclimitedqueue.html#queueall">IAsyncLimitedQueue#queueAll</a> or
+							<a href="queue_asynclimitedqueue.iasynclimitedqueue.html#queueallasync">IAsyncLimitedQueue#queueAllAsync</a>.</p>
+							<pre><code><span style="color: #AF00DB">await</span><span style="color: #000000"> </span><span style="color: #001080">queue</span><span style="color: #000000">.</span><span style="color: #795E26">queue</span><span style="color: #000000">(</span><span style="color: #098658">1</span><span style="color: #000000">);</span>
+<span style="color: #AF00DB">await</span><span style="color: #000000"> </span><span style="color: #001080">queue</span><span style="color: #000000">.</span><span style="color: #795E26">queue</span><span style="color: #000000">(</span><span style="color: #098658">2</span><span style="color: #000000">);</span>
+</code></pre>
+							<pre><code><span style="color: #001080">queue</span><span style="color: #000000">.</span><span style="color: #795E26">queueAll</span><span style="color: #000000">([</span><span style="color: #098658">1</span><span style="color: #000000">, </span><span style="color: #098658">2</span><span style="color: #000000">]);</span>
+</code></pre>
+							<p>The {@link AsyncIterable} interface iterates the queue&#39;s (future) contents
 								ad infinitum. Users are advised to signal the end by manual insertion of a
-							special value (a so-called poison pill), see <a href="_queue_asyncqueue_.iasyncqueue.html">IAsyncQueue</a>.</p>
+							special value (a so-called poison pill), see <a href="queue_asyncqueue.iasyncqueue.html">IAsyncQueue</a>.</p>
 						</dd>
 					</dl>
 				</div>
@@ -130,7 +135,7 @@ await <span class="hljs-built_in">queue</span>.<span class="hljs-built_in">queue
 			<section class="tsd-panel">
 				<h3>Implemented by</h3>
 				<ul class="tsd-hierarchy">
-					<li><a href="../classes/_queue_asynclimitedqueue_.asynclimitedqueue.html" class="tsd-signature-type">AsyncLimitedQueue</a></li>
+					<li><a href="../classes/queue_asynclimitedqueue.asynclimitedqueue.html" class="tsd-signature-type" data-tsd-kind="Class">AsyncLimitedQueue</a></li>
 				</ul>
 			</section>
 			<section class="tsd-panel-group tsd-index-group">
@@ -140,16 +145,16 @@ await <span class="hljs-built_in">queue</span>.<span class="hljs-built_in">queue
 						<section class="tsd-index-section ">
 							<h3>Methods</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-method tsd-parent-kind-interface tsd-is-inherited"><a href="_queue_asynclimitedqueue_.iasynclimitedqueue.html#_symbol_asynciterator_" class="tsd-kind-icon">[<wbr>Symbol.async<wbr>Iterator]</a></li>
-								<li class="tsd-kind-method tsd-parent-kind-interface"><a href="_queue_asynclimitedqueue_.iasynclimitedqueue.html#dequeue" class="tsd-kind-icon">dequeue</a></li>
-								<li class="tsd-kind-method tsd-parent-kind-interface"><a href="_queue_asynclimitedqueue_.iasynclimitedqueue.html#offer" class="tsd-kind-icon">offer</a></li>
-								<li class="tsd-kind-method tsd-parent-kind-interface"><a href="_queue_asynclimitedqueue_.iasynclimitedqueue.html#offerall" class="tsd-kind-icon">offer<wbr>All</a></li>
-								<li class="tsd-kind-method tsd-parent-kind-interface"><a href="_queue_asynclimitedqueue_.iasynclimitedqueue.html#offerallasync" class="tsd-kind-icon">offer<wbr>All<wbr>Async</a></li>
-								<li class="tsd-kind-method tsd-parent-kind-interface"><a href="_queue_asynclimitedqueue_.iasynclimitedqueue.html#poll" class="tsd-kind-icon">poll</a></li>
-								<li class="tsd-kind-method tsd-parent-kind-interface"><a href="_queue_asynclimitedqueue_.iasynclimitedqueue.html#queue" class="tsd-kind-icon">queue</a></li>
-								<li class="tsd-kind-method tsd-parent-kind-interface"><a href="_queue_asynclimitedqueue_.iasynclimitedqueue.html#queueall" class="tsd-kind-icon">queue<wbr>All</a></li>
-								<li class="tsd-kind-method tsd-parent-kind-interface"><a href="_queue_asynclimitedqueue_.iasynclimitedqueue.html#queueallasync" class="tsd-kind-icon">queue<wbr>All<wbr>Async</a></li>
-								<li class="tsd-kind-method tsd-parent-kind-interface"><a href="_queue_asynclimitedqueue_.iasynclimitedqueue.html#size" class="tsd-kind-icon">size</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-interface tsd-is-external"><a href="queue_asynclimitedqueue.iasynclimitedqueue.html#_symbol_asynciterator_" class="tsd-kind-icon">[<wbr>Symbol.async<wbr>Iterator]</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-interface"><a href="queue_asynclimitedqueue.iasynclimitedqueue.html#dequeue" class="tsd-kind-icon">dequeue</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-interface"><a href="queue_asynclimitedqueue.iasynclimitedqueue.html#offer" class="tsd-kind-icon">offer</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-interface"><a href="queue_asynclimitedqueue.iasynclimitedqueue.html#offerall" class="tsd-kind-icon">offer<wbr>All</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-interface"><a href="queue_asynclimitedqueue.iasynclimitedqueue.html#offerallasync" class="tsd-kind-icon">offer<wbr>All<wbr>Async</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-interface"><a href="queue_asynclimitedqueue.iasynclimitedqueue.html#poll" class="tsd-kind-icon">poll</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-interface"><a href="queue_asynclimitedqueue.iasynclimitedqueue.html#queue" class="tsd-kind-icon">queue</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-interface"><a href="queue_asynclimitedqueue.iasynclimitedqueue.html#queueall" class="tsd-kind-icon">queue<wbr>All</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-interface"><a href="queue_asynclimitedqueue.iasynclimitedqueue.html#queueallasync" class="tsd-kind-icon">queue<wbr>All<wbr>Async</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-interface"><a href="queue_asynclimitedqueue.iasynclimitedqueue.html#size" class="tsd-kind-icon">size</a></li>
 							</ul>
 						</section>
 					</div>
@@ -157,21 +162,20 @@ await <span class="hljs-built_in">queue</span>.<span class="hljs-built_in">queue
 			</section>
 			<section class="tsd-panel-group tsd-member-group ">
 				<h2>Methods</h2>
-				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-interface tsd-is-inherited">
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-interface tsd-is-external">
 					<a name="_symbol_asynciterator_" class="tsd-anchor"></a>
 					<h3>[<wbr>Symbol.async<wbr>Iterator]</h3>
-					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-interface tsd-is-inherited">
-						<li class="tsd-signature tsd-kind-icon">[<wbr>Symbol.async<wbr>Iterator]<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">AsyncIterator</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">&gt;</span></li>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-interface tsd-is-external">
+						<li class="tsd-signature tsd-kind-icon">[<wbr>Symbol.async<wbr>Iterator]<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">AsyncIterator</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol">&gt;</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
-								<p>Inherited from <a href="_queue_asyncqueue_.iasyncqueue.html">IAsyncQueue</a>.<a href="_queue_asyncqueue_.iasyncqueue.html#_symbol_asynciterator_">[Symbol.asyncIterator]</a></p>
 								<ul>
-									<li>Defined in node_modules/typedoc/node_modules/typescript/lib/lib.es2018.asynciterable.d.ts:40</li>
+									<li>Defined in node_modules/typescript/lib/lib.es2018.asynciterable.d.ts:40</li>
 								</ul>
 							</aside>
-							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">AsyncIterator</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">&gt;</span></h4>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">AsyncIterator</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol">&gt;</span></h4>
 						</li>
 					</ul>
 				</section>
@@ -185,7 +189,7 @@ await <span class="hljs-built_in">queue</span>.<span class="hljs-built_in">queue
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/ComFreek/async-playground/blob/1dc6e3b/queue/AsyncLimitedQueue.ts#L139">queue/AsyncLimitedQueue.ts:139</a></li>
+									<li>Defined in <a href="https://github.com/ComFreek/async-playground/blob/d19d79b/queue/AsyncLimitedQueue.ts#L139">queue/AsyncLimitedQueue.ts:139</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -214,7 +218,7 @@ await <span class="hljs-built_in">queue</span>.<span class="hljs-built_in">queue
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/ComFreek/async-playground/blob/1dc6e3b/queue/AsyncLimitedQueue.ts#L80">queue/AsyncLimitedQueue.ts:80</a></li>
+									<li>Defined in <a href="https://github.com/ComFreek/async-playground/blob/d19d79b/queue/AsyncLimitedQueue.ts#L80">queue/AsyncLimitedQueue.ts:80</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -245,7 +249,7 @@ await <span class="hljs-built_in">queue</span>.<span class="hljs-built_in">queue
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/ComFreek/async-playground/blob/1dc6e3b/queue/AsyncLimitedQueue.ts#L93">queue/AsyncLimitedQueue.ts:93</a></li>
+									<li>Defined in <a href="https://github.com/ComFreek/async-playground/blob/d19d79b/queue/AsyncLimitedQueue.ts#L93">queue/AsyncLimitedQueue.ts:93</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -281,7 +285,7 @@ await <span class="hljs-built_in">queue</span>.<span class="hljs-built_in">queue
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/ComFreek/async-playground/blob/1dc6e3b/queue/AsyncLimitedQueue.ts#L118">queue/AsyncLimitedQueue.ts:118</a></li>
+									<li>Defined in <a href="https://github.com/ComFreek/async-playground/blob/d19d79b/queue/AsyncLimitedQueue.ts#L118">queue/AsyncLimitedQueue.ts:118</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -294,17 +298,17 @@ await <span class="hljs-built_in">queue</span>.<span class="hljs-built_in">queue
 								<li>
 									<h5>iterable: <span class="tsd-signature-type">AsyncIterable</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">&gt;</span></h5>
 									<div class="tsd-comment tsd-typography">
-										<p>An iterable whose elements will be <a href="_queue_asynclimitedqueue_.iasynclimitedqueue.html#offer">offer</a>ed
+										<p>An iterable whose elements will be <a href="queue_asynclimitedqueue.iasynclimitedqueue.html#offer">offer</a>ed
 											in-order for this queue.
 											The method will stop querying and offering further
-											elements upon the first <a href="_queue_asynclimitedqueue_.iasynclimitedqueue.html#offer">offer</a> call, which
+											elements upon the first <a href="queue_asynclimitedqueue.iasynclimitedqueue.html#offer">offer</a> call, which
 											returns <code>false</code>.
 											<br>
-											Contrary to <a href="_queue_asynclimitedqueue_.iasynclimitedqueue.html#offerall">offerAll</a>, iterables iterating an
+											Contrary to <a href="queue_asynclimitedqueue.iasynclimitedqueue.html#offerall">offerAll</a>, iterables iterating an
 											infinite number of elements might prevent the Promise,
-											which <a href="_queue_asynclimitedqueue_.iasynclimitedqueue.html#offerallasync">offerAllAsync</a> returns, from ever resolving.
+											which <a href="queue_asynclimitedqueue.iasynclimitedqueue.html#offerallasync">offerAllAsync</a> returns, from ever resolving.
 											<br>
-											This depends on <a href="_queue_asynclimitedqueue_.iasynclimitedqueue.html#dequeue">dequeue</a> operations which could
+											This depends on <a href="queue_asynclimitedqueue.iasynclimitedqueue.html#dequeue">dequeue</a> operations which could
 											get scheduled by the JS VM while elements from the passed
 										asynchronous iterator are accessed.</p>
 									</div>
@@ -329,7 +333,7 @@ await <span class="hljs-built_in">queue</span>.<span class="hljs-built_in">queue
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/ComFreek/async-playground/blob/1dc6e3b/queue/AsyncLimitedQueue.ts#L126">queue/AsyncLimitedQueue.ts:126</a></li>
+									<li>Defined in <a href="https://github.com/ComFreek/async-playground/blob/d19d79b/queue/AsyncLimitedQueue.ts#L126">queue/AsyncLimitedQueue.ts:126</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -338,7 +342,7 @@ await <span class="hljs-built_in">queue</span>.<span class="hljs-built_in">queue
 								</div>
 								<dl class="tsd-comment-tags">
 									<dt>throws</dt>
-									<dd><p>A <a href="../classes/_queue_asyncqueue_.noelementerror.html">NoElementError</a> exception if the queue is empty at the time of the call.</p>
+									<dd><p>A <a href="../classes/queue_asyncqueue.noelementerror.html">NoElementError</a> exception if the queue is empty at the time of the call.</p>
 									</dd>
 								</dl>
 							</div>
@@ -357,7 +361,7 @@ await <span class="hljs-built_in">queue</span>.<span class="hljs-built_in">queue
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/ComFreek/async-playground/blob/1dc6e3b/queue/AsyncLimitedQueue.ts#L57">queue/AsyncLimitedQueue.ts:57</a></li>
+									<li>Defined in <a href="https://github.com/ComFreek/async-playground/blob/d19d79b/queue/AsyncLimitedQueue.ts#L57">queue/AsyncLimitedQueue.ts:57</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -366,9 +370,11 @@ await <span class="hljs-built_in">queue</span>.<span class="hljs-built_in">queue
 								</div>
 								<dl class="tsd-comment-tags">
 									<dt>example</dt>
-									<dd><pre><code><span class="hljs-selector-tag">queue</span><span class="hljs-selector-class">.queue</span>(<span class="hljs-number">42</span>)<span class="hljs-selector-class">.then</span>(() =&gt; {
-  <span class="hljs-comment">// 42 is now stored within the queue</span>
-});</code></pre></dd>
+									<dd><pre><code><span style="color: #001080">queue</span><span style="color: #000000">.</span><span style="color: #795E26">queue</span><span style="color: #000000">(</span><span style="color: #098658">42</span><span style="color: #000000">).</span><span style="color: #795E26">then</span><span style="color: #000000">(() </span><span style="color: #0000FF">=&gt;</span><span style="color: #000000"> {</span>
+<span style="color: #000000">  </span><span style="color: #008000">// 42 is now stored within the queue</span>
+<span style="color: #000000">});</span>
+</code></pre>
+									</dd>
 								</dl>
 							</div>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -391,7 +397,7 @@ await <span class="hljs-built_in">queue</span>.<span class="hljs-built_in">queue
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/ComFreek/async-playground/blob/1dc6e3b/queue/AsyncLimitedQueue.ts#L63">queue/AsyncLimitedQueue.ts:63</a></li>
+									<li>Defined in <a href="https://github.com/ComFreek/async-playground/blob/d19d79b/queue/AsyncLimitedQueue.ts#L63">queue/AsyncLimitedQueue.ts:63</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -424,7 +430,7 @@ await <span class="hljs-built_in">queue</span>.<span class="hljs-built_in">queue
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/ComFreek/async-playground/blob/1dc6e3b/queue/AsyncLimitedQueue.ts#L71">queue/AsyncLimitedQueue.ts:71</a></li>
+									<li>Defined in <a href="https://github.com/ComFreek/async-playground/blob/d19d79b/queue/AsyncLimitedQueue.ts#L71">queue/AsyncLimitedQueue.ts:71</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -458,7 +464,7 @@ await <span class="hljs-built_in">queue</span>.<span class="hljs-built_in">queue
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/ComFreek/async-playground/blob/1dc6e3b/queue/AsyncLimitedQueue.ts#L158">queue/AsyncLimitedQueue.ts:158</a></li>
+									<li>Defined in <a href="https://github.com/ComFreek/async-playground/blob/d19d79b/queue/AsyncLimitedQueue.ts#L158">queue/AsyncLimitedQueue.ts:158</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -466,14 +472,16 @@ await <span class="hljs-built_in">queue</span>.<span class="hljs-built_in">queue
 									<p>Return the current size at the moment of the call.</p>
 								</div>
 								<p>Even though code like</p>
-								<pre><code><span class="hljs-keyword">if</span> (<span class="hljs-built_in">queue</span>.<span class="hljs-built_in">size</span>() &gt;= <span class="hljs-number">1</span>) {
-  <span class="hljs-keyword">const</span> element = <span class="hljs-built_in">queue</span>.poll();
-}</code></pre><p>is technically not wrong (due to JS&#39; execution model), users are
+								<pre><code><span style="color: #AF00DB">if</span><span style="color: #000000"> (</span><span style="color: #001080">queue</span><span style="color: #000000">.</span><span style="color: #795E26">size</span><span style="color: #000000">() &gt;= </span><span style="color: #098658">1</span><span style="color: #000000">) {</span>
+<span style="color: #000000">  </span><span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">element</span><span style="color: #000000"> = </span><span style="color: #001080">queue</span><span style="color: #000000">.</span><span style="color: #795E26">poll</span><span style="color: #000000">();</span>
+<span style="color: #000000">}</span>
+</code></pre>
+								<p>is technically not wrong (due to JS&#39; execution model), users are
 								advised to avoid this pattern. Instead, users are encouraged to</p>
 								<ul>
 									<li>in cases where waiting for a promise is impossible, to use
-									<a href="_queue_asynclimitedqueue_.iasynclimitedqueue.html#poll">poll</a> and catch the exception,</li>
-									<li>or to use <a href="_queue_asynclimitedqueue_.iasynclimitedqueue.html#dequeue">dequeue</a> with JS&#39; <code>await</code> or
+									<a href="queue_asynclimitedqueue.iasynclimitedqueue.html#poll">poll</a> and catch the exception,</li>
+									<li>or to use <a href="queue_asynclimitedqueue.iasynclimitedqueue.html#dequeue">dequeue</a> with JS&#39; <code>await</code> or
 									<code>queue.dequeue().then(...)</code>.</li>
 								</ul>
 							</div>
@@ -486,92 +494,71 @@ await <span class="hljs-built_in">queue</span>.<span class="hljs-built_in">queue
 		<div class="col-4 col-menu menu-sticky-wrap menu-highlight">
 			<nav class="tsd-navigation primary">
 				<ul>
-					<li class="globals  ">
-						<a href="../globals.html"><em>Globals</em></a>
+					<li class=" ">
+						<a href="../modules.html">Modules</a>
 					</li>
-					<li class="label tsd-is-external">
-						<span>Internals</span>
+					<li class=" tsd-kind-module">
+						<a href="../modules/queue.html">queue</a>
 					</li>
-					<li class="current tsd-kind-external-module">
-						<a href="../modules/_queue_asynclimitedqueue_.html">&quot;queue/<wbr>Async<wbr>Limited<wbr>Queue&quot;</a>
+					<li class="current tsd-kind-module">
+						<a href="../modules/queue_asynclimitedqueue.html">queue/<wbr>Async<wbr>Limited<wbr>Queue</a>
 					</li>
-					<li class=" tsd-kind-external-module">
-						<a href="../modules/_queue_asynclimitedqueue_spec_.html">&quot;queue/<wbr>Async<wbr>Limited<wbr>Queue.spec&quot;</a>
+					<li class=" tsd-kind-module">
+						<a href="../modules/queue_asyncqueue.html">queue/<wbr>Async<wbr>Queue</a>
 					</li>
-					<li class=" tsd-kind-external-module">
-						<a href="../modules/_queue_asyncqueue_.html">&quot;queue/<wbr>Async<wbr>Queue&quot;</a>
+					<li class=" tsd-kind-module">
+						<a href="../modules/queue_queue_common_spec.html">queue/<wbr>Queue.common-<wbr>spec</a>
 					</li>
-					<li class=" tsd-kind-external-module">
-						<a href="../modules/_queue_asyncqueue_spec_.html">&quot;queue/<wbr>Async<wbr>Queue.spec&quot;</a>
+					<li class=" tsd-kind-module">
+						<a href="../modules/semaphore.html">semaphore</a>
 					</li>
-					<li class=" tsd-kind-external-module">
-						<a href="../modules/_queue_queue_common_spec_.html">&quot;queue/<wbr>Queue.common-<wbr>spec&quot;</a>
+					<li class=" tsd-kind-module">
+						<a href="../modules/semaphore_criticalsection.html">semaphore/<wbr>Critical<wbr>Section</a>
 					</li>
-					<li class=" tsd-kind-external-module">
-						<a href="../modules/_queue_index_.html">&quot;queue/index&quot;</a>
-					</li>
-					<li class=" tsd-kind-external-module">
-						<a href="../modules/_semaphore_criticalsection_.html">&quot;semaphore/<wbr>Critical<wbr>Section&quot;</a>
-					</li>
-					<li class=" tsd-kind-external-module">
-						<a href="../modules/_semaphore_criticalsection_spec_.html">&quot;semaphore/<wbr>Critical<wbr>Section.spec&quot;</a>
-					</li>
-					<li class=" tsd-kind-external-module">
-						<a href="../modules/_semaphore_semaphore_.html">&quot;semaphore/<wbr>Semaphore&quot;</a>
-					</li>
-					<li class=" tsd-kind-external-module">
-						<a href="../modules/_semaphore_semaphore_spec_.html">&quot;semaphore/<wbr>Semaphore.spec&quot;</a>
-					</li>
-					<li class=" tsd-kind-external-module">
-						<a href="../modules/_semaphore_index_.html">&quot;semaphore/index&quot;</a>
-					</li>
-					<li class="label tsd-is-external">
-						<span>Externals</span>
-					</li>
-					<li class=" tsd-kind-external-module tsd-is-external">
-						<a href="../modules/_timing_common_spec_.html">&quot;timing.common-<wbr>spec&quot;</a>
+					<li class=" tsd-kind-module">
+						<a href="../modules/semaphore_semaphore.html">semaphore/<wbr>Semaphore</a>
 					</li>
 				</ul>
 			</nav>
 			<nav class="tsd-navigation secondary menu-sticky">
 				<ul class="before-current">
-					<li class=" tsd-kind-class tsd-parent-kind-external-module tsd-has-type-parameter">
-						<a href="../classes/_queue_asynclimitedqueue_.asynclimitedqueue.html" class="tsd-kind-icon">Async<wbr>Limited<wbr>Queue</a>
+					<li class=" tsd-kind-class tsd-parent-kind-module tsd-has-type-parameter">
+						<a href="../classes/queue_asynclimitedqueue.asynclimitedqueue.html" class="tsd-kind-icon">Async<wbr>Limited<wbr>Queue</a>
 					</li>
 				</ul>
 				<ul class="current">
-					<li class="current tsd-kind-interface tsd-parent-kind-external-module tsd-has-type-parameter">
-						<a href="_queue_asynclimitedqueue_.iasynclimitedqueue.html" class="tsd-kind-icon">IAsync<wbr>Limited<wbr>Queue</a>
+					<li class="current tsd-kind-interface tsd-parent-kind-module tsd-has-type-parameter">
+						<a href="queue_asynclimitedqueue.iasynclimitedqueue.html" class="tsd-kind-icon">IAsync<wbr>Limited<wbr>Queue</a>
 						<ul>
-							<li class=" tsd-kind-method tsd-parent-kind-interface tsd-is-inherited">
-								<a href="_queue_asynclimitedqueue_.iasynclimitedqueue.html#_symbol_asynciterator_" class="tsd-kind-icon">[<wbr>Symbol.async<wbr>Iterator]</a>
+							<li class=" tsd-kind-method tsd-parent-kind-interface tsd-is-external">
+								<a href="queue_asynclimitedqueue.iasynclimitedqueue.html#_symbol_asynciterator_" class="tsd-kind-icon">[<wbr>Symbol.async<wbr>Iterator]</a>
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-interface">
-								<a href="_queue_asynclimitedqueue_.iasynclimitedqueue.html#dequeue" class="tsd-kind-icon">dequeue</a>
+								<a href="queue_asynclimitedqueue.iasynclimitedqueue.html#dequeue" class="tsd-kind-icon">dequeue</a>
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-interface">
-								<a href="_queue_asynclimitedqueue_.iasynclimitedqueue.html#offer" class="tsd-kind-icon">offer</a>
+								<a href="queue_asynclimitedqueue.iasynclimitedqueue.html#offer" class="tsd-kind-icon">offer</a>
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-interface">
-								<a href="_queue_asynclimitedqueue_.iasynclimitedqueue.html#offerall" class="tsd-kind-icon">offer<wbr>All</a>
+								<a href="queue_asynclimitedqueue.iasynclimitedqueue.html#offerall" class="tsd-kind-icon">offer<wbr>All</a>
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-interface">
-								<a href="_queue_asynclimitedqueue_.iasynclimitedqueue.html#offerallasync" class="tsd-kind-icon">offer<wbr>All<wbr>Async</a>
+								<a href="queue_asynclimitedqueue.iasynclimitedqueue.html#offerallasync" class="tsd-kind-icon">offer<wbr>All<wbr>Async</a>
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-interface">
-								<a href="_queue_asynclimitedqueue_.iasynclimitedqueue.html#poll" class="tsd-kind-icon">poll</a>
+								<a href="queue_asynclimitedqueue.iasynclimitedqueue.html#poll" class="tsd-kind-icon">poll</a>
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-interface">
-								<a href="_queue_asynclimitedqueue_.iasynclimitedqueue.html#queue" class="tsd-kind-icon">queue</a>
+								<a href="queue_asynclimitedqueue.iasynclimitedqueue.html#queue" class="tsd-kind-icon">queue</a>
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-interface">
-								<a href="_queue_asynclimitedqueue_.iasynclimitedqueue.html#queueall" class="tsd-kind-icon">queue<wbr>All</a>
+								<a href="queue_asynclimitedqueue.iasynclimitedqueue.html#queueall" class="tsd-kind-icon">queue<wbr>All</a>
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-interface">
-								<a href="_queue_asynclimitedqueue_.iasynclimitedqueue.html#queueallasync" class="tsd-kind-icon">queue<wbr>All<wbr>Async</a>
+								<a href="queue_asynclimitedqueue.iasynclimitedqueue.html#queueallasync" class="tsd-kind-icon">queue<wbr>All<wbr>Async</a>
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-interface">
-								<a href="_queue_asynclimitedqueue_.iasynclimitedqueue.html#size" class="tsd-kind-icon">size</a>
+								<a href="queue_asynclimitedqueue.iasynclimitedqueue.html#size" class="tsd-kind-icon">size</a>
 							</li>
 						</ul>
 					</li>
@@ -587,57 +574,17 @@ await <span class="hljs-built_in">queue</span>.<span class="hljs-built_in">queue
 		<h2>Legend</h2>
 		<div class="tsd-legend-group">
 			<ul class="tsd-legend">
-				<li class="tsd-kind-module"><span class="tsd-kind-icon">Module</span></li>
-				<li class="tsd-kind-object-literal"><span class="tsd-kind-icon">Object literal</span></li>
-				<li class="tsd-kind-variable"><span class="tsd-kind-icon">Variable</span></li>
-				<li class="tsd-kind-function"><span class="tsd-kind-icon">Function</span></li>
-				<li class="tsd-kind-function tsd-has-type-parameter"><span class="tsd-kind-icon">Function with type parameter</span></li>
-				<li class="tsd-kind-index-signature"><span class="tsd-kind-icon">Index signature</span></li>
-				<li class="tsd-kind-type-alias"><span class="tsd-kind-icon">Type alias</span></li>
-				<li class="tsd-kind-type-alias tsd-has-type-parameter"><span class="tsd-kind-icon">Type alias with type parameter</span></li>
-			</ul>
-			<ul class="tsd-legend">
-				<li class="tsd-kind-enum"><span class="tsd-kind-icon">Enumeration</span></li>
-				<li class="tsd-kind-enum-member"><span class="tsd-kind-icon">Enumeration member</span></li>
-				<li class="tsd-kind-property tsd-parent-kind-enum"><span class="tsd-kind-icon">Property</span></li>
-				<li class="tsd-kind-method tsd-parent-kind-enum"><span class="tsd-kind-icon">Method</span></li>
-			</ul>
-			<ul class="tsd-legend">
 				<li class="tsd-kind-interface"><span class="tsd-kind-icon">Interface</span></li>
 				<li class="tsd-kind-interface tsd-has-type-parameter"><span class="tsd-kind-icon">Interface with type parameter</span></li>
-				<li class="tsd-kind-constructor tsd-parent-kind-interface"><span class="tsd-kind-icon">Constructor</span></li>
-				<li class="tsd-kind-property tsd-parent-kind-interface"><span class="tsd-kind-icon">Property</span></li>
 				<li class="tsd-kind-method tsd-parent-kind-interface"><span class="tsd-kind-icon">Method</span></li>
-				<li class="tsd-kind-index-signature tsd-parent-kind-interface"><span class="tsd-kind-icon">Index signature</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-variable"><span class="tsd-kind-icon">Variable</span></li>
+				<li class="tsd-kind-function"><span class="tsd-kind-icon">Function</span></li>
 			</ul>
 			<ul class="tsd-legend">
 				<li class="tsd-kind-class"><span class="tsd-kind-icon">Class</span></li>
 				<li class="tsd-kind-class tsd-has-type-parameter"><span class="tsd-kind-icon">Class with type parameter</span></li>
-				<li class="tsd-kind-constructor tsd-parent-kind-class"><span class="tsd-kind-icon">Constructor</span></li>
-				<li class="tsd-kind-property tsd-parent-kind-class"><span class="tsd-kind-icon">Property</span></li>
-				<li class="tsd-kind-method tsd-parent-kind-class"><span class="tsd-kind-icon">Method</span></li>
-				<li class="tsd-kind-accessor tsd-parent-kind-class"><span class="tsd-kind-icon">Accessor</span></li>
-				<li class="tsd-kind-index-signature tsd-parent-kind-class"><span class="tsd-kind-icon">Index signature</span></li>
-			</ul>
-			<ul class="tsd-legend">
-				<li class="tsd-kind-constructor tsd-parent-kind-class tsd-is-inherited"><span class="tsd-kind-icon">Inherited constructor</span></li>
-				<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited"><span class="tsd-kind-icon">Inherited property</span></li>
-				<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited"><span class="tsd-kind-icon">Inherited method</span></li>
-				<li class="tsd-kind-accessor tsd-parent-kind-class tsd-is-inherited"><span class="tsd-kind-icon">Inherited accessor</span></li>
-			</ul>
-			<ul class="tsd-legend">
-				<li class="tsd-kind-property tsd-parent-kind-class tsd-is-protected"><span class="tsd-kind-icon">Protected property</span></li>
-				<li class="tsd-kind-method tsd-parent-kind-class tsd-is-protected"><span class="tsd-kind-icon">Protected method</span></li>
-				<li class="tsd-kind-accessor tsd-parent-kind-class tsd-is-protected"><span class="tsd-kind-icon">Protected accessor</span></li>
-			</ul>
-			<ul class="tsd-legend">
-				<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><span class="tsd-kind-icon">Private property</span></li>
-				<li class="tsd-kind-method tsd-parent-kind-class tsd-is-private"><span class="tsd-kind-icon">Private method</span></li>
-				<li class="tsd-kind-accessor tsd-parent-kind-class tsd-is-private"><span class="tsd-kind-icon">Private accessor</span></li>
-			</ul>
-			<ul class="tsd-legend">
-				<li class="tsd-kind-property tsd-parent-kind-class tsd-is-static"><span class="tsd-kind-icon">Static property</span></li>
-				<li class="tsd-kind-call-signature tsd-parent-kind-class tsd-is-static"><span class="tsd-kind-icon">Static method</span></li>
 			</ul>
 		</div>
 	</div>
@@ -647,6 +594,5 @@ await <span class="hljs-built_in">queue</span>.<span class="hljs-built_in">queue
 </div>
 <div class="overlay"></div>
 <script src="../assets/js/main.js"></script>
-<script>if (location.protocol == 'file:') document.write('<script src="../assets/js/search.js"><' + '/script>');</script>
 </body>
 </html>
