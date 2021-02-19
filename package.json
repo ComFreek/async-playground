@@ -4,9 +4,10 @@
   "description": "",
   "private": true,
   "scripts": {
-    "test": "nyc mocha --harmony --require ts-node/register --require source-map-support/register --recursive **/*.spec.ts",
-    "coverage": "nyc report --reporter=text-lcov | coveralls",
-    "build-docs": "node node_modules/typedoc/bin/typedoc --out docs queue/ semaphore/ && echo .nojekyll > docs/.nojekyll"
+    "docs": "node node_modules/typedoc/bin/typedoc --out docs queue/ semaphore/",
+    "test": "nyc mocha",
+    "coverage": "nyc report --reporter=html",
+    "coveralls": "nyc report --reporter=text-lcov | coveralls"
   },
   "author": "ComFreek <comfreek@outlook.com>",
   "homepage": "https://github.com/ComFreek/async-playground",
@@ -19,7 +20,6 @@
       ".tsx"
     ],
     "exclude": [
-      "**/*.spec.ts",
       "**/*.common-spec.ts",
       "coverage/**",
       "docs/**",
@@ -35,6 +35,22 @@
     "extends": [
       "config:base"
     ]
+  },
+  "mocha": {
+    "package": "./package.json",
+
+    "extension": ["ts", "tsx", "js"],
+    "spec": ["**/*spec.ts"],
+    "watch-files": ["**/*.ts"],
+    "watch-ignore": ["coverage/**", "docs/**", "examples/**"],
+    "require": ["ts-node/register", "source-map-support/register"],
+    "recursive": true,
+
+    "ui": "bdd",
+    "reporter": "spec",
+    "diff": true,
+    "slow": 1300,
+    "timeout": 2500
   },
   "devDependencies": {
     "@types/chai": "4.2.15",

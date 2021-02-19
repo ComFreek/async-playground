@@ -104,18 +104,20 @@ async function* readInput() {
 })();
 ```
 
-## Documentation
+## Documentation, Tests, and Coverage
 
-Live on <https://comfreek.github.io/async-playground> and built by `npm run build-docs`.
+Our GitHub actions [workflow `./github/workflows/main.yml`](.github/workflows/main.yml) builds documentation, runs tests, and analyzes coverage upon every commit to `master`.
 
-## Tests & Coverage
+**Documentation.** live on <https://comfreek.github.io/async-playground> and built by `npm run docs`.
 
-- Run tests by `npm test`.
-- Coverage live on <https://comfreek.github.io/async-playground/coverage> and built by `npm coverage`.
-- If you would like test scripts on your own, do note that a recent version of Node.js is required and it must be run with the `--harmony` flag: `node --harmony your-script.js`. The flag must also appear before the script name.
+**Tests.** run by `npm test`.
 
-See also our GitHub actions [workflow `./github/workflows/main.yml`](.github/workflows/main.yml) which runs the tests, generates coverage reports, and publishes the documentation upon every commit to `master`.
+**Coverage.**
 
-## Contributions & Licensing
+- `npm run coverage` generates HTML coverage reports and places them into `./coverage` (created if not yet existing).
+
+- `npm run coveralls` generates machine-readable coverage information and publishes them on <https://coveralls.io/github/ComFreek/async-playground>.
+
+## Contributing & Licensing
 
 Ideas and code contributions are welcome! Feel free to copy and redistribute code under the terms of the ISC license, see `LICENSE`.
