@@ -28,8 +28,6 @@ jobs:
       - name: Generate HTML coverage reports
         run: npm run coverage
       - name: debug
-        run: ls -ar
-      - name: Copy HTML coverage reports to deployment folder
         run: cp -a ./coverage ./deploy
       - name: Build documentation
         run: npm run docs
@@ -39,4 +37,4 @@ jobs:
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./docs
+          publish_dir: ./deploy
