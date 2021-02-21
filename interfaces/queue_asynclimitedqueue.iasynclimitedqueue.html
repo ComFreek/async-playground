@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>AsyncLimitedQueue | comfreek-async-playground</title>
+	<title>IAsyncLimitedQueue | comfreek-async-playground</title>
 	<meta name="description" content="Documentation for comfreek-async-playground">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="../assets/css/main.css">
@@ -58,10 +58,10 @@
 					<a href="../modules/queue_asynclimitedqueue.html">queue/AsyncLimitedQueue</a>
 				</li>
 				<li>
-					<a href="queue_asynclimitedqueue.asynclimitedqueue.html">AsyncLimitedQueue</a>
+					<a href="queue_asynclimitedqueue.iasynclimitedqueue.html">IAsyncLimitedQueue</a>
 				</li>
 			</ul>
-			<h1>Class AsyncLimitedQueue&lt;T&gt;</h1>
+			<h1>Interface IAsyncLimitedQueue&lt;T&gt;</h1>
 		</div>
 	</div>
 </header>
@@ -71,10 +71,44 @@
 			<section class="tsd-panel tsd-comment">
 				<div class="tsd-comment tsd-typography">
 					<div class="lead">
-						<p>Asynchronous element-limited FIFO queue with a Promise-driven dequeue operation.</p>
+						<p>Asynchronous entrance-limited FIFO queue with a Promise-driven dequeue operation.</p>
 					</div>
-					<p>{@link AsyncLimitedQueue#queue} operations are delayed (in unspecified order)
-					until space becomes available through dequeue operations.</p>
+					<p>Contrary to <a href="queue_asyncqueue.iasyncqueue.html">IAsyncQueue</a>, the queue operation is Promise-driven as well,
+						e.g. implementations might delay entrance into the queue, e.g. to enforce a
+						limit on the number of elements stored in the queue at the same time, cf.
+						<a href="../classes/queue_asynclimitedqueue.asynclimitedqueue.html">AsyncLimitedQueue</a>.
+						Other types of entrance limitations are conceivable as well, such as a
+					restriction on the sum of contained elements in case of a number queue.</p>
+					<p>All element values are allowed, especially falsy ones, e.g.
+						false, 0, undefined, null, [], {} are all valid elements which
+					can be queued and dequeued.</p>
+					<p><a href="queue_asynclimitedqueue.iasynclimitedqueue.html#queue">IAsyncLimitedQueue#queue</a> operations are possibly delayed and
+					executed in implementation-dependenent order.</p>
+					<dl class="tsd-comment-tags">
+						<dt>example</dt>
+						<dd><p>Issueing multiple <a href="queue_asynclimitedqueue.iasynclimitedqueue.html#queue">queue</a> operations without awaiting the
+							previous ones may result in implementation-defined insertion order.</p>
+							<pre><code><span style="color: #001080">queue</span><span style="color: #000000">.</span><span style="color: #795E26">queue</span><span style="color: #000000">(</span><span style="color: #098658">1</span><span style="color: #000000">);</span>
+<span style="color: #001080">queue</span><span style="color: #000000">.</span><span style="color: #795E26">queue</span><span style="color: #000000">(</span><span style="color: #098658">2</span><span style="color: #000000">);</span>
+
+<span style="color: #AF00DB">await</span><span style="color: #000000"> </span><span style="color: #001080">queue</span><span style="color: #000000">.</span><span style="color: #795E26">dequeue</span><span style="color: #000000">(); </span><span style="color: #008000">// can be 1 or 2</span>
+<span style="color: #AF00DB">await</span><span style="color: #000000"> </span><span style="color: #001080">queue</span><span style="color: #000000">.</span><span style="color: #795E26">dequeue</span><span style="color: #000000">(); </span><span style="color: #008000">// can be 1 or 2 as well (the remaining number)</span>
+</code></pre>
+						</dd>
+						<dt>example</dt>
+						<dd><p>If you would like to retain the order, await the <a href="queue_asynclimitedqueue.iasynclimitedqueue.html#queue">queue</a>
+								operations, use <a href="queue_asynclimitedqueue.iasynclimitedqueue.html#queueall">IAsyncLimitedQueue#queueAll</a> or
+							<a href="queue_asynclimitedqueue.iasynclimitedqueue.html#queueallasync">IAsyncLimitedQueue#queueAllAsync</a>.</p>
+							<pre><code><span style="color: #AF00DB">await</span><span style="color: #000000"> </span><span style="color: #001080">queue</span><span style="color: #000000">.</span><span style="color: #795E26">queue</span><span style="color: #000000">(</span><span style="color: #098658">1</span><span style="color: #000000">);</span>
+<span style="color: #AF00DB">await</span><span style="color: #000000"> </span><span style="color: #001080">queue</span><span style="color: #000000">.</span><span style="color: #795E26">queue</span><span style="color: #000000">(</span><span style="color: #098658">2</span><span style="color: #000000">);</span>
+</code></pre>
+							<pre><code><span style="color: #001080">queue</span><span style="color: #000000">.</span><span style="color: #795E26">queueAll</span><span style="color: #000000">([</span><span style="color: #098658">1</span><span style="color: #000000">, </span><span style="color: #098658">2</span><span style="color: #000000">]);</span>
+</code></pre>
+							<p>The {@link AsyncIterable} interface iterates the queue&#39;s (future) contents
+								ad infinitum. Users are advised to signal the end by manual insertion of a
+							special value (a so-called poison pill), see <a href="queue_asyncqueue.iasyncqueue.html">IAsyncQueue</a>.</p>
+						</dd>
+					</dl>
 				</div>
 			</section>
 			<section class="tsd-panel tsd-type-parameters">
@@ -89,14 +123,19 @@
 				<h3>Hierarchy</h3>
 				<ul class="tsd-hierarchy">
 					<li>
-						<span class="target">AsyncLimitedQueue</span>
+						<span class="tsd-signature-type">AsyncIterable</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">&gt;</span>
+						<ul class="tsd-hierarchy">
+							<li>
+								<span class="target">IAsyncLimitedQueue</span>
+							</li>
+						</ul>
 					</li>
 				</ul>
 			</section>
 			<section class="tsd-panel">
-				<h3>Implements</h3>
+				<h3>Implemented by</h3>
 				<ul class="tsd-hierarchy">
-					<li><a href="../interfaces/queue_asynclimitedqueue.iasynclimitedqueue.html" class="tsd-signature-type" data-tsd-kind="Interface">IAsyncLimitedQueue</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">&gt;</span></li>
+					<li><a href="../classes/queue_asynclimitedqueue.asynclimitedqueue.html" class="tsd-signature-type" data-tsd-kind="Class">AsyncLimitedQueue</a></li>
 				</ul>
 			</section>
 			<section class="tsd-panel-group tsd-index-group">
@@ -104,135 +143,53 @@
 				<section class="tsd-panel tsd-index-panel">
 					<div class="tsd-index-content">
 						<section class="tsd-index-section ">
-							<h3>Constructors</h3>
-							<ul class="tsd-index-list">
-								<li class="tsd-kind-constructor tsd-parent-kind-class tsd-has-type-parameter"><a href="queue_asynclimitedqueue.asynclimitedqueue.html#constructor" class="tsd-kind-icon">constructor</a></li>
-							</ul>
-						</section>
-						<section class="tsd-index-section tsd-is-private tsd-is-private-protected">
-							<h3>Properties</h3>
-							<ul class="tsd-index-list">
-								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><a href="queue_asynclimitedqueue.asynclimitedqueue.html#limitsem" class="tsd-kind-icon">limit<wbr>Sem</a></li>
-							</ul>
-						</section>
-						<section class="tsd-index-section ">
 							<h3>Methods</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-method tsd-parent-kind-class"><a href="queue_asynclimitedqueue.asynclimitedqueue.html#_symbol_asynciterator_" class="tsd-kind-icon">[<wbr>Symbol.async<wbr>Iterator]</a></li>
-								<li class="tsd-kind-method tsd-parent-kind-class"><a href="queue_asynclimitedqueue.asynclimitedqueue.html#dequeue" class="tsd-kind-icon">dequeue</a></li>
-								<li class="tsd-kind-method tsd-parent-kind-class"><a href="queue_asynclimitedqueue.asynclimitedqueue.html#offer" class="tsd-kind-icon">offer</a></li>
-								<li class="tsd-kind-method tsd-parent-kind-class"><a href="queue_asynclimitedqueue.asynclimitedqueue.html#offerall" class="tsd-kind-icon">offer<wbr>All</a></li>
-								<li class="tsd-kind-method tsd-parent-kind-class"><a href="queue_asynclimitedqueue.asynclimitedqueue.html#offerallasync" class="tsd-kind-icon">offer<wbr>All<wbr>Async</a></li>
-								<li class="tsd-kind-method tsd-parent-kind-class"><a href="queue_asynclimitedqueue.asynclimitedqueue.html#poll" class="tsd-kind-icon">poll</a></li>
-								<li class="tsd-kind-method tsd-parent-kind-class"><a href="queue_asynclimitedqueue.asynclimitedqueue.html#queue" class="tsd-kind-icon">queue</a></li>
-								<li class="tsd-kind-method tsd-parent-kind-class"><a href="queue_asynclimitedqueue.asynclimitedqueue.html#queueall" class="tsd-kind-icon">queue<wbr>All</a></li>
-								<li class="tsd-kind-method tsd-parent-kind-class"><a href="queue_asynclimitedqueue.asynclimitedqueue.html#queueallasync" class="tsd-kind-icon">queue<wbr>All<wbr>Async</a></li>
-								<li class="tsd-kind-method tsd-parent-kind-class"><a href="queue_asynclimitedqueue.asynclimitedqueue.html#size" class="tsd-kind-icon">size</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-interface tsd-is-external"><a href="queue_asynclimitedqueue.iasynclimitedqueue.html#_symbol_asynciterator_" class="tsd-kind-icon">[<wbr>Symbol.async<wbr>Iterator]</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-interface"><a href="queue_asynclimitedqueue.iasynclimitedqueue.html#dequeue" class="tsd-kind-icon">dequeue</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-interface"><a href="queue_asynclimitedqueue.iasynclimitedqueue.html#offer" class="tsd-kind-icon">offer</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-interface"><a href="queue_asynclimitedqueue.iasynclimitedqueue.html#offerall" class="tsd-kind-icon">offer<wbr>All</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-interface"><a href="queue_asynclimitedqueue.iasynclimitedqueue.html#offerallasync" class="tsd-kind-icon">offer<wbr>All<wbr>Async</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-interface"><a href="queue_asynclimitedqueue.iasynclimitedqueue.html#poll" class="tsd-kind-icon">poll</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-interface"><a href="queue_asynclimitedqueue.iasynclimitedqueue.html#queue" class="tsd-kind-icon">queue</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-interface"><a href="queue_asynclimitedqueue.iasynclimitedqueue.html#queueall" class="tsd-kind-icon">queue<wbr>All</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-interface"><a href="queue_asynclimitedqueue.iasynclimitedqueue.html#queueallasync" class="tsd-kind-icon">queue<wbr>All<wbr>Async</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-interface"><a href="queue_asynclimitedqueue.iasynclimitedqueue.html#size" class="tsd-kind-icon">size</a></li>
 							</ul>
 						</section>
 					</div>
 				</section>
 			</section>
 			<section class="tsd-panel-group tsd-member-group ">
-				<h2>Constructors</h2>
-				<section class="tsd-panel tsd-member tsd-kind-constructor tsd-parent-kind-class tsd-has-type-parameter">
-					<a name="constructor" class="tsd-anchor"></a>
-					<h3>constructor</h3>
-					<ul class="tsd-signatures tsd-kind-constructor tsd-parent-kind-class tsd-has-type-parameter">
-						<li class="tsd-signature tsd-kind-icon">new <wbr>Async<wbr>Limited<wbr>Queue&lt;T&gt;<span class="tsd-signature-symbol">(</span>limit<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span>, storageQueue<span class="tsd-signature-symbol">?: </span><a href="../interfaces/queue_asyncqueue.iasyncqueue.html" class="tsd-signature-type" data-tsd-kind="Interface">IAsyncQueue</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="queue_asynclimitedqueue.asynclimitedqueue.html" class="tsd-signature-type" data-tsd-kind="Class">AsyncLimitedQueue</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">&gt;</span></li>
-					</ul>
-					<ul class="tsd-descriptions">
-						<li class="tsd-description">
-							<aside class="tsd-sources">
-								<ul>
-									<li>Defined in <a href="https://github.com/ComFreek/async-playground/blob/0dee9e7/queue/AsyncLimitedQueue.ts#L168">queue/AsyncLimitedQueue.ts:168</a></li>
-								</ul>
-							</aside>
-							<div class="tsd-comment tsd-typography">
-								<div class="lead">
-									<p>Initialize the queue.</p>
-								</div>
-								<dl class="tsd-comment-tags">
-									<dt>throws</dt>
-									<dd><p>An exception in case the limit is not an integer or is &lt;= 0.</p>
-									</dd>
-								</dl>
-							</div>
-							<h4 class="tsd-type-parameters-title">Type parameters</h4>
-							<ul class="tsd-type-parameters">
-								<li>
-									<h4>T</h4>
-								</li>
-							</ul>
-							<h4 class="tsd-parameters-title">Parameters</h4>
-							<ul class="tsd-parameters">
-								<li>
-									<h5>limit: <span class="tsd-signature-type">number</span></h5>
-									<div class="tsd-comment tsd-typography">
-										<p>A integer &gt;= 1 specifying the number of elements after which
-											queue() effectively blocks (i.e. the promise returned by it
-											does not get &quot;immediately&quot; fulfilled for some informal value
-										of immediately).</p>
-									</div>
-								</li>
-								<li>
-									<h5>storageQueue: <a href="../interfaces/queue_asyncqueue.iasyncqueue.html" class="tsd-signature-type" data-tsd-kind="Interface">IAsyncQueue</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> = ...</span></h5>
-									<div class="tsd-comment tsd-typography">
-										<p>An asynchronous (non-limiting) queue backing the data.
-										It defaults to a AsyncQueue.</p>
-									</div>
-								</li>
-							</ul>
-							<h4 class="tsd-returns-title">Returns <a href="queue_asynclimitedqueue.asynclimitedqueue.html" class="tsd-signature-type" data-tsd-kind="Class">AsyncLimitedQueue</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">&gt;</span></h4>
-						</li>
-					</ul>
-				</section>
-			</section>
-			<section class="tsd-panel-group tsd-member-group tsd-is-private tsd-is-private-protected">
-				<h2>Properties</h2>
-				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-private">
-					<a name="limitsem" class="tsd-anchor"></a>
-					<h3><span class="tsd-flag ts-flagPrivate">Private</span> limit<wbr>Sem</h3>
-					<div class="tsd-signature tsd-kind-icon">limit<wbr>Sem<span class="tsd-signature-symbol">:</span> <a href="../interfaces/semaphore_semaphore.isemaphore.html" class="tsd-signature-type" data-tsd-kind="Interface">ISemaphore</a></div>
-					<aside class="tsd-sources">
-						<ul>
-							<li>Defined in <a href="https://github.com/ComFreek/async-playground/blob/0dee9e7/queue/AsyncLimitedQueue.ts#L168">queue/AsyncLimitedQueue.ts:168</a></li>
-						</ul>
-					</aside>
-				</section>
-			</section>
-			<section class="tsd-panel-group tsd-member-group ">
 				<h2>Methods</h2>
-				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-interface tsd-is-external">
 					<a name="_symbol_asynciterator_" class="tsd-anchor"></a>
 					<h3>[<wbr>Symbol.async<wbr>Iterator]</h3>
-					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-						<li class="tsd-signature tsd-kind-icon">[<wbr>Symbol.async<wbr>Iterator]<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">AsyncIterableIterator</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">&gt;</span></li>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-interface tsd-is-external">
+						<li class="tsd-signature tsd-kind-icon">[<wbr>Symbol.async<wbr>Iterator]<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">AsyncIterator</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol">&gt;</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
-								<p>Implementation of <a href="../interfaces/queue_asynclimitedqueue.iasynclimitedqueue.html">IAsyncLimitedQueue</a>.<a href="../interfaces/queue_asynclimitedqueue.iasynclimitedqueue.html#_symbol_asynciterator_">[Symbol.asyncIterator]</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/ComFreek/async-playground/blob/0dee9e7/queue/AsyncLimitedQueue.ts#L255">queue/AsyncLimitedQueue.ts:255</a></li>
+									<li>Defined in node_modules/typescript/lib/lib.es2018.asynciterable.d.ts:40</li>
 								</ul>
 							</aside>
-							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">AsyncIterableIterator</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">&gt;</span></h4>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">AsyncIterator</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol">&gt;</span></h4>
 						</li>
 					</ul>
 				</section>
-				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-interface">
 					<a name="dequeue" class="tsd-anchor"></a>
 					<h3>dequeue</h3>
-					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-interface">
 						<li class="tsd-signature tsd-kind-icon">dequeue<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">&gt;</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
-								<p>Implementation of <a href="../interfaces/queue_asynclimitedqueue.iasynclimitedqueue.html">IAsyncLimitedQueue</a>.<a href="../interfaces/queue_asynclimitedqueue.iasynclimitedqueue.html#dequeue">dequeue</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/ComFreek/async-playground/blob/0dee9e7/queue/AsyncLimitedQueue.ts#L244">queue/AsyncLimitedQueue.ts:244</a></li>
+									<li>Defined in <a href="https://github.com/ComFreek/async-playground/blob/9ed6114/queue/AsyncLimitedQueue.ts#L139">queue/AsyncLimitedQueue.ts:139</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -251,19 +208,25 @@
 						</li>
 					</ul>
 				</section>
-				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-interface">
 					<a name="offer" class="tsd-anchor"></a>
 					<h3>offer</h3>
-					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-interface">
 						<li class="tsd-signature tsd-kind-icon">offer<span class="tsd-signature-symbol">(</span>data<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/ComFreek/async-playground/blob/0dee9e7/queue/AsyncLimitedQueue.ts#L206">queue/AsyncLimitedQueue.ts:206</a></li>
+									<li>Defined in <a href="https://github.com/ComFreek/async-playground/blob/9ed6114/queue/AsyncLimitedQueue.ts#L80">queue/AsyncLimitedQueue.ts:80</a></li>
 								</ul>
 							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Offer an element, only queueing it if entrance is available at the time
+									of the call.</p>
+								</div>
+							</div>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
@@ -271,21 +234,22 @@
 								</li>
 							</ul>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">boolean</span></h4>
+							<p>True if the element could be inserted right away. False
+							otherwise.</p>
 						</li>
 					</ul>
 				</section>
-				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-interface">
 					<a name="offerall" class="tsd-anchor"></a>
 					<h3>offer<wbr>All</h3>
-					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-interface">
 						<li class="tsd-signature tsd-kind-icon">offer<wbr>All<span class="tsd-signature-symbol">(</span>iterable<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Iterable</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
-								<p>Implementation of <a href="../interfaces/queue_asynclimitedqueue.iasynclimitedqueue.html">IAsyncLimitedQueue</a>.<a href="../interfaces/queue_asynclimitedqueue.iasynclimitedqueue.html#offerall">offerAll</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/ComFreek/async-playground/blob/0dee9e7/queue/AsyncLimitedQueue.ts#L216">queue/AsyncLimitedQueue.ts:216</a></li>
+									<li>Defined in <a href="https://github.com/ComFreek/async-playground/blob/9ed6114/queue/AsyncLimitedQueue.ts#L93">queue/AsyncLimitedQueue.ts:93</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -297,6 +261,12 @@
 							<ul class="tsd-parameters">
 								<li>
 									<h5>iterable: <span class="tsd-signature-type">Iterable</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">&gt;</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>An iterable whose first (limit - queue.size()) elements
+											will be inserted. Iterables which iterate an infinite
+											number of elements can also be passed and will <em>not</em>
+										result in an endless loop.</p>
+									</div>
 								</li>
 							</ul>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">number</span></h4>
@@ -305,18 +275,17 @@
 						</li>
 					</ul>
 				</section>
-				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-interface">
 					<a name="offerallasync" class="tsd-anchor"></a>
 					<h3>offer<wbr>All<wbr>Async</h3>
-					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-interface">
 						<li class="tsd-signature tsd-kind-icon">offer<wbr>All<wbr>Async<span class="tsd-signature-symbol">(</span>iterable<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">AsyncIterable</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">&gt;</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
-								<p>Implementation of <a href="../interfaces/queue_asynclimitedqueue.iasynclimitedqueue.html">IAsyncLimitedQueue</a>.<a href="../interfaces/queue_asynclimitedqueue.iasynclimitedqueue.html#offerallasync">offerAllAsync</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/ComFreek/async-playground/blob/0dee9e7/queue/AsyncLimitedQueue.ts#L230">queue/AsyncLimitedQueue.ts:230</a></li>
+									<li>Defined in <a href="https://github.com/ComFreek/async-playground/blob/9ed6114/queue/AsyncLimitedQueue.ts#L118">queue/AsyncLimitedQueue.ts:118</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -328,6 +297,21 @@
 							<ul class="tsd-parameters">
 								<li>
 									<h5>iterable: <span class="tsd-signature-type">AsyncIterable</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">&gt;</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>An iterable whose elements will be <a href="queue_asynclimitedqueue.iasynclimitedqueue.html#offer">offer</a>ed
+											in-order for this queue.
+											The method will stop querying and offering further
+											elements upon the first <a href="queue_asynclimitedqueue.iasynclimitedqueue.html#offer">offer</a> call, which
+											returns <code>false</code>.
+											<br>
+											Contrary to <a href="queue_asynclimitedqueue.iasynclimitedqueue.html#offerall">offerAll</a>, iterables iterating an
+											infinite number of elements might prevent the Promise,
+											which <a href="queue_asynclimitedqueue.iasynclimitedqueue.html#offerallasync">offerAllAsync</a> returns, from ever resolving.
+											<br>
+											This depends on <a href="queue_asynclimitedqueue.iasynclimitedqueue.html#dequeue">dequeue</a> operations which could
+											get scheduled by the JS VM while elements from the passed
+										asynchronous iterator are accessed.</p>
+									</div>
 								</li>
 							</ul>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">&gt;</span></h4>
@@ -339,43 +323,60 @@
 						</li>
 					</ul>
 				</section>
-				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-interface">
 					<a name="poll" class="tsd-anchor"></a>
 					<h3>poll</h3>
-					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-interface">
 						<li class="tsd-signature tsd-kind-icon">poll<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">T</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
-								<p>Implementation of <a href="../interfaces/queue_asynclimitedqueue.iasynclimitedqueue.html">IAsyncLimitedQueue</a>.<a href="../interfaces/queue_asynclimitedqueue.iasynclimitedqueue.html#poll">poll</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/ComFreek/async-playground/blob/0dee9e7/queue/AsyncLimitedQueue.ts#L251">queue/AsyncLimitedQueue.ts:251</a></li>
+									<li>Defined in <a href="https://github.com/ComFreek/async-playground/blob/9ed6114/queue/AsyncLimitedQueue.ts#L126">queue/AsyncLimitedQueue.ts:126</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
 								<div class="lead">
 									<p>Dequeue an element if available or throw an exception otherwise.</p>
 								</div>
+								<dl class="tsd-comment-tags">
+									<dt>throws</dt>
+									<dd><p>A <a href="../classes/queue_asyncqueue.noelementerror.html">NoElementError</a> exception if the queue is empty at the time of the call.</p>
+									</dd>
+								</dl>
 							</div>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">T</span></h4>
 							<p>The first element of the queue.</p>
 						</li>
 					</ul>
 				</section>
-				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-interface">
 					<a name="queue" class="tsd-anchor"></a>
 					<h3>queue</h3>
-					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-interface">
 						<li class="tsd-signature tsd-kind-icon">queue<span class="tsd-signature-symbol">(</span>data<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/ComFreek/async-playground/blob/0dee9e7/queue/AsyncLimitedQueue.ts#L189">queue/AsyncLimitedQueue.ts:189</a></li>
+									<li>Defined in <a href="https://github.com/ComFreek/async-playground/blob/9ed6114/queue/AsyncLimitedQueue.ts#L57">queue/AsyncLimitedQueue.ts:57</a></li>
 								</ul>
 							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Queue an element, waiting for entrance if necessary.</p>
+								</div>
+								<dl class="tsd-comment-tags">
+									<dt>example</dt>
+									<dd><pre><code><span style="color: #001080">queue</span><span style="color: #000000">.</span><span style="color: #795E26">queue</span><span style="color: #000000">(</span><span style="color: #098658">42</span><span style="color: #000000">).</span><span style="color: #795E26">then</span><span style="color: #000000">(() </span><span style="color: #0000FF">=&gt;</span><span style="color: #000000"> {</span>
+<span style="color: #000000">  </span><span style="color: #008000">// 42 is now stored within the queue</span>
+<span style="color: #000000">});</span>
+</code></pre>
+									</dd>
+								</dl>
+							</div>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
@@ -386,24 +387,28 @@
 						</li>
 					</ul>
 				</section>
-				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-interface">
 					<a name="queueall" class="tsd-anchor"></a>
 					<h3>queue<wbr>All</h3>
-					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-interface">
 						<li class="tsd-signature tsd-kind-icon">queue<wbr>All<span class="tsd-signature-symbol">(</span>iterable<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Iterable</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
-								<p>Implementation of <a href="../interfaces/queue_asynclimitedqueue.iasynclimitedqueue.html">IAsyncLimitedQueue</a>.<a href="../interfaces/queue_asynclimitedqueue.iasynclimitedqueue.html#queueall">queueAll</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/ComFreek/async-playground/blob/0dee9e7/queue/AsyncLimitedQueue.ts#L194">queue/AsyncLimitedQueue.ts:194</a></li>
+									<li>Defined in <a href="https://github.com/ComFreek/async-playground/blob/9ed6114/queue/AsyncLimitedQueue.ts#L63">queue/AsyncLimitedQueue.ts:63</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
 								<div class="lead">
 									<p>Queue all elements of an iterable, e.g. an array or a generator function.</p>
 								</div>
+								<dl class="tsd-comment-tags">
+									<dt>see</dt>
+									<dd><p>IAsyncQueue#queueAll</p>
+									</dd>
+								</dl>
 							</div>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
@@ -415,18 +420,17 @@
 						</li>
 					</ul>
 				</section>
-				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-interface">
 					<a name="queueallasync" class="tsd-anchor"></a>
 					<h3>queue<wbr>All<wbr>Async</h3>
-					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-interface">
 						<li class="tsd-signature tsd-kind-icon">queue<wbr>All<wbr>Async<span class="tsd-signature-symbol">(</span>iterable<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">AsyncIterable</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
-								<p>Implementation of <a href="../interfaces/queue_asynclimitedqueue.iasynclimitedqueue.html">IAsyncLimitedQueue</a>.<a href="../interfaces/queue_asynclimitedqueue.iasynclimitedqueue.html#queueallasync">queueAllAsync</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/ComFreek/async-playground/blob/0dee9e7/queue/AsyncLimitedQueue.ts#L200">queue/AsyncLimitedQueue.ts:200</a></li>
+									<li>Defined in <a href="https://github.com/ComFreek/async-playground/blob/9ed6114/queue/AsyncLimitedQueue.ts#L71">queue/AsyncLimitedQueue.ts:71</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -434,6 +438,11 @@
 									<p>Queue all elements of an asynchronous iterable, e.g. an asynchronous
 									generator functions.</p>
 								</div>
+								<dl class="tsd-comment-tags">
+									<dt>see</dt>
+									<dd><p>IAsyncQueue#queueAllAsync</p>
+									</dd>
+								</dl>
 							</div>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
@@ -445,18 +454,17 @@
 						</li>
 					</ul>
 				</section>
-				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-interface">
 					<a name="size" class="tsd-anchor"></a>
 					<h3>size</h3>
-					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-interface">
 						<li class="tsd-signature tsd-kind-icon">size<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
-								<p>Implementation of <a href="../interfaces/queue_asynclimitedqueue.iasynclimitedqueue.html">IAsyncLimitedQueue</a>.<a href="../interfaces/queue_asynclimitedqueue.iasynclimitedqueue.html#size">size</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/ComFreek/async-playground/blob/0dee9e7/queue/AsyncLimitedQueue.ts#L261">queue/AsyncLimitedQueue.ts:261</a></li>
+									<li>Defined in <a href="https://github.com/ComFreek/async-playground/blob/9ed6114/queue/AsyncLimitedQueue.ts#L158">queue/AsyncLimitedQueue.ts:158</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -472,8 +480,8 @@
 								advised to avoid this pattern. Instead, users are encouraged to</p>
 								<ul>
 									<li>in cases where waiting for a promise is impossible, to use
-									<a href="queue_asynclimitedqueue.asynclimitedqueue.html#poll">poll</a> and catch the exception,</li>
-									<li>or to use <a href="queue_asynclimitedqueue.asynclimitedqueue.html#dequeue">dequeue</a> with JS&#39; <code>await</code> or
+									<a href="queue_asynclimitedqueue.iasynclimitedqueue.html#poll">poll</a> and catch the exception,</li>
+									<li>or to use <a href="queue_asynclimitedqueue.iasynclimitedqueue.html#dequeue">dequeue</a> with JS&#39; <code>await</code> or
 									<code>queue.dequeue().then(...)</code>.</li>
 								</ul>
 							</div>
@@ -514,54 +522,48 @@
 			</nav>
 			<nav class="tsd-navigation secondary menu-sticky">
 				<ul class="before-current">
+					<li class=" tsd-kind-class tsd-parent-kind-module tsd-has-type-parameter">
+						<a href="../classes/queue_asynclimitedqueue.asynclimitedqueue.html" class="tsd-kind-icon">Async<wbr>Limited<wbr>Queue</a>
+					</li>
 				</ul>
 				<ul class="current">
-					<li class="current tsd-kind-class tsd-parent-kind-module tsd-has-type-parameter">
-						<a href="queue_asynclimitedqueue.asynclimitedqueue.html" class="tsd-kind-icon">Async<wbr>Limited<wbr>Queue</a>
+					<li class="current tsd-kind-interface tsd-parent-kind-module tsd-has-type-parameter">
+						<a href="queue_asynclimitedqueue.iasynclimitedqueue.html" class="tsd-kind-icon">IAsync<wbr>Limited<wbr>Queue</a>
 						<ul>
-							<li class=" tsd-kind-constructor tsd-parent-kind-class tsd-has-type-parameter">
-								<a href="queue_asynclimitedqueue.asynclimitedqueue.html#constructor" class="tsd-kind-icon">constructor</a>
+							<li class=" tsd-kind-method tsd-parent-kind-interface tsd-is-external">
+								<a href="queue_asynclimitedqueue.iasynclimitedqueue.html#_symbol_asynciterator_" class="tsd-kind-icon">[<wbr>Symbol.async<wbr>Iterator]</a>
 							</li>
-							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-private">
-								<a href="queue_asynclimitedqueue.asynclimitedqueue.html#limitsem" class="tsd-kind-icon">limit<wbr>Sem</a>
+							<li class=" tsd-kind-method tsd-parent-kind-interface">
+								<a href="queue_asynclimitedqueue.iasynclimitedqueue.html#dequeue" class="tsd-kind-icon">dequeue</a>
 							</li>
-							<li class=" tsd-kind-method tsd-parent-kind-class">
-								<a href="queue_asynclimitedqueue.asynclimitedqueue.html#_symbol_asynciterator_" class="tsd-kind-icon">[<wbr>Symbol.async<wbr>Iterator]</a>
+							<li class=" tsd-kind-method tsd-parent-kind-interface">
+								<a href="queue_asynclimitedqueue.iasynclimitedqueue.html#offer" class="tsd-kind-icon">offer</a>
 							</li>
-							<li class=" tsd-kind-method tsd-parent-kind-class">
-								<a href="queue_asynclimitedqueue.asynclimitedqueue.html#dequeue" class="tsd-kind-icon">dequeue</a>
+							<li class=" tsd-kind-method tsd-parent-kind-interface">
+								<a href="queue_asynclimitedqueue.iasynclimitedqueue.html#offerall" class="tsd-kind-icon">offer<wbr>All</a>
 							</li>
-							<li class=" tsd-kind-method tsd-parent-kind-class">
-								<a href="queue_asynclimitedqueue.asynclimitedqueue.html#offer" class="tsd-kind-icon">offer</a>
+							<li class=" tsd-kind-method tsd-parent-kind-interface">
+								<a href="queue_asynclimitedqueue.iasynclimitedqueue.html#offerallasync" class="tsd-kind-icon">offer<wbr>All<wbr>Async</a>
 							</li>
-							<li class=" tsd-kind-method tsd-parent-kind-class">
-								<a href="queue_asynclimitedqueue.asynclimitedqueue.html#offerall" class="tsd-kind-icon">offer<wbr>All</a>
+							<li class=" tsd-kind-method tsd-parent-kind-interface">
+								<a href="queue_asynclimitedqueue.iasynclimitedqueue.html#poll" class="tsd-kind-icon">poll</a>
 							</li>
-							<li class=" tsd-kind-method tsd-parent-kind-class">
-								<a href="queue_asynclimitedqueue.asynclimitedqueue.html#offerallasync" class="tsd-kind-icon">offer<wbr>All<wbr>Async</a>
+							<li class=" tsd-kind-method tsd-parent-kind-interface">
+								<a href="queue_asynclimitedqueue.iasynclimitedqueue.html#queue" class="tsd-kind-icon">queue</a>
 							</li>
-							<li class=" tsd-kind-method tsd-parent-kind-class">
-								<a href="queue_asynclimitedqueue.asynclimitedqueue.html#poll" class="tsd-kind-icon">poll</a>
+							<li class=" tsd-kind-method tsd-parent-kind-interface">
+								<a href="queue_asynclimitedqueue.iasynclimitedqueue.html#queueall" class="tsd-kind-icon">queue<wbr>All</a>
 							</li>
-							<li class=" tsd-kind-method tsd-parent-kind-class">
-								<a href="queue_asynclimitedqueue.asynclimitedqueue.html#queue" class="tsd-kind-icon">queue</a>
+							<li class=" tsd-kind-method tsd-parent-kind-interface">
+								<a href="queue_asynclimitedqueue.iasynclimitedqueue.html#queueallasync" class="tsd-kind-icon">queue<wbr>All<wbr>Async</a>
 							</li>
-							<li class=" tsd-kind-method tsd-parent-kind-class">
-								<a href="queue_asynclimitedqueue.asynclimitedqueue.html#queueall" class="tsd-kind-icon">queue<wbr>All</a>
-							</li>
-							<li class=" tsd-kind-method tsd-parent-kind-class">
-								<a href="queue_asynclimitedqueue.asynclimitedqueue.html#queueallasync" class="tsd-kind-icon">queue<wbr>All<wbr>Async</a>
-							</li>
-							<li class=" tsd-kind-method tsd-parent-kind-class">
-								<a href="queue_asynclimitedqueue.asynclimitedqueue.html#size" class="tsd-kind-icon">size</a>
+							<li class=" tsd-kind-method tsd-parent-kind-interface">
+								<a href="queue_asynclimitedqueue.iasynclimitedqueue.html#size" class="tsd-kind-icon">size</a>
 							</li>
 						</ul>
 					</li>
 				</ul>
 				<ul class="after-current">
-					<li class=" tsd-kind-interface tsd-parent-kind-module tsd-has-type-parameter">
-						<a href="../interfaces/queue_asynclimitedqueue.iasynclimitedqueue.html" class="tsd-kind-icon">IAsync<wbr>Limited<wbr>Queue</a>
-					</li>
 				</ul>
 			</nav>
 		</div>
@@ -572,20 +574,17 @@
 		<h2>Legend</h2>
 		<div class="tsd-legend-group">
 			<ul class="tsd-legend">
-				<li class="tsd-kind-class"><span class="tsd-kind-icon">Class</span></li>
-				<li class="tsd-kind-class tsd-has-type-parameter"><span class="tsd-kind-icon">Class with type parameter</span></li>
-				<li class="tsd-kind-method tsd-parent-kind-class"><span class="tsd-kind-icon">Method</span></li>
+				<li class="tsd-kind-interface"><span class="tsd-kind-icon">Interface</span></li>
+				<li class="tsd-kind-interface tsd-has-type-parameter"><span class="tsd-kind-icon">Interface with type parameter</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-interface"><span class="tsd-kind-icon">Method</span></li>
 			</ul>
 			<ul class="tsd-legend">
 				<li class="tsd-kind-variable"><span class="tsd-kind-icon">Variable</span></li>
 				<li class="tsd-kind-function"><span class="tsd-kind-icon">Function</span></li>
 			</ul>
 			<ul class="tsd-legend">
-				<li class="tsd-kind-interface"><span class="tsd-kind-icon">Interface</span></li>
-				<li class="tsd-kind-interface tsd-has-type-parameter"><span class="tsd-kind-icon">Interface with type parameter</span></li>
-			</ul>
-			<ul class="tsd-legend">
-				<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><span class="tsd-kind-icon">Private property</span></li>
+				<li class="tsd-kind-class"><span class="tsd-kind-icon">Class</span></li>
+				<li class="tsd-kind-class tsd-has-type-parameter"><span class="tsd-kind-icon">Class with type parameter</span></li>
 			</ul>
 		</div>
 	</div>
