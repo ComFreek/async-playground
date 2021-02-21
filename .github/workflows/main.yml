@@ -31,9 +31,9 @@ jobs:
         run: cp -a ./coverage ./deploy
       - name: Build documentation
         run: npm run docs
-      - name: Copy documentation to deployment folder
-        run: cp -a ./docs ./deploy
-      - name: Publish documentation to GitHub pages
+      - name: Copy documentation contents (not folder itself!) to deployment folder
+        run: cp -a ./docs/. ./deploy
+      - name: Deploy to GitHub pages
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
