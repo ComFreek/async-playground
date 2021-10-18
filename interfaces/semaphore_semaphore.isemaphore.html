@@ -1,0 +1,364 @@
+<!doctype html>
+<html class="default no-js">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>ISemaphore | comfreek-async-playground</title>
+	<meta name="description" content="Documentation for comfreek-async-playground">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="../assets/css/main.css">
+	<script async src="../assets/js/search.js" id="search-script"></script>
+</head>
+<body>
+<header>
+	<div class="tsd-page-toolbar">
+		<div class="container">
+			<div class="table-wrap">
+				<div class="table-cell" id="tsd-search" data-index="../assets/js/search.json" data-base="..">
+					<div class="field">
+						<label for="tsd-search-field" class="tsd-widget search no-caption">Search</label>
+						<input id="tsd-search-field" type="text" />
+					</div>
+					<ul class="results">
+						<li class="state loading">Preparing search index...</li>
+						<li class="state failure">The search index is not available</li>
+					</ul>
+					<a href="../index.html" class="title">comfreek-async-playground</a>
+				</div>
+				<div class="table-cell" id="tsd-widgets">
+					<div id="tsd-filter">
+						<a href="#" class="tsd-widget options no-caption" data-toggle="options">Options</a>
+						<div class="tsd-filter-group">
+							<div class="tsd-select" id="tsd-filter-visibility">
+								<span class="tsd-select-label">All</span>
+								<ul class="tsd-select-list">
+									<li data-value="public">Public</li>
+									<li data-value="protected">Public/Protected</li>
+									<li data-value="private" class="selected">All</li>
+								</ul>
+							</div>
+							<input type="checkbox" id="tsd-filter-inherited" checked />
+							<label class="tsd-widget" for="tsd-filter-inherited">Inherited</label>
+							<input type="checkbox" id="tsd-filter-externals" checked />
+							<label class="tsd-widget" for="tsd-filter-externals">Externals</label>
+						</div>
+					</div>
+					<a href="#" class="tsd-widget menu no-caption" data-toggle="menu">Menu</a>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="tsd-page-title">
+		<div class="container">
+			<ul class="tsd-breadcrumb">
+				<li>
+					<a href="../modules.html">comfreek-async-playground</a>
+				</li>
+				<li>
+					<a href="../modules/semaphore_semaphore.html">semaphore/Semaphore</a>
+				</li>
+				<li>
+					<a href="semaphore_semaphore.isemaphore.html">ISemaphore</a>
+				</li>
+			</ul>
+			<h1>Interface ISemaphore</h1>
+		</div>
+	</div>
+</header>
+<div class="container container-main">
+	<div class="row">
+		<div class="col-8 col-content">
+			<section class="tsd-panel tsd-comment">
+				<div class="tsd-comment tsd-typography">
+					<div class="lead">
+						<p>General counting semaphore with Promises.</p>
+					</div>
+					<p>It allows arbitrary <a href="semaphore_semaphore.isemaphore.html#take">take</a> (also referred to as &quot;P&quot;) and <a href="semaphore_semaphore.isemaphore.html#free">free</a>
+					(&quot;V&quot;) calls.</p>
+					<p>To use implementations with the normal JS execution model
+						(single-threaded + queue), <a href="semaphore_semaphore.isemaphore.html#take">take</a> and <a href="semaphore_semaphore.isemaphore.html#free">free</a> are supposed
+						to be called on different &#39;fibers&#39;. For example, <a href="semaphore_semaphore.isemaphore.html#take">take</a>
+						can be awaited in the business logic processing data
+						while <a href="semaphore_semaphore.isemaphore.html#free">free</a> is called inside a filesystem API callback
+					putting the data into an array.</p>
+					<dl class="tsd-comment-tags">
+						<dt>example</dt>
+						<dd><p>All of the following examples assume a semaphore initialized with a count of 0.</p>
+							<ul>
+								<li><a href="semaphore_semaphore.isemaphore.html#take">take</a> is called 10 times. <a href="semaphore_semaphore.isemaphore.html#free">free</a> is then called once.
+									Exactly one of the previous 10 promises is fulfilled. It is
+								implementation-defined which of them is chosen.</li>
+								<li><a href="semaphore_semaphore.isemaphore.html#free">free</a> is called 5 times. <a href="semaphore_semaphore.isemaphore.html#take">take</a> is then called 6 times.
+									Exactly 5 of the returned promises get fulfilled &quot;immediately&quot; (for some
+								informal value of immediately).</li>
+							</ul>
+						</dd>
+					</dl>
+				</div>
+			</section>
+			<section class="tsd-panel tsd-hierarchy">
+				<h3>Hierarchy</h3>
+				<ul class="tsd-hierarchy">
+					<li>
+						<span class="target">ISemaphore</span>
+					</li>
+				</ul>
+			</section>
+			<section class="tsd-panel">
+				<h3>Implemented by</h3>
+				<ul class="tsd-hierarchy">
+					<li><a href="../classes/semaphore_semaphore.semaphore.html" class="tsd-signature-type" data-tsd-kind="Class">Semaphore</a></li>
+				</ul>
+			</section>
+			<section class="tsd-panel-group tsd-index-group">
+				<h2>Index</h2>
+				<section class="tsd-panel tsd-index-panel">
+					<div class="tsd-index-content">
+						<section class="tsd-index-section ">
+							<h3>Methods</h3>
+							<ul class="tsd-index-list">
+								<li class="tsd-kind-method tsd-parent-kind-interface"><a href="semaphore_semaphore.isemaphore.html#free" class="tsd-kind-icon">free</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-interface"><a href="semaphore_semaphore.isemaphore.html#take" class="tsd-kind-icon">take</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-interface"><a href="semaphore_semaphore.isemaphore.html#trytake" class="tsd-kind-icon">try<wbr>Take</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-interface"><a href="semaphore_semaphore.isemaphore.html#trytakewithin" class="tsd-kind-icon">try<wbr>Take<wbr>Within</a></li>
+							</ul>
+						</section>
+					</div>
+				</section>
+			</section>
+			<section class="tsd-panel-group tsd-member-group ">
+				<h2>Methods</h2>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-interface">
+					<a name="free" class="tsd-anchor"></a>
+					<h3>free</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-interface">
+						<li class="tsd-signature tsd-kind-icon">free<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/ComFreek/async-playground/blob/eeb9fe1/semaphore/Semaphore.ts#L83">semaphore/Semaphore.ts:83</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Free or &#39;V&#39; operation.</p>
+								</div>
+								<p>If there are any promises returned by {@link take()} still awaiting
+									their fulfillment, exactly of them is fulfilled. The order of
+								fulfillment is implementation-defined.</p>
+							</div>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-interface">
+					<a name="take" class="tsd-anchor"></a>
+					<h3>take</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-interface">
+						<li class="tsd-signature tsd-kind-icon">take<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/ComFreek/async-playground/blob/eeb9fe1/semaphore/Semaphore.ts#L32">semaphore/Semaphore.ts:32</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Take or &#39;P&#39; operation.</p>
+								</div>
+							</div>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span></h4>
+							<p>A promise which is fulfilled when &gt;= 1 of the resource
+								represented by the internal counter is available. This might be
+								the case either if <a href="semaphore_semaphore.isemaphore.html#free">free</a> is called or if the semaphore is
+							initialized with a value &gt; 0.</p>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-interface">
+					<a name="trytake" class="tsd-anchor"></a>
+					<h3>try<wbr>Take</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-interface">
+						<li class="tsd-signature tsd-kind-icon">try<wbr>Take<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/ComFreek/async-playground/blob/eeb9fe1/semaphore/Semaphore.ts#L40">semaphore/Semaphore.ts:40</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Take (&#39;P&#39;) if a resource is still available (&lt;=&gt; counter &gt;= 1).
+									Otherwise, do <em>not</em> block (as <a href="semaphore_semaphore.isemaphore.html#take">take</a> does) and return false.</p>
+								</div>
+							</div>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">boolean</span></h4>
+							<p>True if a resource could be taken, False otherwise.</p>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-interface">
+					<a name="trytakewithin" class="tsd-anchor"></a>
+					<h3>try<wbr>Take<wbr>Within</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-interface">
+						<li class="tsd-signature tsd-kind-icon">try<wbr>Take<wbr>Within<span class="tsd-signature-symbol">(</span>millis<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">&gt;</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/ComFreek/async-playground/blob/eeb9fe1/semaphore/Semaphore.ts#L74">semaphore/Semaphore.ts:74</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Try taking (&#39;P&#39;) a resource within the next <code>millis</code> milliseconds.</p>
+								</div>
+								<dl class="tsd-comment-tags">
+									<dt>example</dt>
+									<dd><p>Contrary to <a href="semaphore_semaphore.isemaphore.html#trytake">tryTake</a>, you have to await the promise returned
+										by this method.</p>
+										<pre><code><span style="color: #795E26">tryTakeWithin</span><span style="color: #000000">(</span><span style="color: #098658">500</span><span style="color: #000000">).</span><span style="color: #795E26">then</span><span style="color: #000000">((</span><span style="color: #001080">hasTaken</span><span style="color: #000000">) </span><span style="color: #0000FF">=&gt;</span><span style="color: #000000"> ...);</span>
+
+<span style="color: #008000">// inside an async function</span>
+<span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">hasTaken</span><span style="color: #000000"> = </span><span style="color: #AF00DB">await</span><span style="color: #000000"> </span><span style="color: #795E26">tryTakeWithin</span><span style="color: #000000">(</span><span style="color: #098658">500</span><span style="color: #000000">);</span>
+</code></pre>
+									</dd>
+									<dt>example</dt>
+									<dd><p>Instead of simply waiting with <a href="semaphore_semaphore.isemaphore.html#take">take</a>, you can also use
+											this method to regularly give up some computation time, so that other
+											parts of the code can <a href="semaphore_semaphore.isemaphore.html#free">free</a> a resource, while still doing some
+											useful work in case of an unsuccessful attempt.<br>
+											Note that this were impossible with <a href="semaphore_semaphore.isemaphore.html#take">take</a> since it does not give
+											up computation time (it is a synchronous method) and the JS VM is
+											single-threaded. Conversely, the other &quot;fibers&quot; must give up their
+											computation power as well (e.g. by <code>yield</code>ing or <code>await</code>ing), this
+										is known as cooperative multitasking.</p>
+										<pre><code><span style="color: #008000">// Regularly check for 500ms if we are able to take a resource</span>
+<span style="color: #AF00DB">while</span><span style="color: #000000"> (!</span><span style="color: #AF00DB">await</span><span style="color: #000000"> </span><span style="color: #795E26">tryTakeWithin</span><span style="color: #000000">(</span><span style="color: #098658">500</span><span style="color: #000000">)) {</span>
+<span style="color: #000000">  </span><span style="color: #008000">// If not, do some other work...</span>
+<span style="color: #000000">}</span>
+<span style="color: #008000">// We finally acquired the resource</span>
+</code></pre>
+									</dd>
+								</dl>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>millis: <span class="tsd-signature-type">number</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">&gt;</span></h4>
+							<p>A promise fulfilling with <code>true</code> if a resource could be taken or
+							<code>false</code> otherwise.</p>
+						</li>
+					</ul>
+				</section>
+			</section>
+		</div>
+		<div class="col-4 col-menu menu-sticky-wrap menu-highlight">
+			<nav class="tsd-navigation primary">
+				<ul>
+					<li class=" ">
+						<a href="../modules.html">Modules</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="../modules/queue.html">queue</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="../modules/queue_asynclimitedqueue.html">queue/<wbr>Async<wbr>Limited<wbr>Queue</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="../modules/queue_asynclimitedqueue_spec.html">queue/<wbr>Async<wbr>Limited<wbr>Queue.spec</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="../modules/queue_asyncqueue.html">queue/<wbr>Async<wbr>Queue</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="../modules/queue_asyncqueue_spec.html">queue/<wbr>Async<wbr>Queue.spec</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="../modules/queue_queue_common_spec.html">queue/<wbr>Queue.common-<wbr>spec</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="../modules/semaphore.html">semaphore</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="../modules/semaphore_criticalsection.html">semaphore/<wbr>Critical<wbr>Section</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="../modules/semaphore_criticalsection_spec.html">semaphore/<wbr>Critical<wbr>Section.spec</a>
+					</li>
+					<li class="current tsd-kind-module">
+						<a href="../modules/semaphore_semaphore.html">semaphore/<wbr>Semaphore</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="../modules/semaphore_semaphore_spec.html">semaphore/<wbr>Semaphore.spec</a>
+					</li>
+				</ul>
+			</nav>
+			<nav class="tsd-navigation secondary menu-sticky">
+				<ul class="before-current">
+					<li class=" tsd-kind-class tsd-parent-kind-module">
+						<a href="../classes/semaphore_semaphore.semaphore.html" class="tsd-kind-icon">Semaphore</a>
+					</li>
+				</ul>
+				<ul class="current">
+					<li class="current tsd-kind-interface tsd-parent-kind-module">
+						<a href="semaphore_semaphore.isemaphore.html" class="tsd-kind-icon">ISemaphore</a>
+						<ul>
+							<li class=" tsd-kind-method tsd-parent-kind-interface">
+								<a href="semaphore_semaphore.isemaphore.html#free" class="tsd-kind-icon">free</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-interface">
+								<a href="semaphore_semaphore.isemaphore.html#take" class="tsd-kind-icon">take</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-interface">
+								<a href="semaphore_semaphore.isemaphore.html#trytake" class="tsd-kind-icon">try<wbr>Take</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-interface">
+								<a href="semaphore_semaphore.isemaphore.html#trytakewithin" class="tsd-kind-icon">try<wbr>Take<wbr>Within</a>
+							</li>
+						</ul>
+					</li>
+				</ul>
+				<ul class="after-current">
+				</ul>
+			</nav>
+		</div>
+	</div>
+</div>
+<footer class="with-border-bottom">
+	<div class="container">
+		<h2>Legend</h2>
+		<div class="tsd-legend-group">
+			<ul class="tsd-legend">
+				<li class="tsd-kind-interface"><span class="tsd-kind-icon">Interface</span></li>
+				<li class="tsd-kind-interface tsd-has-type-parameter"><span class="tsd-kind-icon">Interface with type parameter</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-interface"><span class="tsd-kind-icon">Method</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-variable"><span class="tsd-kind-icon">Variable</span></li>
+				<li class="tsd-kind-function"><span class="tsd-kind-icon">Function</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-class"><span class="tsd-kind-icon">Class</span></li>
+				<li class="tsd-kind-class tsd-has-type-parameter"><span class="tsd-kind-icon">Class with type parameter</span></li>
+			</ul>
+		</div>
+	</div>
+</footer>
+<div class="container tsd-generator">
+	<p>Generated using <a href="https://typedoc.org/" target="_blank">TypeDoc</a></p>
+</div>
+<div class="overlay"></div>
+<script src="../assets/js/main.js"></script>
+</body>
+</html>
