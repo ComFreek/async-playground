@@ -13,7 +13,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v4
       - name: Install npm packages (with caching)
         uses: bahmutov/npm-install@v1.7.1
       - name: Run tests
